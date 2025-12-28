@@ -176,7 +176,7 @@ export default function Header() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm transition-all whitespace-nowrap flex items-center gap-2 ${
+                className={`shrink-0 px-4 py-1.5 rounded-full text-sm transition-all whitespace-nowrap flex items-center gap-2 ${
                   activeCategory === cat.id
                     ? "bg-white text-background-dark font-bold shadow-sm"
                     : "bg-surface-dark border border-border-dark text-text-secondary hover:text-white hover:border-primary/50 font-medium"
@@ -191,7 +191,7 @@ export default function Header() {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-background-dark border-b border-border-dark py-4 px-4 shadow-xl animate-in slide-in-from-top-2">
+          <div className="md:hidden absolute z-10 top-full left-0 w-full bg-background-dark border-b border-border-dark py-4 px-4 shadow-xl animate-in slide-in-from-top-2">
             <nav className="flex flex-col gap-2">
               {currentNavItems.map((item) => (
                 <Link

@@ -21,7 +21,31 @@ export default function TopBar() {
         </div>
 
         {/* Actions */}
-     
+        <div className="flex items-center gap-3">
+          <Button
+            variant="outline"
+            className="bg-[#9419e6] hover:bg-[#a824f0] border-[#9419e6] text-white rounded-lg h-10 px-4"
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            Upload
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-gray-400 hover:text-white hover:bg-[#2a2330] rounded-lg h-10 w-10 p-0"
+          >
+            <MessageSquare className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            className="text-gray-400 hover:text-white hover:bg-[#2a2330] rounded-lg h-10 w-10 p-0 relative"
+          >
+            <Bell className="h-5 w-5" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-[#9419e6] rounded-full"></span>
+          </Button>
+          <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#9419e6] to-[#7a14c4] flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-[#9419e6] transition-all">
+            <span className="text-white font-semibold text-sm">AT</span>
+          </div>
+        </div>
       </div>
     </div>
   )
