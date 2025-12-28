@@ -5,13 +5,17 @@ import {
   Briefcase,
   Gift,
   Heart,
+  Layers,
   MessageCircle,
+  Play,
   Share2,
 } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
 import { Post } from "@/lib/types";
+import { usePathname } from "next/navigation";
+import PostViewModal from "./modals/PostViewModal";
 
 interface PostCardProps {
   post: Post;
@@ -20,19 +24,56 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isHome = pathname === "/";
+
+  const handleOpenView = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIsViewModalOpen(true);
+  };
 
   return (
-    <article className="relative w-full aspect-4/5 bg-surface-dark rounded-2xl overflow-hidden border border-border-dark shadow-2xl group transition-all duration-300 hover:-translate-y-1 hover:shadow-primary/20">
-      {/* Media Content */}
+    <article
+      onClick={() => !isHome && handleOpenView()}
+      className={`relative w-full aspect-4/5 bg-surface-dark rounded-2xl overflow-hidden border border-border-dark shadow-2xl group transition-all duration-300 hover:-translate-y-1 hover:shadow-primary/20 ${
+        !isHome ? "cursor-pointer" : ""
+      }`}
+    >
       <div className="absolute inset-0">
-        <Image
-          src={post.mediaUrl}
-          alt="Post content"
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          priority
-        />
+        {post.mediaItems && post.mediaItems[0].type === "video" ? (
+          <div className="relative w-full h-full">
+            <video
+              src={post.mediaItems[0].url}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              muted
+              loop
+              playsInline
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="p-3 rounded-full bg-black/40 backdrop-blur-sm border border-white/20">
+                <Play className="h-6 w-6 text-white fill-current" />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <Image
+            src={post.mediaUrl}
+            alt="Post content"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            priority
+          />
+        )}
         <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/90"></div>
+
+        {/* Multi-Media Indicator */}
+        {post.mediaItems && post.mediaItems.length > 1 && (
+          <div className="absolute top-4 right-4 p-2 bg-black/40 backdrop-blur-md rounded-lg border border-white/10 z-10 transition-transform group-hover:scale-110">
+            <Layers className="h-4 w-4 text-white" />
+          </div>
+        )}
       </div>
 
       {/* Right Interaction Rail */}
@@ -57,7 +98,10 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           </span>
         </button>
 
-        <button className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none">
+        <button
+          onClick={(e) => handleOpenView(e)}
+          className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none"
+        >
           <div className="p-2 md:p-3 rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all">
             <MessageCircle className="h-5 w-5 md:h-7 md:w-7 text-white" />
           </div>
@@ -145,6 +189,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
           )}
         </p>
       </div>
+
+      <PostViewModal
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+        post={post}
+      />
     </article>
   );
 };

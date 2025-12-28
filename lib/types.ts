@@ -9,6 +9,7 @@ export interface Post {
   username: string;
   avatarUrl: string;
   mediaUrl: string;
+  mediaItems?: { url: string; type: "image" | "video" }[];
   caption: string;
   timestamp: string;
   likes: string;

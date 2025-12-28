@@ -64,7 +64,21 @@ export const MOCK_POSTS: Post[] = [
     avatarUrl:
       "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100",
     mediaUrl:
-      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800", // Guitar playing
+      "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+    mediaItems: [
+      {
+        url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+        type: "image",
+      },
+      {
+        url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        type: "video",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=800",
+        type: "image",
+      },
+    ],
     caption:
       "Practicing a new solo for the upcoming gig! What do you guys think of this riff? 🎸🔥",
     timestamp: "2h ago",
@@ -79,7 +93,21 @@ export const MOCK_POSTS: Post[] = [
     username: "NeonDreamer",
     avatarUrl:
       "https://images.unsplash.com/photo-1549213783-8284d0336c4f?w=100",
-    mediaUrl: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800", // Cyberpunk art
+    mediaUrl: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800",
+    mediaItems: [
+      {
+        url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        type: "video",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800",
+        type: "image",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?w=800",
+        type: "image",
+      },
+    ],
     caption:
       "The future is bright. Latest concept art for my personal project. Created in Blender 3D. 🌆🖌️",
     timestamp: "5h ago",
