@@ -46,7 +46,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>;
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [usernameAvailable, setUsernameAvailable] = useState(true);
+  const [usernameAvailable] = useState(true);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -94,7 +94,7 @@ export default function Register() {
                         {...field}
                         type="text"
                         placeholder="e.g. Sarah Jenkins"
-                        className="bg-[#2a2330] border-[#4a3c53] text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
+                        className="bg-[#2a2330] border-border-dark text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-primary focus:ring-primary"
                       />
                       <User className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
                     </div>
@@ -116,7 +116,7 @@ export default function Register() {
                         {...field}
                         type="text"
                         placeholder="@username"
-                        className="bg-[#2a2330] border-[#4a3c53] text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
+                        className="bg-[#2a2330] border-border-dark text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-primary focus:ring-primary"
                       />
                       {usernameAvailable && field.value && (
                         <Check className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-green-500" />
@@ -145,7 +145,7 @@ export default function Register() {
                         {...field}
                         type="email"
                         placeholder="name@example.com"
-                        className="bg-[#2a2330] border-[#4a3c53] text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
+                        className="bg-[#2a2330] border-border-dark text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-primary focus:ring-primary"
                       />
                       <Mail className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
                     </div>
@@ -167,7 +167,7 @@ export default function Register() {
                         {...field}
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
-                        className="bg-[#2a2330] border-[#4a3c53] text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
+                        className="bg-[#2a2330] border-border-dark text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-primary focus:ring-primary"
                       />
                       <button
                         type="button"
@@ -213,7 +213,7 @@ export default function Register() {
                           {...field}
                           type={showConfirmPassword ? "text" : "password"}
                           placeholder="••••••••"
-                          className="bg-[#2a2330] border-[#4a3c53] text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
+                          className="bg-[#2a2330] border-border-dark text-white placeholder:text-gray-500 h-10 lg:h-12 pl-4 pr-12 rounded-lg focus:border-primary focus:ring-primary"
                         />
                         {/* No eye icon shown in design for confirm password? Actually it is. */}
                         {/* Design screenshot for confirm password shows dots. */}
@@ -234,7 +234,7 @@ export default function Register() {
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={field.onChange}
-                      className="border-[#4a3c53] data-[state=checked]:bg-[#9419e6] data-[state=checked]:border-[#9419e6]"
+                      className="border-border-dark data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                     />
                   </FormControl>
                   <FormLabel className="text-white/70 text-sm font-normal cursor-pointer">
@@ -269,7 +269,7 @@ export default function Register() {
 
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-[#4a3c53]"></div>
+            <div className="w-full border-t border-border-dark"></div>
           </div>
           <div className="relative flex justify-center text-xs uppercase">
             <span className="bg-background-dark lg:bg-surface-dark px-2 text-gray-500">
@@ -282,7 +282,7 @@ export default function Register() {
           <Button
             type="button"
             variant="outline"
-            className="h-12 bg-[#2a2330] border-[#4a3c53] text-white hover:bg-[#332840] rounded-lg flex items-center gap-2"
+            className="h-12 bg-[#2a2330] border-border-dark text-white hover:bg-[#332840] rounded-lg flex items-center gap-2"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
@@ -324,7 +324,7 @@ export default function Register() {
             Already have an account?{" "}
             <Link
               href="/auth/login"
-              className="text-[#9419e6] hover:underline font-medium"
+              className="text-primary hover:underline font-medium"
             >
               Sign in
             </Link>
