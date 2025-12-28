@@ -98,7 +98,6 @@ export default function Sidebar() {
         <nav className="flex flex-col gap-2 flex-1 overflow-y-auto scrollbar-hide">
           {currentNavItems.map((item: NavItem) => {
             const active = isActive(item.href);
-            const hasSubItems = !!item.subItems;
 
             return (
               <div key={item.label} className="relative group/nav">
@@ -125,7 +124,7 @@ export default function Sidebar() {
                 </Link>
 
                 {/* Sub Items Dropdown on Hover */}
-                {hasSubItems && (
+                {item.subItems && item.subItems.length > 0 && (
                   <div className="hidden group-hover/nav:flex flex-col gap-1 ml-10 mt-1 animate-in slide-in-from-top-1 duration-200">
                     {item.subItems.map((subItem) => (
                       <Link
