@@ -734,4 +734,99 @@ export const MOCK_POSTS: Post[] = [
     category: "fashion",
     audioName: "Fashion Week",
   },
+  {
+    id: "30",
+    username: "guitarmaster",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1549213783-8284d0336c4f?w=100",
+    mediaUrl:
+      "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=800",
+    mediaItems: [
+      {
+        url: "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=800",
+        type: "image",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+        type: "image",
+      },
+    ],
+    caption: "Late night jamming. This rhythm is so catchy! 🎸✨",
+    timestamp: "1h ago",
+    likes: "500",
+    comments: 12,
+    tags: ["music", "guitar", "jamming"],
+    category: "music",
+    audioName: "Late Night Jam",
+  },
+  {
+    id: "31",
+    username: "sarah_dance",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100",
+    mediaUrl:
+      "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=800",
+    mediaItems: [
+      {
+        url: "https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=800",
+        type: "image",
+      },
+      {
+        url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+        type: "video",
+      },
+    ],
+    caption: "Working on my contemporary flow. Practice makes perfect! 💃",
+    timestamp: "3h ago",
+    likes: "1.2k",
+    comments: 45,
+    tags: ["dance", "flow", "art"],
+    category: "dance",
+    audioName: "Contemporary Spirit",
+  },
+  {
+    id: "32",
+    username: "davide_design",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
+    mediaUrl: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800",
+    mediaItems: [
+      {
+        url: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800",
+        type: "image",
+      },
+    ],
+    caption: "Brand identity project for a local startup. 🎨💻",
+    timestamp: "5h ago",
+    likes: "890",
+    comments: 26,
+    tags: ["design", "branding", "minimal"],
+    category: "design",
+    audioName: "Creative Workflow",
+  },
+  {
+    id: "33",
+    username: "annak_photo",
+    avatarUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100",
+    mediaUrl:
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800",
+    mediaItems: [
+      {
+        url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800",
+        type: "image",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+        type: "image",
+      },
+    ],
+    caption: "Capturing the golden hour. Nature is amazing. 📸🌅",
+    timestamp: "8h ago",
+    likes: "2.1k",
+    comments: 67,
+    tags: ["photo", "goldenhour", "nature"],
+    category: "photography",
+    audioName: "Golden Moment",
+  },
 ];

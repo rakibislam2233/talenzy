@@ -103,16 +103,17 @@ export default function UserProfilePage() {
     );
   }, [usernameParam, profile.username]);
 
-  // If no posts found, just show some random ones for demo purposes if it's Alex Creator
-  const displayPosts =
-    userPosts.length > 0
-      ? userPosts
-      : usernameParam === "alexcreates"
-      ? MOCK_POSTS.slice(0, 6)
-      : [];
+  // Fallback posts if the user has none
+  const displayPosts = useMemo(() => {
+    if (userPosts.length > 0) return userPosts;
+
+    // Default fallback for demo - show first 6 posts from MOCK_POSTS
+    // This ensures no profile page looks empty
+    return MOCK_POSTS.slice(0, 6);
+  }, [userPosts]);
 
   return (
-    <div className="max-w-6xl mx-auto pb-32">
+    <div className="max-w-6xl mx-auto pb-32 font-outfit">
       {/* Cover Image */}
       <div className="relative h-64 bg-linear-to-br from-[#2d0845] to-primary overflow-hidden rounded-t-xl">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
@@ -124,7 +125,7 @@ export default function UserProfilePage() {
         <div className="flex flex-col md:flex-row items-end md:items-end justify-between -mt-20 mb-6 gap-4">
           <div className="relative group">
             <div className="size-40 rounded-full p-1.5 bg-background-dark">
-              <div className="w-full h-full rounded-full bg-gradient-to-br from-primary to-purple-400 p-[2px]">
+              <div className="w-full h-full rounded-full bg-linear-to-br from-primary to-purple-400 p-[2px]">
                 <div className="w-full h-full rounded-full bg-surface-dark overflow-hidden relative">
                   <Image
                     src={profile.avatar}
@@ -352,7 +353,7 @@ export default function UserProfilePage() {
                         <h4 className="text-white font-bold text-sm">
                           Reviewer {id}
                         </h4>
-                        <span className="text-text-secondary text-xs">
+                        <span className="text-gray-400 text-xs">
                           2 weeks ago
                         </span>
                       </div>
@@ -376,13 +377,13 @@ export default function UserProfilePage() {
                     Definitely recommend working with them.
                   </p>
                   <div className="flex items-center gap-4 mt-auto pt-4 border-t border-border-dark/50">
-                    <button className="text-xs text-secondary font-medium hover:text-white flex items-center gap-1">
+                    <button className="text-xs text-gray-400 font-medium hover:text-white flex items-center gap-1">
                       <ThumbsUp className="h-3 w-3" /> Helpful
                     </button>
-                    <button className="text-xs text-secondary font-medium hover:text-white flex items-center gap-1 text-white">
+                    <button className="text-xs text-white font-medium hover:text-white flex items-center gap-1">
                       <MessageSquare className="h-3 w-3" /> Reply
                     </button>
-                    <button className="ml-auto text-secondary hover:text-white">
+                    <button className="ml-auto text-gray-400 hover:text-white">
                       <MoreHorizontal className="h-4 w-4" />
                     </button>
                   </div>

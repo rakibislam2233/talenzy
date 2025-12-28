@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function DiscoverPeople() {
-  const [filter, setFilter] = useState("Recommended");
+  const [filter] = useState("Recommended");
 
   // Mock data matching the screenshot
   const profiles = [
