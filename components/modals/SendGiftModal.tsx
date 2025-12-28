@@ -8,11 +8,11 @@ import {
   Coffee,
   Diamond,
   Flower2,
+  LucideIcon,
   Pizza,
   Plus,
   Rocket,
   Send,
-  Trophy,
   Wallet,
   X,
 } from "lucide-react";
@@ -23,7 +23,7 @@ interface GiftItem {
   id: string;
   name: string;
   price: number;
-  icon: any;
+  icon: LucideIcon;
   color: string;
 }
 
