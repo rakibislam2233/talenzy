@@ -21,7 +21,7 @@ import {
 const loginSchema = z.object({
   emailOrUsername: z.string().min(1, "Email or username is required"),
   password: z.string().min(1, "Password is required"),
-  rememberMe: z.boolean().default(false),
+  rememberMe: z.boolean(),
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-[#221c26] rounded-2xl p-8 shadow-2xl border border-[#4a3c53]/30">
+      <div className="bg-surface-dark rounded-2xl p-8 shadow-2xl border border-border-dark/30">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back!</h1>
           <p className="text-gray-400 text-sm">
