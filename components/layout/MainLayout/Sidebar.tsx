@@ -1,5 +1,6 @@
 "use client";
 
+import CreatePostModal from "@/components/modals/CreatePostModal";
 import { useAuth } from "@/context/AuthContext";
 import {
   Bell,
@@ -8,6 +9,7 @@ import {
   Home,
   Info,
   MessageCircle,
+  PlusSquare,
   Settings,
   Sparkles,
   User,
@@ -16,10 +18,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { isAuthenticated, logout } = useAuth();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -36,6 +40,7 @@ export default function Sidebar() {
   const authNavItems = [
     { href: "/", icon: Home, label: "Home" },
     { href: "/explore", icon: Compass, label: "Explore" },
+    { href: "/discover", icon: Users, label: "Discover User" },
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
     { href: "/messages", icon: MessageCircle, label: "Message" },
     { href: "/notifications", icon: Bell, label: "Notification" },
@@ -95,7 +100,24 @@ export default function Sidebar() {
               </Link>
             );
           })}
+
+          {/* Create Post Button (Only for Authenticated Users) */}
+          {isAuthenticated && (
+            <button
+              onClick={() => setIsCreateModalOpen(true)}
+              className="flex items-center gap-4 px-4 py-3 rounded-lg transition-all group text-text-secondary hover:bg-surface-dark hover:text-white"
+            >
+              <PlusSquare className="h-6 w-6 transition-colors group-hover:text-primary" />
+              <span className="text-sm font-medium">Create</span>
+            </button>
+          )}
         </nav>
+
+        {/* Create Post Modal */}
+        <CreatePostModal
+          isOpen={isCreateModalOpen}
+          onClose={() => setIsCreateModalOpen(false)}
+        />
 
         {/* Footer Buttons */}
         <div className="flex flex-col gap-3 mt-auto">
