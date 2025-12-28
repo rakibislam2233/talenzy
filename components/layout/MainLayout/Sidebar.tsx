@@ -3,7 +3,6 @@
 import { useAuth } from "@/context/AuthContext";
 import {
   Bell,
-  Bookmark,
   Briefcase,
   Compass,
   Home,
@@ -40,7 +39,6 @@ export default function Sidebar() {
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
     { href: "/messages", icon: MessageCircle, label: "Message" },
     { href: "/notifications", icon: Bell, label: "Notification" },
-    { href: "/saved", icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
     { href: "/profile", icon: User, label: "Profile" },
     { href: "/settings", icon: Settings, label: "Setting" },

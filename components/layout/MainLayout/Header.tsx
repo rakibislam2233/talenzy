@@ -1,6 +1,11 @@
 import { useAuth } from "@/context/AuthContext";
 import {
   Bell,
+  Bookmark,
+  Briefcase,
+  Compass,
+  Home,
+  Info,
   Menu,
   MessageCircle,
   Mic,
@@ -8,8 +13,12 @@ import {
   Palette,
   PlusSquare,
   Search,
+  Settings,
   Sparkles,
   User,
+  Users,
+  Wallet,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,32 +36,57 @@ const CATEGORIES = [
 
 export default function Header() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { isAuthenticated } = useAuth();
 
   const isHome = pathname === "/";
+
+  const publicNavItems = [
+    { href: "/", icon: Home, label: "Home" },
+    { href: "/explore", icon: Compass, label: "Explore" },
+    { href: "/about", icon: Info, label: "About" },
+    { href: "/discover", icon: Users, label: "Discover User" },
+  ];
+
+  const authNavItems = [
+    { href: "/", icon: Home, label: "Home" },
+    { href: "/explore", icon: Compass, label: "Explore" },
+    { href: "/hiring", icon: Briefcase, label: "Hiring" },
+    { href: "/messages", icon: MessageCircle, label: "Message" },
+    { href: "/notifications", icon: Bell, label: "Notification" },
+    { href: "/saved", icon: Bookmark, label: "Saved" },
+    { href: "/wallet", icon: Wallet, label: "Wallet" },
+    { href: "/profile", icon: User, label: "Profile" },
+    { href: "/settings", icon: Settings, label: "Setting" },
+  ];
+
+  const currentNavItems = isAuthenticated ? authNavItems : publicNavItems;
 
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-border-dark">
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-4">
         {/* Main Header Row */}
         <div className="flex items-center justify-between gap-6">
-          {/* Left: Logo (Only on non-home pages) */}
-          {!isHome && (
-            <Link href="/" className="flex items-center gap-2 shrink-0">
-              <div className="size-8 rounded-lg bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
-                <Sparkles className="text-white h-5 w-5 fill-white" />
-              </div>
-              <span className="text-lg font-bold tracking-tight text-white hidden sm:block">
-                Talenzy
-              </span>
-            </Link>
-          )}
+          {/* Logo - Visible on Mobile (Left) AND Desktop (if not Home) */}
+          <Link
+            href="/"
+            className={`flex items-center gap-2 shrink-0 ${
+              isHome ? "md:hidden" : "flex"
+            }`}
+          >
+            <div className="size-8 rounded-lg bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
+              <Sparkles className="text-white h-5 w-5 fill-white" />
+            </div>
+            <span className="text-lg font-bold tracking-tight text-white hidden sm:block">
+              Talenzy
+            </span>
+          </Link>
 
           {/* Center: Search Bar */}
           <div
             className={`relative flex-1 ${
-              isHome ? "max-w-xl" : "max-w-md mx-auto"
+              isHome ? "max-w-xl md:ml-0" : "max-w-md mx-auto"
             }`}
           >
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -65,11 +99,19 @@ export default function Header() {
             />
           </div>
 
-          <button className="md:hidden p-2 text-white">
-            <Menu className="h-6 w-6" />
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
 
-          {/* Right Side Actions (Hidden on mobile for now) */}
+          {/* Desktop Right Side Actions */}
           <div className="hidden md:flex items-center gap-2">
             {!isHome && isAuthenticated ? (
               <>
@@ -114,7 +156,7 @@ export default function Header() {
                 </Link>
               </div>
             ) : (
-              // Home Page Right Side (Default / Existing)
+              // Home Page Right Side (Default)
               <div className="flex items-center gap-4">
                 <button className="p-2 text-text-secondary hover:text-white transition-colors relative group">
                   <Bell className="h-5 w-5" />
@@ -128,8 +170,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Chips Row (Only on Home Page) */}
-        {isHome && (
+        {/* Categories Chips (Only on Home Page - Hidden if Mobile Menu is Open) */}
+        {isHome && !isMobileMenuOpen && (
           <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
             {CATEGORIES.map((cat) => (
               <button
@@ -145,6 +187,58 @@ export default function Header() {
                 {cat.label}
               </button>
             ))}
+          </div>
+        )}
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-background-dark border-b border-border-dark py-4 px-4 shadow-xl animate-in slide-in-from-top-2">
+            <nav className="flex flex-col gap-2">
+              {currentNavItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center gap-4 px-4 py-3 rounded-lg transition-all ${
+                    pathname === item.href
+                      ? "bg-surface-dark text-white border border-border-dark/50"
+                      : "text-text-secondary hover:bg-surface-dark hover:text-white"
+                  }`}
+                >
+                  <item.icon
+                    className={`h-5 w-5 ${
+                      pathname === item.href ? "text-primary" : ""
+                    }`}
+                  />
+                  <span
+                    className={`text-sm ${
+                      pathname === item.href ? "font-semibold" : "font-medium"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </Link>
+              ))}
+
+              {!isAuthenticated && (
+                <div className="mt-4 pt-4 border-t border-border-dark flex flex-col gap-3">
+                  <Link
+                    href="/auth/register"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full bg-primary text-white py-2 rounded-lg text-center font-bold text-sm"
+                  >
+                    Sign Up
+                  </Link>
+                  <Link
+                    href="/auth/login"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="w-full border border-border-dark text-white py-2 rounded-lg text-center font-bold text-sm hover:bg-surface-dark"
+                  >
+                    Log In
+                  </Link>
+                </div>
+              )}
+            </nav>
           </div>
         )}
       </div>
