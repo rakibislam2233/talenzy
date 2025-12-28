@@ -2,6 +2,7 @@
 
 import PostViewModal from "@/components/modals/PostViewModal";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 import { MOCK_POSTS } from "@/lib/data";
 import { Post } from "@/lib/types";
 import {
@@ -139,12 +140,16 @@ export default function UserProfilePage() {
           </div>
 
           <div className="flex gap-3 mb-4 md:mb-2 text-white">
-            <Button className="bg-primary hover:bg-primary-hover text-white rounded-full h-10 px-6 font-bold shadow-glow transition-all hover:-translate-y-0.5 flex items-center gap-2">
+            <Button
+              onClick={() => toast.follow(usernameParam)}
+              className="bg-primary hover:bg-primary-hover text-white rounded-full h-10 px-6 font-bold shadow-glow transition-all hover:-translate-y-0.5 flex items-center gap-2"
+            >
               <UserPlus className="h-4 w-4" />
               Follow
             </Button>
             <Button
               variant="outline"
+              onClick={() => toast.comment(usernameParam)}
               className="bg-surface-dark border-border-dark text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary rounded-full h-10 px-4 font-semibold transition-all"
             >
               <MessageSquare className="h-4 w-4 mr-2" />
@@ -152,6 +157,7 @@ export default function UserProfilePage() {
             </Button>
             <Button
               variant="outline"
+              onClick={() => toast.hire(usernameParam)}
               className="bg-surface-dark border-border-dark text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary rounded-full h-10 px-4 font-semibold transition-all"
             >
               <Gift className="h-4 w-4 mr-2" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 import { Check, ChevronDown, MessageSquare, Search } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -278,14 +279,24 @@ export default function DiscoverPeople() {
               <div className="flex items-center gap-3 w-full">
                 {profile.isFollowing ? (
                   <Button
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toast.show({
+                        type: "success",
+                        title: "Unfollowed",
+                        description: `You have unfollowed ${profile.username}`,
+                      });
+                    }}
                     className="flex-1 bg-[#2a2330] hover:bg-[#332840] text-gray-300 border border-border-dark/30 font-semibold h-10 transition-colors"
                   >
                     Followed
                   </Button>
                 ) : (
                   <Button
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toast.follow(profile.username.replace("@", ""));
+                    }}
                     className="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold h-10 shadow-lg shadow-primary/25 transition-all"
                   >
                     Follow

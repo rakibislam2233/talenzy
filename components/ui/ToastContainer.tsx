@@ -13,15 +13,15 @@ import {
   MessageSquare,
   PartyPopper,
   Smile,
+  UserCheck,
   UserCog,
-  UserPlus,
   Wallet,
   X,
 } from "lucide-react";
 
 const toastIcons: Record<ToastType, any> = {
   gift: PartyPopper,
-  follow: UserPlus,
+  follow: UserCheck,
   like: Heart,
   comment: MessageSquare,
   reaction: Smile,
@@ -37,7 +37,7 @@ const toastIcons: Record<ToastType, any> = {
 
 const toastColors: Record<ToastType, string> = {
   gift: "from-purple-500 to-primary",
-  follow: "from-blue-500 to-cyan-500",
+  follow: "from-primary to-purple-400",
   like: "from-pink-500 to-rose-500",
   comment: "from-emerald-500 to-teal-500",
   reaction: "from-yellow-500 to-orange-500",
@@ -77,10 +77,10 @@ const ToastItem = ({
       <div className="bg-surface-dark/90 backdrop-blur-xl border border-white/5 shadow-2xl rounded-2xl p-4 flex gap-4 ml-[2px]">
         {/* Icon Container */}
         <div
-          className={`size-14 rounded-2xl bg-linear-to-br ${gradientClass} p-[1px] shrink-0`}
+          className={`size-14 rounded-2xl bg-linear-to-br ${gradientClass} p-1 shrink-0`}
         >
           <div className="w-full h-full rounded-[14px] bg-surface-dark flex items-center justify-center">
-            <Icon className="h-7 w-7 text-white" />
+            <Icon className="h-7 w-7 text-primary" />
           </div>
         </div>
 
