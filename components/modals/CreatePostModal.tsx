@@ -93,6 +93,7 @@ export default function CreatePostModal({
           "bg-transparent border-none text-white focus:outline-none min-h-[120px] text-base leading-relaxed",
       },
     },
+    immediatelyRender: false,
   });
 
   // Esc key close
