@@ -105,12 +105,12 @@ export default function CreatePostModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100000] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md"
+          className="fixed inset-0 z-10 flex items-center justify-center p-4 md:p-8 bg-black/40 backdrop-blur-sm"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[100001] cursor-pointer"
+            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors  cursor-pointer"
           >
             <X className="h-6 w-6" />
           </button>
@@ -151,6 +151,6 @@ export default function CreatePostModal({
         </motion.div>
       )}
     </AnimatePresence>,
-    document.body 
+    document.body
   );
 }
