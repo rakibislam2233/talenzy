@@ -69,19 +69,29 @@ export default function Header() {
         {/* Main Header Row */}
         <div className="flex items-center justify-between gap-6">
           {/* Center: Search Bar */}
-          <div
-            className={`relative flex-1 ${
-              isHome ? "max-w-xl md:ml-0" : "max-w-md mx-auto"
-            }`}
-          >
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-4 w-4 text-text-secondary" />
+          <div className="w-full flex items-center gap-6 ">
+            {/* Logo */}
+            <Link href={"/"} className="block md:hidden">
+              <div className="flex items-center gap-3 cursor-pointer">
+                <div className="size-10 rounded-xl bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
+                  <Sparkles className="text-white h-6 w-6 fill-white" />
+                </div>
+              </div>
+            </Link>
+            <div
+              className={`w-full relative flex-1 ${
+                isHome ? "max-w-xl md:ml-0" : "max-w-md mx-auto"
+              }`}
+            >
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-4 w-4 text-text-secondary" />
+              </div>
+              <input
+                className="block w-full pl-10 pr-4 py-2 bg-surface-dark border border-border-dark rounded-full text-sm text-white placeholder-text-secondary focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none"
+                placeholder="Search..."
+                type="text"
+              />
             </div>
-            <input
-              className="block w-full pl-10 pr-4 py-2 bg-surface-dark border border-border-dark rounded-full text-sm text-white placeholder-text-secondary focus:ring-1 focus:ring-primary focus:border-primary transition-all outline-none"
-              placeholder="Search..."
-              type="text"
-            />
           </div>
 
           {/* Mobile Menu Button */}

@@ -14,8 +14,7 @@ export const metadata: Metadata = {
 };
 
 import Providers from "@/components/providers/Providers";
-
-// ... existing imports
+import { ToastContainer } from "@/components/ui/ToastContainer";
 
 export default function RootLayout({
   children,
@@ -25,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${beVietnamPro.className} antialiased`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <ToastContainer />
+        </Providers>
       </body>
     </html>
   );

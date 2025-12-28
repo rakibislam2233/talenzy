@@ -207,8 +207,16 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
         {/* Right Interaction Rail */}
         <div className="absolute right-2 md:right-4 bottom-20 md:bottom-24 flex flex-col gap-3 md:gap-5 items-center">
+          import {toast} from "@/hooks/use-toast"; // ... inside FeedPost
+          component ...
           <button
-            onClick={() => setLiked(!liked)}
+            onClick={() => {
+              const newLikedState = !liked;
+              setLiked(newLikedState);
+              if (newLikedState) {
+                toast.like(post.username);
+              }
+            }}
             className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none"
           >
             <div
@@ -226,7 +234,6 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               {liked ? "1.3k" : post.likes}
             </span>
           </button>
-
           <button
             onClick={(e) => handleOpenView(e)}
             className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none"
@@ -238,7 +245,6 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               {post.comments}
             </span>
           </button>
-
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -253,7 +259,6 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               Gift
             </span>
           </button>
-
           <button
             onClick={() => setSaved(!saved)}
             className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none"
@@ -273,7 +278,6 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
               Save
             </span>
           </button>
-
           <button
             onClick={(e) => {
               e.stopPropagation();
