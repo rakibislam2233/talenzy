@@ -102,15 +102,17 @@ export default function Sidebar() {
           })}
 
           {/* Create Post Button (Only for Authenticated Users) */}
-          {isAuthenticated && (
-            <button
-              onClick={() => setIsCreateModalOpen(true)}
-              className="flex items-center gap-4 px-4 py-3 rounded-lg transition-all group text-text-secondary hover:bg-surface-dark hover:text-white"
-            >
-              <PlusSquare className="h-6 w-6 transition-colors group-hover:text-primary" />
-              <span className="text-sm font-medium">Create</span>
-            </button>
-          )}
+          <div className="w-full mt-24">
+            {isAuthenticated && (
+              <button
+                onClick={() => setIsCreateModalOpen(true)}
+                className="w-full bg-linear-to-br from-primary to-purple-400 flex items-center gap-4 px-4 py-3 rounded-lg transition-all group text-text-secondary hover:bg-surface-dark hover:text-white"
+              >
+                <PlusSquare className="h-6 w-6 transition-colors group-hover:text-primary" />
+                <span className="text-sm font-medium">Create</span>
+              </button>
+            )}
+          </div>
         </nav>
 
         {/* Create Post Modal */}
