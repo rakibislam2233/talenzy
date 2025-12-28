@@ -52,11 +52,11 @@ export default function CreatePostMedia({
   const currentFile = selectedFiles[currentSlide];
 
   return (
-    <div className="relative w-full h-[40vh] sm:h-[50vh] lg:h-full lg:w-[60%] bg-[#0f0f12] flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-border-dark group overflow-hidden">
+    <div className="relative w-full h-[40vh] sm:h-[50vh] lg:h-full lg:w-[60%] bg-[#0F1313] flex flex-col justify-center border border-[#18181B] group overflow-hidden">
       {selectedFiles.length > 0 ? (
         <>
           {/* Main Preview Area */}
-          <div className="relative w-full h-full flex items-center justify-center bg-black/50">
+          <div className="relative w-full h-full flex items-center justify-center ">
             {/* Crop Tool View */}
             {activeTool === "crop" && currentFile.type === "image" ? (
               <div className="absolute inset-0 z-20 bg-black">

@@ -17,6 +17,7 @@ import {
   Star,
   ThumbsUp,
   UserPlus,
+  Verified,
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -126,7 +127,7 @@ export default function UserProfilePage() {
         <div className="flex flex-col md:flex-row items-center md:items-end justify-between -mt-20 sm:-mt-24 mb-6 gap-6 md:gap-4">
           <div className="relative group">
             <div className="size-32 sm:size-40 rounded-full p-1.5 bg-background-dark">
-              <div className="w-full h-full rounded-full bg-linear-to-br from-primary to-purple-400 p-[2px]">
+              <div className="w-full h-full rounded-full ring-4 ring-primary">
                 <div className="w-full h-full rounded-full bg-surface-dark overflow-hidden relative">
                   <Image
                     src={profile.avatar}
@@ -166,7 +167,7 @@ export default function UserProfilePage() {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 bg-surface-dark border border-border-dark text-gray-400 hover:text-white hover:border-white/20 rounded-full h-10 w-10 flex items-center justify-center transition-all bg-transparent"
+              className="shrink-0 bg-surface-dark border border-border-dark text-gray-400 hover:text-white hover:border-white/20 rounded-full h-10 w-10 flex items-center justify-center transition-all"
             >
               <MoreHorizontal className="h-5 w-5" />
             </Button>
@@ -181,7 +182,7 @@ export default function UserProfilePage() {
             </h1>
             <div className="flex items-center gap-2">
               {profile.verified && (
-                <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500" />
+                <Verified className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500" />
               )}
               {profile.hiring && (
                 <span className="px-3 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded-full border border-green-500/20 uppercase tracking-tighter">

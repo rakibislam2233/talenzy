@@ -66,9 +66,9 @@ export default function CreatePostForm({
   });
 
   return (
-    <div className="w-full lg:w-[40%] bg-surface-dark flex flex-col flex-1 lg:h-full overflow-y-auto custom-scrollbar relative z-20">
+    <div className="w-full lg:w-[40%] bg-[#0F1313] flex flex-col flex-1 lg:h-full overflow-y-auto custom-scrollbar border-l border-[#121213] relative z-20">
       {/* Header */}
-      <div className="p-4 border-b border-border-dark flex items-center justify-between sticky top-0 bg-surface-dark/95 backdrop-blur-md z-30">
+      <div className="p-4 border-b border-[#232326] flex items-center justify-between sticky top-0 bg-[#0F1313]/95 backdrop-blur-md z-30">
         <div className="flex items-center gap-3">
           <button
             onClick={onClose}
@@ -241,7 +241,7 @@ export default function CreatePostForm({
       </div>
 
       {/* Action Buttons */}
-      <div className="p-4 border-t border-border-dark bg-surface-dark sticky bottom-0 z-30 flex gap-3">
+      <div className="p-4 border-t border-[#2F2F32] bg-[#0F1313] sticky bottom-0 z-30 flex gap-3">
         <Button
           variant="outline"
           onClick={onClose}
