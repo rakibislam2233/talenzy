@@ -21,7 +21,7 @@ import {
 const loginSchema = z.object({
   emailOrUsername: z.string().min(1, "Email or username is required"),
   password: z.string().min(1, "Password is required"),
-  rememberMe: z.boolean(),
+  rememberMe: z.boolean().default(false),
 })
 
 type LoginFormValues = z.infer<typeof loginSchema>
@@ -29,7 +29,7 @@ type LoginFormValues = z.infer<typeof loginSchema>
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
 
-  const form = useForm<LoginFormValues>({
+  const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       emailOrUsername: "",
