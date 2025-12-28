@@ -35,21 +35,6 @@ const toastIcons: Record<ToastType, any> = {
   error: AlertCircle,
 };
 
-const toastColors: Record<ToastType, string> = {
-  gift: "from-purple-500 to-primary",
-  follow: "from-primary to-purple-400",
-  like: "from-pink-500 to-rose-500",
-  comment: "from-emerald-500 to-teal-500",
-  reaction: "from-yellow-500 to-orange-500",
-  hire: "from-primary to-purple-600",
-  deposit: "from-green-500 to-emerald-600",
-  withdraw: "from-orange-500 to-red-600",
-  profile_update: "from-blue-400 to-indigo-500",
-  logout: "from-gray-500 to-slate-600",
-  login: "from-primary to-blue-500",
-  success: "from-green-400 to-emerald-500",
-  error: "from-red-500 to-rose-600",
-};
 
 const ToastItem = ({
   toast,
@@ -59,7 +44,6 @@ const ToastItem = ({
   onDismiss: (id: string) => void;
 }) => {
   const Icon = toastIcons[toast.type] || CheckCircle2;
-  const gradientClass = toastColors[toast.type] || "from-primary to-purple-500";
 
   return (
     <motion.div
@@ -71,13 +55,13 @@ const ToastItem = ({
     >
       {/* Accent Line */}
       <div
-        className={`absolute left-0 top-1 bottom-1 w-[4px] rounded-full bg-linear-to-b ${gradientClass} z-10`}
+        className={`absolute left-0 top-1 bottom-1 w-[4px] rounded-full bg-linear-to-b from-primary to-purple-400 z-10`}
       />
 
       <div className="bg-surface-dark/90 backdrop-blur-xl border border-white/5 shadow-2xl rounded-2xl p-4 flex gap-4 ml-[2px]">
         {/* Icon Container */}
         <div
-          className={`size-14 rounded-2xl bg-linear-to-br ${gradientClass} p-1 shrink-0`}
+          className={`size-14 rounded-2xl bg-linear-to-br from-primary to-purple-400 p-1 shrink-0`}
         >
           <div className="w-full h-full rounded-[14px] bg-surface-dark flex items-center justify-center">
             <Icon className="h-7 w-7 text-primary" />
@@ -113,7 +97,7 @@ const ToastItem = ({
         initial={{ width: "0%" }}
         animate={{ width: "100%" }}
         transition={{ duration: toast.duration ? toast.duration / 1000 : 5 }}
-        className={`absolute bottom-0 left-0 h-[2px] bg-linear-to-r ${gradientClass} opacity-30`}
+        className={`absolute bottom-0 left-0 h-[2px] bg-linear-to-r from-primary to-purple-400 opacity-30`}
       />
     </motion.div>
   );
