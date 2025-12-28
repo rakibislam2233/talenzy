@@ -15,7 +15,7 @@ import {
   Send,
   Share2,
   Twitter,
-  X,
+  X as XIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useSyncExternalStore } from "react";
@@ -61,7 +61,7 @@ export default function ShareModal({ isOpen, onClose, post }: ShareModalProps) {
                 onClick={onClose}
                 className="p-2 hover:bg-white/10 rounded-full text-gray-400 transition-colors"
               >
-                <X className="h-5 w-5" />
+                <XIcon className="h-5 w-5" />
               </button>
             </div>
 

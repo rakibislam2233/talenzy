@@ -22,6 +22,8 @@ import {
 import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import SendGiftModal from "./SendGiftModal";
+import ShareModal from "./ShareModal";
 
 interface Comment {
   id: string;
@@ -276,6 +278,8 @@ export default function PostViewModal({
   const [liked, setLiked] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+  const [isGiftModalOpen, setIsGiftModalOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const mediaItems = post.mediaItems || [
     { url: post.mediaUrl, type: "image" as const },
@@ -473,11 +477,17 @@ export default function PostViewModal({
                     <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
                       <MessageCircle className="h-6 w-6" />
                     </button>
-                    <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
+                    <button
+                      onClick={() => setIsShareModalOpen(true)}
+                      className="flex flex-col items-center gap-1 text-gray-400 hover:text-white"
+                    >
                       <Share2 className="h-6 w-6" />
                     </button>
                   </div>
-                  <Button className="bg-primary hover:bg-primary-hover text-white rounded-full h-10 px-5 font-bold shadow-lg shadow-primary/20 flex items-center gap-2">
+                  <Button
+                    onClick={() => setIsGiftModalOpen(true)}
+                    className="bg-primary hover:bg-primary-hover text-white rounded-full h-10 px-5 font-bold shadow-lg shadow-primary/20 flex items-center gap-2"
+                  >
                     <Gift className="h-4 w-4" />
                     Gift
                   </Button>
@@ -533,6 +543,16 @@ export default function PostViewModal({
               </div>
             </div>
           </motion.div>
+          <SendGiftModal
+            isOpen={isGiftModalOpen}
+            onClose={() => setIsGiftModalOpen(false)}
+            username={post.username}
+          />
+          <ShareModal
+            isOpen={isShareModalOpen}
+            onClose={() => setIsShareModalOpen(false)}
+            post={post}
+          />
         </div>
       )}
     </AnimatePresence>
