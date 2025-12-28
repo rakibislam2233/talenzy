@@ -70,6 +70,54 @@ export const toast = {
       title: "Liked a post",
       description: `You liked @${username}'s new post.`,
     }),
+  comment: (username: string) =>
+    toast.show({
+      type: "comment",
+      title: "Comment Sent!",
+      description: `Your comment on @${username}'s post is visible now.`,
+    }),
+  reaction: (type: string) =>
+    toast.show({
+      type: "reaction",
+      title: "Reaction Added",
+      description: `You reacted with ${type} to the post.`,
+    }),
+  hire: (username: string) =>
+    toast.show({
+      type: "hire",
+      title: "Hire Request Sent!",
+      description: `Your request to hire @${username} has been submitted.`,
+    }),
+  deposit: (amount: number) =>
+    toast.show({
+      type: "deposit",
+      title: "Deposit Successful",
+      description: `You successfully added $${amount} to your wallet.`,
+    }),
+  withdraw: (amount: number) =>
+    toast.show({
+      type: "withdraw",
+      title: "Withdrawal Initiated",
+      description: `$${amount} is being processed for withdrawal.`,
+    }),
+  profileUpdate: () =>
+    toast.show({
+      type: "profile_update",
+      title: "Profile Updated",
+      description: "Your profile changes have been saved successfully!",
+    }),
+  logout: () =>
+    toast.show({
+      type: "logout",
+      title: "Logged Out",
+      description: "You have been securely logged out. See you soon!",
+    }),
+  login: (name: string) =>
+    toast.show({
+      type: "login",
+      title: `Welcome back, ${name}!`,
+      description: "Successfully logged in to your account.",
+    }),
 };
 
 export const useToast = () => {

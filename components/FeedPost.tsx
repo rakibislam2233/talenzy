@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
+import { toast } from "@/hooks/use-toast";
 import { Post } from "@/lib/types";
 import { usePathname } from "next/navigation";
 import PostViewModal from "./modals/PostViewModal";
@@ -207,10 +208,9 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
 
         {/* Right Interaction Rail */}
         <div className="absolute right-2 md:right-4 bottom-20 md:bottom-24 flex flex-col gap-3 md:gap-5 items-center">
-          import {toast} from "@/hooks/use-toast"; // ... inside FeedPost
-          component ...
           <button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               const newLikedState = !liked;
               setLiked(newLikedState);
               if (newLikedState) {

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Coffee,
@@ -88,6 +89,14 @@ export default function SendGiftModal({
   const [selectedGift, setSelectedGift] = useState<GiftItem | null>(GIFTS[1]); // Default to Pizza as per screenshot
   const [customAmount, setCustomAmount] = useState("");
   const [message, setMessage] = useState("");
+
+  const handleSendGift = () => {
+    toast.gift({
+      coins: selectedGift?.price || Number(customAmount) || 0,
+      username: username,
+    });
+    onClose();
+  };
 
   if (!mounted) return null;
 
@@ -263,7 +272,10 @@ export default function SendGiftModal({
                   </p>
                 </div>
               </div>
-              <Button className="w-full bg-primary hover:bg-primary-hover text-white h-14 rounded-2xl font-bold text-base shadow-xl shadow-primary/20 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]">
+              <Button
+                onClick={handleSendGift}
+                className="w-full bg-primary hover:bg-primary-hover text-white h-14 rounded-2xl font-bold text-base shadow-xl shadow-primary/20 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
                 Send Gift
                 <Send className="h-5 w-5 rotate-45" />
               </Button>
