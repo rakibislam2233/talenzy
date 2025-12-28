@@ -65,23 +65,9 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 w-full glass-panel border-b border-border-dark z-10">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-4">
+      <div className="w-full px-4 py-3 flex flex-col gap-4">
         {/* Main Header Row */}
         <div className="flex items-center justify-between gap-6">
-          <Link
-            href="/"
-            className={`flex items-center gap-2 shrink-0 ${
-              isHome ? "md:hidden" : "flex"
-            }`}
-          >
-            <div className="size-8 rounded-lg bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
-              <Sparkles className="text-white h-5 w-5 fill-white" />
-            </div>
-            <span className="text-lg font-bold tracking-tight text-white hidden sm:block">
-              Talenzy
-            </span>
-          </Link>
-
           {/* Center: Search Bar */}
           <div
             className={`relative flex-1 ${

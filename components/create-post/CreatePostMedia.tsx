@@ -264,10 +264,10 @@ export default function CreatePostMedia({
           </p>
           <Button
             onClick={() => fileInputRef.current?.click()}
-            className="bg-primary hover:bg-primary-hover text-white rounded-xl px-6 py-4 md:px-8 md:py-6 text-base md:text-lg font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all hover:scale-105"
+            className="bg-primary hover:bg-primary-hover text-white rounded-xl px-6 py-4 md:px-8 md:py-6 text-base font-medium cursor-pointer shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all "
           >
             Select from Computer
-          </Button>
+          </Button> 
         </div>
       )}
       <input
