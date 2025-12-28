@@ -1,57 +1,94 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react"
-import Link from "next/link"
+import Link from "next/link";
+import { ReactNode } from "react";
 
 interface AuthLayoutProps {
-  children: ReactNode
-  showBackToLogin?: boolean
-  showCreateAccount?: boolean
+  children: ReactNode;
+  variant?: "split" | "centered";
+  sideContent?: ReactNode;
 }
 
-export default function AuthLayout({ 
-  children, 
-  showBackToLogin = false,
-  showCreateAccount = false 
+export default function AuthLayout({
+  children,
+  variant = "centered",
+  sideContent,
 }: AuthLayoutProps) {
-  return (
-    <div className="min-h-screen bg-linear-to-br from-background-dark via-[#2d1b3d] to-background-dark flex items-center justify-center p-4">
-      <div className="w-full max-w-6xl">
-        <div className="flex justify-between items-center mb-8">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">T</span>
-            </div>
-            <span className="text-white text-xl font-semibold">Talenzy</span>
-          </Link>
-          {showCreateAccount && (
-            <div className="flex items-center gap-4">
-              <span className="text-white text-sm">New here?</span>
-              <Link 
-                href="/auth/register"
-                className="px-4 py-2 bg-surface-dark text-white rounded-lg hover:bg-[#2a2330] transition-colors"
-              >
-                Create Account
+  if (variant === "split") {
+    return (
+      <div className="min-h-screen flex bg-background-dark">
+        {/* Left Side - Brand/Marketing */}
+        <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-[#3a0d5c]">
+          {/* Background effects */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#5a108f] to-[#2d0845] opacity-90" />
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#9d4edd] rounded-full blur-[128px] opacity-40" />
+          <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-[#b5179e] rounded-full blur-[96px] opacity-30" />
+
+          {/* Content */}
+          <div className="relative z-10 w-full flex flex-col p-12 justify-between">
+            <div>
+              <Link href="/" className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20">
+                  <span className="text-white text-xl">✨</span>
+                </div>
+                <span className="text-white text-2xl font-bold tracking-tight">
+                  Talenzy
+                </span>
               </Link>
             </div>
-          )}
-          {showBackToLogin && (
-            <Link 
-              href="/auth/login"
-              className="text-white text-sm hover:text-primary transition-colors"
-            >
-              Help
-            </Link>
-          )}
+
+            <div className="mb-12">{sideContent}</div>
+
+            <div className="text-white/40 text-sm">
+              © 2024 Talenzy. All rights reserved.
+            </div>
+          </div>
         </div>
-        {children}
-        <div className="text-center mt-8">
-          <p className="text-gray-400 text-sm">
-            © 2024 Talenzy. All rights reserved.
-          </p>
+
+        {/* Right Side - Form */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12 bg-background-dark">
+          <div className="w-full max-w-md">
+            {/* Mobile Logo (only visible on small screens) */}
+            <div className="lg:hidden mb-8 text-center">
+              <Link href="/" className="inline-flex items-center gap-2">
+                <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
+                  <span className="text-primary text-xl">✨</span>
+                </div>
+                <span className="text-white text-2xl font-bold">Talenzy</span>
+              </Link>
+            </div>
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Centered Variant (Forgot Password, Verify, Reset)
+  return (
+    <div className="min-h-screen bg-background-dark flex flex-col">
+      <header className="p-6">
+        <Link href="/" className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-[#3a0d5c] rounded-xl flex items-center justify-center">
+            <span className="text-white text-xl">✨</span>{" "}
+            {/* Replaced T with sparkle/icon as per image */}
+          </div>
+          <span className="text-white text-xl font-bold">Talenzy</span>
+        </Link>
+      </header>
+
+      <div className="flex-1 flex items-center justify-center p-4 relative overflow-hidden">
+        {/* Background glow effects */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="w-full max-w-[480px] relative z-10">
+          {children}
+
+          <div className="text-center mt-8 text-gray-500 text-sm">
+            © 2024 Talenzy. Secure Verification System.
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
-
