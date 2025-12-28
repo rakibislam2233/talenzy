@@ -12,7 +12,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children, showRightSidebar = true }: MainLayoutProps) {
   return (
-    <div className="min-h-screen bg-[#1b1121] flex">
+    <div className="min-h-screen bg-background-dark flex">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <TopBar />

@@ -37,13 +37,13 @@ export default function ForgotPassword() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-[#221c26] rounded-2xl p-8 shadow-2xl border border-[#4a3c53]/30">
+      <div className="bg-surface-dark rounded-2xl p-8 shadow-2xl border border-border-dark/30">
         <div className="flex justify-center mb-6">
           <div className="relative">
-            <div className="w-16 h-16 bg-[#9419e6] rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
               <RefreshCw className="h-8 w-8 text-white" />
             </div>
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-[#9419e6] rounded-full flex items-center justify-center border-2 border-[#221c26]">
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full flex items-center justify-center border-2 border-[#221c26]">
               <Lock className="h-3 w-3 text-white" />
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function ForgotPassword() {
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Forgot Password?</h1>
           <p className="text-gray-400 text-sm">
-            Enter the email associated with your account and we'll send you a link to reset your password.
+            Enter the email associated with your account and we&apos;ll send you a link to reset your password.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export default function ForgotPassword() {
                         {...field}
                         type="email"
                         placeholder="name@example.com"
-                        className="bg-[#2a2330] border-[#4a3c53] text-white placeholder:text-gray-500 h-12 pl-12 pr-4 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
+                        className="bg-[#2a2330] border-border-dark text-white placeholder:text-gray-500 h-12 pl-12 pr-4 rounded-lg focus:border-[#9419e6] focus:ring-[#9419e6]"
                       />
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500" />
                     </div>
@@ -82,7 +82,7 @@ export default function ForgotPassword() {
 
             <Button
               type="submit"
-              className="w-full h-12 bg-gradient-to-r from-[#9419e6] to-[#7a14c4] text-white rounded-lg hover:from-[#a824f0] hover:to-[#8a19d4] transition-all font-semibold"
+              className="w-full h-12 bg-linear-to-r from-primary to-[#7a14c4] text-white rounded-lg hover:from-[#a824f0] hover:to-[#8a19d4] transition-all font-semibold"
             >
               Send Reset Link
             </Button>
@@ -92,7 +92,7 @@ export default function ForgotPassword() {
         <div className="mt-6 text-center">
           <Link
             href="/auth/login"
-            className="text-white text-sm hover:text-[#9419e6] transition-colors inline-flex items-center gap-2"
+            className="text-white text-sm hover:text-primary transition-colors inline-flex items-center gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to log in
