@@ -1,6 +1,13 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
-import { Select } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { Check, ChevronDown, MessageSquare, Search } from "lucide-react";
 import Image from "next/image";
@@ -181,55 +188,69 @@ export default function DiscoverPeople() {
           <div className="flex gap-3 overflow-x-auto scrollbar-hide py-1">
             <Select
               value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              options={[
-                { value: "all", label: "All Categories" },
-                { value: "musician", label: "Musicians" },
-                { value: "dancer", label: "Dancers" },
-                { value: "designer", label: "Designers" },
-                { value: "photographer", label: "Photographers" },
-                { value: "artist", label: "Artists" },
-              ]}
-              className="min-w-[150px]"
-            />
+              onValueChange={setSelectedCategory}
+            >
+              <SelectTrigger className="min-w-[150px]">
+                <SelectValue placeholder="All Categories" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="musician">Musicians</SelectItem>
+                <SelectItem value="dancer">Dancers</SelectItem>
+                <SelectItem value="designer">Designers</SelectItem>
+                <SelectItem value="photographer">Photographers</SelectItem>
+                <SelectItem value="artist">Artists</SelectItem>
+              </SelectContent>
+            </Select>
+
             <Select
               value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              options={[
-                { value: "all", label: "Location" },
-                { value: "us", label: "United States" },
-                { value: "uk", label: "United Kingdom" },
-                { value: "ca", label: "Canada" },
-                { value: "au", label: "Australia" },
-                { value: "de", label: "Germany" },
-              ]}
-              className="min-w-[140px]"
-            />
-            <Select
-              value={selectedSkill}
-              onChange={(e) => setSelectedSkill(e.target.value)}
-              options={[
-                { value: "all", label: "Skills" },
-                { value: "guitar", label: "Guitar" },
-                { value: "piano", label: "Piano" },
-                { value: "vocals", label: "Vocals" },
-                { value: "production", label: "Production" },
-                { value: "mixing", label: "Mixing" },
-              ]}
-              className="min-w-[130px]"
-            />
+              onValueChange={setSelectedLocation}
+            >
+              <SelectTrigger className="min-w-[140px]">
+                <SelectValue placeholder="Location" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Locations</SelectItem>
+                <SelectItem value="us">United States</SelectItem>
+                <SelectItem value="uk">United Kingdom</SelectItem>
+                <SelectItem value="ca">Canada</SelectItem>
+                <SelectItem value="au">Australia</SelectItem>
+                <SelectItem value="de">Germany</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={selectedSkill} onValueChange={setSelectedSkill}>
+              <SelectTrigger className="min-w-[130px]">
+                <SelectValue placeholder="Skills" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Skills</SelectItem>
+                <SelectItem value="guitar">Guitar</SelectItem>
+                <SelectItem value="piano">Piano</SelectItem>
+                <SelectItem value="vocals">Vocals</SelectItem>
+                <SelectItem value="production">Production</SelectItem>
+                <SelectItem value="mixing">Mixing</SelectItem>
+              </SelectContent>
+            </Select>
+
             <Select
               value={selectedExperience}
-              onChange={(e) => setSelectedExperience(e.target.value)}
-              options={[
-                { value: "all", label: "Experience" },
-                { value: "beginner", label: "Beginner (0-2 years)" },
-                { value: "intermediate", label: "Intermediate (2-5 years)" },
-                { value: "advanced", label: "Advanced (5-10 years)" },
-                { value: "expert", label: "Expert (10+ years)" },
-              ]}
-              className="min-w-[150px]"
-            />
+              onValueChange={setSelectedExperience}
+            >
+              <SelectTrigger className="min-w-[150px]">
+                <SelectValue placeholder="Experience" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Experience</SelectItem>
+                <SelectItem value="beginner">Beginner (0-2 years)</SelectItem>
+                <SelectItem value="intermediate">
+                  Intermediate (2-5 years)
+                </SelectItem>
+                <SelectItem value="advanced">Advanced (5-10 years)</SelectItem>
+                <SelectItem value="expert">Expert (10+ years)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 

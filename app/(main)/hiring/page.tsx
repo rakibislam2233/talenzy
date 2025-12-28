@@ -1,6 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 import { MapPin, Star } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,12 +21,20 @@ export default function Hire() {
   const [activeTab, setActiveTab] = useState<
     "all" | "my-requests" | "hired-me"
   >("all");
+
+  // Filter states
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState([150]);
+  const [availability, setAvailability] = useState("anytime");
+  const [location, setLocation] = useState("");
+  const [verifiedOnly, setVerifiedOnly] = useState(false);
+
   const categories = [
-    { name: "Music & Audio", checked: true },
-    { name: "Dance & Performance", checked: false },
-    { name: "Visual Arts", checked: false },
-    { name: "Tech & Development", checked: false },
-    { name: "Lifestyle & Model", checked: false },
+    { id: "music", name: "Music & Audio" },
+    { id: "dance", name: "Dance & Performance" },
+    { id: "visual", name: "Visual Arts" },
+    { id: "tech", name: "Tech & Development" },
+    { id: "lifestyle", name: "Lifestyle & Model" },
   ];
 
   const talents = [
@@ -100,13 +118,34 @@ export default function Hire() {
     },
   ];
 
+  const handleCategoryToggle = (categoryId: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(categoryId)
+        ? prev.filter((id) => id !== categoryId)
+        : [...prev, categoryId]
+    );
+  };
+
+  const handleResetFilters = () => {
+    setSelectedCategories([]);
+    setPriceRange([150]);
+    setAvailability("anytime");
+    setLocation("");
+    setVerifiedOnly(false);
+  };
+
   return (
     <div className="flex h-full">
       {/* Inner Filter Sidebar */}
       <div className="w-64 p-6 border-r border-border-dark/30 hidden lg:block overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-white font-bold text-lg">Filters</h2>
-          <button className="text-primary text-sm hover:underline">
+          <h2 className="text-white font-black text-lg uppercase tracking-tight">
+            Filters
+          </h2>
+          <button
+            onClick={handleResetFilters}
+            className="text-primary text-xs hover:underline font-bold uppercase tracking-wider"
+          >
             Reset
           </button>
         </div>
@@ -114,87 +153,109 @@ export default function Hire() {
         <div className="space-y-6">
           {/* Categories */}
           <div>
-            <h3 className="text-white font-semibold mb-3">Categories</h3>
-            <div className="space-y-2">
-              {categories.map((cat, i) => (
-                <label
-                  key={i}
-                  className="flex items-center gap-3 cursor-pointer group"
-                >
-                  <div
-                    className={`w-4 h-4 rounded border flex items-center justify-center ${
-                      cat.checked
-                        ? "bg-primary border-primary"
-                        : "border-gray-500 group-hover:border-primary"
-                    }`}
+            <h3 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">
+              Categories
+            </h3>
+            <div className="space-y-3">
+              {categories.map((cat) => (
+                <div key={cat.id} className="flex items-center space-x-3">
+                  <Checkbox
+                    id={cat.id}
+                    checked={selectedCategories.includes(cat.id)}
+                    onCheckedChange={() => handleCategoryToggle(cat.id)}
+                  />
+                  <Label
+                    htmlFor={cat.id}
+                    className="text-sm text-gray-400 cursor-pointer hover:text-white transition-colors font-medium"
                   >
-                    {cat.checked && (
-                      <div className="w-2 h-2 bg-white rounded-sm" />
-                    )}
-                  </div>
-                  <span className="text-gray-400 text-sm group-hover:text-white transition-colors">
                     {cat.name}
-                  </span>
-                </label>
+                  </Label>
+                </div>
               ))}
             </div>
           </div>
 
           {/* Price Range */}
           <div>
-            <h3 className="text-white font-semibold mb-3">Price Range / Hr</h3>
-            <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+            <h3 className="text-white font-bold text-sm mb-3 uppercase tracking-wide">
+              Price Range / Hr
+            </h3>
+            <div className="flex items-center justify-between text-xs text-gray-500 mb-3 font-medium">
               <span>$10</span>
               <span>$500+</span>
             </div>
-            <div className="h-1 bg-surface-dark rounded-full relative">
-              <div className="absolute left-[30%] right-[40%] bg-primary h-full rounded-full" />
-              <div className="absolute left-[30%] top-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full border-2 border-surface-dark cursor-pointer shadow-lg" />
-            </div>
-            <div className="mt-2 text-center text-primary font-bold text-sm">
-              $150/hr
+            <Slider
+              value={priceRange}
+              onValueChange={setPriceRange}
+              max={500}
+              min={10}
+              step={10}
+              className="mb-3"
+            />
+            <div className="text-center text-primary font-black text-sm">
+              ${priceRange[0]}/hr
             </div>
           </div>
 
           {/* Availability */}
           <div>
-            <h3 className="text-white font-semibold mb-3">Availability</h3>
-            <select className="w-full bg-background-dark border border-border-dark/30 rounded-lg h-10 px-3 text-sm text-white focus:outline-none focus:border-primary">
-              <option>Anytime</option>
-              <option>This Week</option>
-              <option>This Month</option>
-            </select>
+            <h3 className="text-white font-bold text-sm mb-3 uppercase tracking-wide">
+              Availability
+            </h3>
+            <Select value={availability} onValueChange={setAvailability}>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select availability" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="anytime">Anytime</SelectItem>
+                <SelectItem value="week">This Week</SelectItem>
+                <SelectItem value="month">This Month</SelectItem>
+                <SelectItem value="urgent">Urgent (24hrs)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Location */}
           <div>
-            <h3 className="text-white font-semibold mb-3">Location</h3>
+            <h3 className="text-white font-bold text-sm mb-3 uppercase tracking-wide">
+              Location
+            </h3>
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
               <input
                 type="text"
                 placeholder="City or Country"
-                className="w-full bg-background-dark border border-border-dark/30 rounded-lg h-10 pl-9 pr-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full bg-background-dark border border-border-dark/30 rounded-xl h-12 pl-10 pr-3 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
               />
             </div>
           </div>
 
           {/* Verified toggle */}
-          <div className="flex items-center justify-between">
-            <span className="text-white font-semibold">Verified Only</span>
-            <div className="w-10 h-6 bg-surface-dark rounded-full p-1 cursor-pointer">
-              <div className="w-4 h-4 bg-white rounded-full ml-auto" />
-            </div>
+          <div className="flex items-center justify-between py-3 px-4 bg-background-dark/50 rounded-xl border border-border-dark/30">
+            <Label
+              htmlFor="verified"
+              className="text-white font-bold text-sm cursor-pointer"
+            >
+              Verified Only
+            </Label>
+            <Checkbox
+              id="verified"
+              checked={verifiedOnly}
+              onCheckedChange={(checked) => setVerifiedOnly(checked as boolean)}
+            />
           </div>
 
-          <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold mt-4">
+          <Button className="w-full bg-primary hover:bg-primary-hover text-white font-black uppercase tracking-wider text-xs h-12 rounded-xl shadow-xl shadow-primary/20">
             Apply Filters
           </Button>
           <Button
+            onClick={handleResetFilters}
             variant="outline"
-            className="w-full border-border-dark text-white hover:bg-surface-dark mt-2"
+            className="w-full border-border-dark text-white hover:bg-surface-dark bg-transparent font-bold uppercase tracking-wider text-xs h-12 rounded-xl"
           >
-            Clear Filters
+            Clear All
           </Button>
         </div>
       </div>
