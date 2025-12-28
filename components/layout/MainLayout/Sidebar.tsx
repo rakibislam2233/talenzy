@@ -107,7 +107,7 @@ export default function Sidebar() {
             {isAuthenticated && (
               <button
                 onClick={() => setIsCreateModalOpen(true)}
-                className="w-full bg-linear-to-br from-primary to-purple-400 flex items-center gap-3 px-4 py-3 rounded-lg cursor-pointer"
+                className="w-full bg-linear-to-br from-primary to-purple-400 flex items-center gap-3 px-5 py-3 rounded-lg cursor-pointer"
               >
                 <PlusCircle className="h-6 w-6 transition-colors group-hover:text-primary" />
                 <span className="font-semibold">Create Post</span>
