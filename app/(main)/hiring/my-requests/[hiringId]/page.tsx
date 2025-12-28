@@ -431,23 +431,44 @@ export default function MyHireRequestDetailPage() {
                   ))}
                 </div>
 
-                <p className="text-gray-400 text-sm mb-4">
-                  The freelancer has sent a counter-offer. You can accept it or
-                  send a new offer.
-                </p>
+                {/* Latest Offer Highlight */}
+                {negotiations.length > 0 &&
+                  negotiations[negotiations.length - 1].from ===
+                    "freelancer" && (
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 mb-6">
+                      <p className="text-blue-400 text-sm font-bold mb-2">
+                        💰 Freelancer&apos;s Latest Offer: $
+                        {negotiations[negotiations.length - 1].amount}
+                      </p>
+                      <p className="text-gray-400 text-xs">
+                        You can accept this offer, reject it, or send a new
+                        counter-offer.
+                      </p>
+                    </div>
+                  )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
                   <Button
                     onClick={handleAcceptFreelancerOffer}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl h-12 font-black uppercase tracking-widest text-xs"
+                    className="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl h-12 font-black uppercase tracking-widest text-xs shadow-xl"
                   >
-                    Accept Freelancer Offer
+                    <CheckCircle2 className="size-4 mr-2" />
+                    Accept Offer
+                  </Button>
+                  <Button
+                    onClick={handleCancelOrder}
+                    variant="outline"
+                    className="w-full bg-transparent border-red-500/50 text-red-500 hover:bg-red-500/10 rounded-xl h-12 font-black uppercase tracking-widest text-xs"
+                  >
+                    <X className="size-4 mr-2" />
+                    Reject Offer
                   </Button>
                   <Button
                     onClick={() => setShowNegotiation(true)}
                     className="w-full bg-primary hover:bg-primary-hover text-white rounded-xl h-12 font-black uppercase tracking-widest text-xs"
                   >
-                    Send Counter Offer
+                    <DollarSign className="size-4 mr-2" />
+                    Counter Offer
                   </Button>
                 </div>
 
@@ -480,14 +501,6 @@ export default function MyHireRequestDetailPage() {
                     </div>
                   </div>
                 )}
-
-                <Button
-                  onClick={handleCancelOrder}
-                  variant="outline"
-                  className="w-full mt-4 bg-transparent border-red-500/50 text-red-500 hover:bg-red-500/10 rounded-xl h-10 font-bold uppercase text-xs"
-                >
-                  Cancel Negotiation
-                </Button>
               </div>
             )}
 
