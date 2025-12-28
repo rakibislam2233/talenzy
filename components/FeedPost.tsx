@@ -36,7 +36,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       </div>
 
       {/* Right Interaction Rail */}
-      <div className="absolute right-4 bottom-24 flex flex-col gap-5 items-center z-20">
+      <div className="absolute right-4 bottom-24 flex flex-col gap-5 items-center ">
         <button
           onClick={() => setLiked(!liked)}
           className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none"
@@ -104,7 +104,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
       </div>
 
       {/* Bottom Info Overlay */}
-      <div className="absolute bottom-0 left-0 w-full p-6 z-10 pr-20 text-left">
+      <div className="absolute bottom-0 left-0 w-full p-6 pr-20 text-left">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-3">
             <div className="size-10 rounded-full border-2 border-primary p-0.5 pointer-events-none relative">

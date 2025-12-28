@@ -155,12 +155,12 @@ export default function CreatePostModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-8 bg-black/90 backdrop-blur-md"
+          className="fixed inset-0 z-100000 flex items-center justify-center p-4 md:p-8 bg-black/40 backdrop-blur-sm"
         >
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-[10000]"
+            className="absolute top-6 cursor-pointer right-6 p-2 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors z-100001"
           >
             <X className="h-6 w-6" />
           </button>
@@ -277,13 +277,13 @@ export default function CreatePostModal({
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 20, opacity: 0 }}
-                        className="absolute bottom-24 inset-x-8 h-24 bg-black/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-800 flex items-center gap-4 px-4 overflow-x-auto custom-scrollbar z-30"
+                        className="absolute bottom-24 inset-x-8 bg-black/80 backdrop-blur-xl p-4 rounded-2xl border border-gray-800 flex items-center gap-4 px-4 overflow-x-auto custom-scrollbar z-30"
                       >
                         {FILTERS.map((filter) => (
                           <button
                             key={filter.name}
                             onClick={() => applyFilter(filter.class)}
-                            className={`flex flex-col items-center gap-2 min-w-[80px] group ${
+                            className={`flex flex-col items-center gap-2 cursor-pointer min-w-[80px] group ${
                               selectedFiles[currentSlide].filter ===
                               filter.class
                                 ? "text-primary"
@@ -307,7 +307,7 @@ export default function CreatePostModal({
                                   className={`w-full h-full object-cover ${filter.class}`}
                                 />
                               ) : (
-                                <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-600" />
+                                <div className="w-full h-full bg-linear-to-br from-gray-700 to-gray-600" />
                               )}
                             </div>
                             <span className="text-xs font-medium">
@@ -315,10 +315,10 @@ export default function CreatePostModal({
                             </span>
                           </button>
                         ))}
-                        <div className="w-[1px] h-10 bg-gray-700 mx-2" />
+                        <div className="w-px h-10 bg-gray-700 mx-2" />
                         <button
                           onClick={() => setActiveTool("none")}
-                          className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-white"
+                          className="p-2 bg-white/10 cursor-pointer hover:bg-white/20 rounded-full text-white"
                         >
                           <Check className="h-5 w-5" />
                         </button>
@@ -328,7 +328,7 @@ export default function CreatePostModal({
 
                   {/* Edit Tools Trigger */}
                   {activeTool === "none" && (
-                    <div className="absolute right-6 bottom-24 flex flex-col gap-4 z-10">
+                    <div className="absolute right-6 bottom-24 cursor-pointer flex flex-col gap-4 z-10">
                       {selectedFiles[currentSlide].type === "image" && (
                         <>
                           <ToolButton
@@ -422,7 +422,7 @@ export default function CreatePostModal({
                 {/* User Info & Privacy */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-purple-400 p-[2px]">
+                    <div className="w-12 h-12 rounded-full bg-linear-to-br from-primary to-purple-400 p-[2px]">
                       <div className="w-full h-full rounded-full bg-surface-dark relative overflow-hidden">
                         <div className="w-full h-full flex items-center justify-center bg-gray-800 text-white font-bold text-sm">
                           AT
@@ -656,7 +656,7 @@ function ToolButton({
   return (
     <button
       onClick={onClick}
-      className="p-3 bg-black/40 hover:bg-black/60 rounded-full text-white backdrop-blur-md transition-all group relative hover:scale-110"
+      className="p-3 bg-black/40 hover:bg-black/60 rounded-full z-10 text-white backdrop-blur-md transition-all group relative hover:scale-110"
     >
       <Icon className="h-5 w-5" />
       <span className="absolute right-full mr-2 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-black/80 text-white text-xs font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10">

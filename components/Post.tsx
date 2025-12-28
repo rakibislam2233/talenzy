@@ -40,7 +40,7 @@ export default function Post({
       {/* Post Header */}
       <div className="p-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#9419e6] to-[#7a14c4] flex items-center justify-center">
+          <div className="w-10 h-10 rounded-full bg-linear-to-br from-[#9419e6] to-[#7a14c4] flex items-center justify-center">
             <span className="text-white font-semibold text-sm">{userAvatar}</span>
           </div>
           <div>

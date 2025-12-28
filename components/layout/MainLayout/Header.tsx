@@ -64,7 +64,7 @@ export default function Header() {
   const currentNavItems = isAuthenticated ? authNavItems : publicNavItems;
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-border-dark">
+    <header className="sticky top-0 w-full glass-panel border-b border-border-dark">
       <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-4">
         {/* Main Header Row */}
         <div className="flex items-center justify-between gap-6">
