@@ -194,57 +194,69 @@ export default function Hire() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 overflow-y-auto">
+      <div className="flex-1 p-4 sm:p-8 overflow-y-auto pb-32">
         {/* Gradient Hero Header */}
-        <div className="bg-linear-to-r from-primary to-[#5b21b6] rounded-2xl p-8 mb-8 text-center shadow-2xl relative overflow-hidden">
-          {/* Decorative circles */}
-          <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-48 h-48 bg-white/10 rounded-full blur-3xl translate-x-1/4 translate-y-1/4" />
+        <div className="bg-linear-to-br from-primary via-purple-900 to-[#2e1065] rounded-3xl p-6 sm:p-10 mb-8 text-center shadow-2xl relative overflow-hidden group">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 group-hover:bg-white/10 transition-colors" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-x-1/4 translate-y-1/4 group-hover:bg-white/10 transition-colors" />
 
-          <h1 className="text-3xl font-bold text-white mb-2 relative">
-            Hire Talented Creators
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-3 relative tracking-tighter uppercase italic">
+            Hire Top <span className="text-purple-300">Talent</span>
           </h1>
-          <p className="text-white/80 mb-8 max-w-lg mx-auto relative">
-            Connect with top-tier musicians, dancers, artists, and influencers
-            for your next campaign or project.
+          <p className="text-white/70 mb-8 max-w-lg mx-auto relative text-sm sm:text-base font-medium leading-relaxed">
+            Connect with industry-leading creators for your next project.
+            Premium members get priority access to vetted profiles.
           </p>
 
-          <div className="relative max-w-xl mx-auto">
+          <div className="relative max-w-xl mx-auto group/search">
             <input
               type="text"
-              placeholder="Search for skills (e.g. 'Guitarist', 'Video Editor')..."
-              className="w-full h-12 rounded-full pl-6 pr-32 bg-white text-black placeholder:text-gray-500 focus:outline-none shadow-xl"
+              placeholder="Who are you looking for?"
+              className="w-full h-14 sm:h-16 rounded-2xl pl-6 sm:pl-8 pr-16 sm:pr-36 bg-white/10 backdrop-blur-xl border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all shadow-2xl"
             />
-            <Button className="absolute right-1 top-1 bottom-1 rounded-full bg-purple-900 hover:bg-purple-950 text-white px-6 font-semibold">
-              Search
+            <Button className="absolute right-2 top-2 bottom-2 rounded-xl bg-white text-primary hover:bg-white/90 px-4 sm:px-8 font-black uppercase tracking-widest text-xs">
+              <span className="hidden sm:inline">Search Now</span>
+              <span className="sm:hidden">GO</span>
             </Button>
           </div>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-6 mb-6 border-b border-border-dark/30 pb-2">
-          <button className="text-primary font-semibold border-b-2 border-primary pb-2 px-2">
-            Available for Hire
+        <div className="flex items-center gap-6 sm:gap-10 mb-8 border-b border-border-dark/40 overflow-x-auto scrollbar-hide no-scrollbar">
+          <button className="text-primary font-black border-b-2 border-primary pb-4 px-2 whitespace-nowrap text-xs sm:text-sm uppercase tracking-widest transition-all">
+            All Freelancers
           </button>
-          <button className="text-gray-400 font-medium hover:text-white pb-2 px-2 transition-colors">
-            My Hiring Requests
+          <button className="text-gray-500 font-bold hover:text-white pb-4 px-2 whitespace-nowrap text-xs sm:text-sm uppercase tracking-widest transition-colors">
+            Saved Talents
           </button>
-          <button className="text-gray-400 font-medium hover:text-white pb-2 px-2 transition-colors">
-            My Active Hires
+          <button className="text-gray-500 font-bold hover:text-white pb-4 px-2 whitespace-nowrap text-xs sm:text-sm uppercase tracking-widest transition-colors">
+            Direct Messages
           </button>
         </div>
 
+        {/* Mobile Filter Toggle (Visible only on small screens) */}
+        <div className="lg:hidden mb-6 flex items-center justify-between p-4 bg-surface-dark border border-border-dark rounded-2xl">
+          <span className="text-white font-bold text-sm">Advanced Filters</span>
+          <Button
+            variant="ghost"
+            className="text-primary h-8 px-3 font-bold text-xs uppercase tracking-tighter hover:bg-primary/10"
+          >
+            Open Filters
+          </Button>
+        </div>
+
         {/* Talent Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
           {talents.map((talent, i) => (
             <div
               key={i}
-              className="bg-surface-dark rounded-xl p-5 border border-border-dark/30 hover:border-primary/50 transition-colors group card-hover-effect"
+              className="bg-surface-dark rounded-3xl p-5 sm:p-6 border border-border-dark/40 hover:border-primary/50 transition-all group card-hover-effect relative overflow-hidden"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
+              <div className="flex items-start justify-between mb-6 relative z-10">
+                <div className="flex items-center gap-4">
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-surface-dark">
+                    <div className="size-14 sm:size-16 rounded-2xl overflow-hidden border-2 border-border-dark group-hover:border-primary/50 transition-colors">
                       <Image
                         src={talent.image || ""}
                         alt={talent.name}
@@ -252,77 +264,92 @@ export default function Hire() {
                         className="object-cover"
                       />
                     </div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-surface-dark rounded-full" />
+                    <div className="absolute -bottom-1 -right-1 size-4 bg-green-500 border-2 border-surface-dark rounded-full shadow-lg" />
                   </div>
                   <div>
-                    <div className="flex items-center gap-1">
-                      <h3 className="text-white font-bold">{talent.name}</h3>
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <h3 className="text-white font-black text-base sm:text-lg tracking-tight uppercase">
+                        {talent.name}
+                      </h3>
                       <div className="bg-blue-500 p-0.5 rounded-full">
-                        <div className="w-2 h-2 text-white">
-                          <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                          </svg>
-                        </div>
+                        <svg
+                          className="size-2.5 text-white"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                        </svg>
                       </div>
                     </div>
-                    <p className="text-gray-400 text-xs">{talent.username}</p>
-                    <div className="flex items-center gap-1 text-xs mt-1">
-                      <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                      <span className="text-white font-bold">
+                    <p className="text-primary font-bold text-[10px] sm:text-xs tracking-tight">
+                      {talent.username}
+                    </p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="bg-yellow-500/10 text-yellow-500 text-[10px] font-black px-2 py-0.5 rounded flex items-center gap-1">
+                        <Star className="size-2.5 fill-current" />
                         {talent.rating}
                       </span>
-                      <span className="text-gray-500">
-                        ({talent.jobs} jobs)
+                      <span className="text-gray-500 text-[10px] font-bold uppercase tracking-tighter">
+                        {talent.jobs} JOBS
                       </span>
                     </div>
                   </div>
                 </div>
-                <Bookmark className="w-5 h-5 text-gray-500 hover:text-white cursor-pointer" />
+                <button className="p-2.5 rounded-xl bg-background-dark/50 border border-border-dark text-gray-500 hover:text-white hover:border-primary/50 transition-all">
+                  <Bookmark className="size-4" />
+                </button>
               </div>
 
-              <div className="flex gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-6 relative z-10">
                 {talent.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-background-dark text-gray-300 text-xs px-2 py-1 rounded border border-border-dark/50"
+                    className="bg-background-dark/80 text-gray-400 text-[10px] sm:text-xs px-3 py-1 rounded-lg border border-border-dark/50 font-bold uppercase tracking-tight"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <p className="text-gray-400 text-sm mb-6 line-clamp-2">
+              <p className="text-gray-400 text-sm mb-8 line-clamp-2 leading-relaxed font-medium">
                 {talent.bio}
               </p>
 
-              <div className="flex items-center justify-between pt-4 border-t border-border-dark/30">
-                <div className="text-center">
-                  <p className="text-gray-500 text-[10px] uppercase tracking-wider">
-                    Followers
+              <div className="grid grid-cols-2 gap-4 py-6 border-t border-border-dark/30 relative z-10">
+                <div className="text-left">
+                  <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1 leading-none">
+                    Audience
                   </p>
-                  <p className="text-white font-bold">{talent.followers}</p>
+                  <p className="text-white font-black text-lg tracking-tight">
+                    {talent.followers}
+                  </p>
                 </div>
-                <div className="text-center">
-                  <p className="text-gray-500 text-[10px] uppercase tracking-wider">
+                <div className="text-right">
+                  <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest mb-1 leading-none">
                     Starting At
                   </p>
-                  <p className="text-white font-bold">{talent.rate}</p>
+                  <p className="text-white font-black text-lg tracking-tight">
+                    {talent.rate}
+                  </p>
                 </div>
               </div>
 
-              <Button className="w-full mt-4 bg-background-dark hover:bg-primary text-white border border-border-dark/50 hover:border-primary transition-all font-semibold">
-                Hire Now
+              <Button className="w-full h-12 bg-white text-primary hover:bg-white/90 text-sm font-black uppercase tracking-widest rounded-xl shadow-xl shadow-white/5 relative z-10">
+                Contact Creator
               </Button>
+
+              {/* Subtle background aesthetic */}
+              <div className="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center mt-8 pb-8">
+        <div className="flex justify-center mt-12 pb-12 relative z-10">
           <Button
             variant="outline"
-            className="rounded-full px-6 border-border-dark text-white hover:bg-surface-dark bg-transparent"
+            className="rounded-2xl px-10 h-14 border-border-dark text-white hover:bg-surface-dark bg-transparent font-black uppercase tracking-widest text-xs"
           >
-            Load More Talents
+            Show More Talents
           </Button>
         </div>
       </div>

@@ -122,10 +122,10 @@ export default function UserProfilePage() {
       </div>
 
       {/* Profile Header */}
-      <div className="px-6 pb-6 relative">
-        <div className="flex flex-col md:flex-row items-end md:items-end justify-between -mt-20 mb-6 gap-4">
+      <div className="px-4 sm:px-6 pb-6 relative">
+        <div className="flex flex-col md:flex-row items-center md:items-end justify-between -mt-20 sm:-mt-24 mb-6 gap-6 md:gap-4">
           <div className="relative group">
-            <div className="size-40 rounded-full p-1.5 bg-background-dark">
+            <div className="size-32 sm:size-40 rounded-full p-1.5 bg-background-dark">
               <div className="w-full h-full rounded-full bg-linear-to-br from-primary to-purple-400 p-[2px]">
                 <div className="w-full h-full rounded-full bg-surface-dark overflow-hidden relative">
                   <Image
@@ -139,10 +139,10 @@ export default function UserProfilePage() {
             </div>
           </div>
 
-          <div className="flex gap-3 mb-4 md:mb-2 text-white">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-2 sm:gap-3 mb-2 text-white w-full md:w-auto">
             <Button
               onClick={() => toast.follow(usernameParam)}
-              className="bg-primary hover:bg-primary-hover text-white rounded-full h-10 px-6 font-bold shadow-glow transition-all hover:-translate-y-0.5 flex items-center gap-2"
+              className="flex-1 md:flex-none bg-primary hover:bg-primary-hover text-white rounded-full h-10 px-6 font-bold shadow-glow transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2"
             >
               <UserPlus className="h-4 w-4" />
               Follow
@@ -150,7 +150,7 @@ export default function UserProfilePage() {
             <Button
               variant="outline"
               onClick={() => toast.comment(usernameParam)}
-              className="bg-surface-dark border-border-dark text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary rounded-full h-10 px-4 font-semibold transition-all"
+              className="flex-1 md:flex-none bg-surface-dark border-border-dark text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary rounded-full h-10 px-4 font-semibold transition-all flex items-center justify-center"
             >
               <MessageSquare className="h-4 w-4 mr-2" />
               Message
@@ -158,7 +158,7 @@ export default function UserProfilePage() {
             <Button
               variant="outline"
               onClick={() => toast.hire(usernameParam)}
-              className="bg-surface-dark border-border-dark text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary rounded-full h-10 px-4 font-semibold transition-all"
+              className="flex-1 md:flex-none bg-surface-dark border-border-dark text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary rounded-full h-10 px-4 font-semibold transition-all flex items-center justify-center"
             >
               <Gift className="h-4 w-4 mr-2" />
               Hire
@@ -166,7 +166,7 @@ export default function UserProfilePage() {
             <Button
               variant="outline"
               size="icon"
-              className="bg-surface-dark border border-border-dark text-gray-400 hover:text-white hover:border-white/20 rounded-full h-10 w-10 flex items-center justify-center transition-all bg-transparent"
+              className="shrink-0 bg-surface-dark border border-border-dark text-gray-400 hover:text-white hover:border-white/20 rounded-full h-10 w-10 flex items-center justify-center transition-all bg-transparent"
             >
               <MoreHorizontal className="h-5 w-5" />
             </Button>
@@ -174,63 +174,73 @@ export default function UserProfilePage() {
         </div>
 
         {/* User Info */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 mb-2">
-            <h1 className="text-3xl font-bold text-white">{profile.name}</h1>
-            {profile.verified && (
-              <CheckCircle2 className="h-6 w-6 text-blue-500" />
-            )}
-            {profile.hiring && (
-              <span className="px-3 py-1 bg-green-500/20 text-green-500 text-xs font-semibold rounded-full">
-                AVAILABLE FOR HIRE
-              </span>
-            )}
+        <div className="mb-8 mt-2 md:mt-0 text-center md:text-left">
+          <div className="flex flex-col md:flex-row items-center gap-2 mb-2">
+            <h1 className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight">
+              {profile.name}
+            </h1>
+            <div className="flex items-center gap-2">
+              {profile.verified && (
+                <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-blue-500" />
+              )}
+              {profile.hiring && (
+                <span className="px-3 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded-full border border-green-500/20 uppercase tracking-tighter">
+                  AVAILABLE FOR HIRE
+                </span>
+              )}
+            </div>
           </div>
-          <p className="text-gray-400 mb-4">@{usernameParam}</p>
-          <p className="text-white mb-4 max-w-2xl leading-relaxed">
+          <p className="text-primary font-medium text-sm sm:text-base mb-4 lowercase tracking-tight">
+            @{usernameParam}
+          </p>
+          <p className="text-gray-300 mb-6 max-w-2xl leading-relaxed text-sm sm:text-base mx-auto md:mx-0">
             {profile.bio}
           </p>
-          <div className="flex flex-wrap gap-4 text-gray-400 text-sm mb-6">
+
+          <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-3 text-gray-400 text-[13px] mb-8">
             <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4" />
+              <MapPin className="h-4 w-4 text-primary/70" />
               <span>{profile.location}</span>
             </div>
             <div className="flex items-center gap-2">
-              <LinkIcon className="h-4 w-4" />
+              <LinkIcon className="h-4 w-4 text-primary/70" />
               <a href="#" className="hover:text-primary transition-colors">
                 {profile.username}.com
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4" />
+              <Calendar className="h-4 w-4 text-primary/70" />
               <span>Joined March 2024</span>
             </div>
           </div>
-          <div className="flex gap-8 p-4 bg-surface-dark rounded-xl border border-border-dark w-fit">
+
+          <div className="flex gap-4 sm:gap-8 p-4 bg-surface-dark/50 sm:p-5 sm:bg-surface-dark rounded-2xl border border-border-dark w-full sm:w-fit mx-auto md:mx-0 justify-center sm:justify-start shadow-xl">
             <div className="text-center px-2">
-              <p className="text-white font-bold text-lg">
+              <p className="text-white font-bold text-lg sm:text-xl">
                 {profile.followers}
               </p>
-              <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
+              <p className="text-gray-500 text-[9px] sm:text-[10px] uppercase tracking-widest font-black">
                 FOLLOWERS
               </p>
             </div>
-            <div className="w-px bg-border-dark"></div>
+            <div className="w-px bg-border-dark/50"></div>
             <div className="text-center px-2">
-              <p className="text-white font-bold text-lg">
+              <p className="text-white font-bold text-lg sm:text-xl">
                 {profile.following}
               </p>
-              <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
+              <p className="text-gray-500 text-[9px] sm:text-[10px] uppercase tracking-widest font-black">
                 FOLLOWING
               </p>
             </div>
-            <div className="w-px bg-border-dark"></div>
+            <div className="w-px bg-border-dark/50"></div>
             <div className="text-center flex flex-col items-center px-2">
               <div className="flex items-center gap-1">
-                <p className="text-white font-bold text-lg">{profile.rating}</p>
+                <p className="text-white font-bold text-lg sm:text-xl">
+                  {profile.rating}
+                </p>
                 <Star className="h-4 w-4 text-yellow-500 fill-yellow-500" />
               </div>
-              <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">
+              <p className="text-gray-500 text-[9px] sm:text-[10px] uppercase tracking-widest font-black">
                 RATING
               </p>
             </div>
@@ -238,14 +248,14 @@ export default function UserProfilePage() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-8 border-b border-border-dark mb-8">
+        <div className="flex gap-6 sm:gap-10 border-b border-border-dark mb-8 overflow-x-auto scrollbar-hide scroll-smooth">
           {["Portfolio", "Videos", "About", "Gifts"].map((tab) => (
             <button
               key={tab}
               onClick={() => {
                 setActiveTab(tab);
               }}
-              className={`pb-4 px-2 border-b-2 transition-all text-sm font-bold ${
+              className={`pb-4 px-1 border-b-2 transition-all text-xs sm:text-sm font-black uppercase tracking-widest whitespace-nowrap ${
                 activeTab === tab
                   ? "border-primary text-white"
                   : "border-transparent text-gray-500 hover:text-white"

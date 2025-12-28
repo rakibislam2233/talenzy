@@ -140,67 +140,75 @@ export default function DiscoverPeople() {
   ];
 
   return (
-    <div className="flex-1 p-8 overflow-y-auto">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 pb-32">
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white mb-2">
-            Discover People
+          <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mb-1">
+            Discover <span className="text-primary italic">Talent</span>
           </h1>
-          <p className="text-gray-400 text-sm">
-            Connect with talented individuals across the globe
+          <p className="text-gray-400 text-sm sm:text-base">
+            Connect with incredible creators around the globe
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-gray-500 text-sm">Sort by:</span>
-          <button className="flex items-center gap-2 bg-[#2a2330] hover:bg-[#332840] text-white px-4 py-2 rounded-lg border border-border-dark/30 transition-colors text-sm font-medium">
+        <div className="flex items-center gap-3">
+          <span className="text-gray-500 text-xs font-bold uppercase tracking-widest hidden sm:block">
+            Sort by:
+          </span>
+          <button className="flex items-center justify-between gap-3 bg-[#2a2330] hover:bg-[#332840] text-white px-4 py-2.5 rounded-xl border border-border-dark/30 transition-all text-sm font-bold shadow-lg min-w-[140px]">
             {filter}
-            <ChevronDown className="h-4 w-4 text-gray-400" />
+            <ChevronDown className="h-4 w-4 text-primary" />
           </button>
         </div>
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-surface-dark/50 p-4 rounded-xl border border-border-dark/30 mb-8">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+      <div className="bg-surface-dark/50 p-4 sm:p-5 rounded-2xl border border-border-dark/40 mb-10 shadow-xl backdrop-blur-md">
+        <div className="flex flex-col lg:flex-row gap-5">
+          <div className="flex-1 relative group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 group-focus-within:text-primary transition-colors" />
             <input
               type="text"
-              placeholder="Search by name or username"
-              className="w-full h-10 bg-background-dark border border-border-dark/30 rounded-lg pl-10 pr-4 text-sm text-white focus:outline-none focus:border-primary transition-colors"
+              placeholder="Search by name, role, or username..."
+              className="w-full h-12 bg-background-dark/80 border border-border-dark/50 rounded-xl pl-12 pr-4 text-sm text-white focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-gray-600"
             />
           </div>
 
-          <div className="flex gap-4 overflow-x-auto">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide py-1">
             <Dropdown label="All Categories" />
             <Dropdown label="Location" />
             <Dropdown label="Skills" />
+            <Dropdown label="Experience" />
           </div>
         </div>
 
         {/* Popular Tags */}
-        <div className="flex items-center gap-3 mt-4 text-xs">
-          <span className="text-gray-500 font-semibold uppercase tracking-wider">
-            Popular:
+        <div className="flex items-center gap-4 mt-5">
+          <span className="text-gray-600 text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">
+            Trending:
           </span>
-          <div className="flex gap-2">
-            {["#Musicians", "#Designers", "#Dancers", "#Photographers"].map(
-              (tag) => (
-                <button
-                  key={tag}
-                  className="bg-[#2a2330] hover:bg-primary/20 hover:text-primary text-gray-400 px-3 py-1 rounded-full transition-colors"
-                >
-                  {tag}
-                </button>
-              )
-            )}
+          <div className="flex gap-2 overflow-x-auto scrollbar-hide scroll-smooth">
+            {[
+              "#Musicians",
+              "#Designers",
+              "#Dancers",
+              "#Photographers",
+              "#Editors",
+              "#Writers",
+            ].map((tag) => (
+              <button
+                key={tag}
+                className="bg-background-dark hover:bg-primary hover:text-white text-gray-500 px-4 py-1.5 rounded-full transition-all text-[11px] font-bold border border-border-dark/30 whitespace-nowrap shadow-sm hover:shadow-primary/20"
+              >
+                {tag}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
         {profiles.map((profile) => (
           <div
             key={profile.id}
@@ -211,7 +219,7 @@ export default function DiscoverPeople() {
                 ""
               )}`;
             }}
-            className="bg-surface-dark rounded-2xl p-6 border border-border-dark/30 hover:border-primary/30 transition-all hover:transform hover:-translate-y-1 group relative overflow-hidden cursor-pointer"
+            className="bg-surface-dark rounded-3xl p-6 border border-border-dark/30 hover:border-primary/50 transition-all hover:transform hover:-translate-y-2 group relative overflow-hidden cursor-pointer shadow-xl hover:shadow-primary/10"
           >
             {/* Gradient Background Effect */}
             <div className="absolute top-0 left-0 right-0 h-24 bg-linear-to-b from-[#2a2330] to-transparent opacity-50"></div>
