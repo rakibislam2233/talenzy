@@ -268,7 +268,7 @@ export default function Hire() {
           <div className="absolute top-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 group-hover:bg-white/10 transition-colors" />
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl translate-x-1/4 translate-y-1/4 group-hover:bg-white/10 transition-colors" />
 
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-3 relative tracking-tighter uppercase italic">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-3 relative ">
             Hire Top <span className="text-purple-300">Talent</span>
           </h1>
           <p className="text-white/70 mb-8 max-w-lg mx-auto relative text-sm sm:text-base font-medium leading-relaxed">
@@ -297,9 +297,9 @@ export default function Hire() {
               activeTab === "all"
                 ? "text-primary border-b-2 border-primary"
                 : "text-gray-500 hover:text-white"
-            } font-black pb-4 px-2 whitespace-nowrap text-xs sm:text-sm uppercase tracking-widest transition-all`}
+            } font-black pb-4 px-2 whitespace-nowrap text-xs sm:text-sm  tracking-widest transition-all`}
           >
-            All Freelancers
+            All People
           </button>
           <button
             onClick={() => setActiveTab("my-requests")}
@@ -307,7 +307,7 @@ export default function Hire() {
               activeTab === "my-requests"
                 ? "text-primary border-b-2 border-primary"
                 : "text-gray-500 hover:text-white"
-            } font-black pb-4 px-2 whitespace-nowrap text-xs sm:text-sm uppercase tracking-widest transition-all`}
+            } font-black pb-4 px-2 whitespace-nowrap text-xs sm:text-sm  tracking-widest transition-all`}
           >
             My Hire Requests
           </button>
@@ -317,7 +317,7 @@ export default function Hire() {
               activeTab === "hired-me"
                 ? "text-primary border-b-2 border-primary"
                 : "text-gray-500 hover:text-white"
-            } font-black pb-4 px-2 whitespace-nowrap text-xs sm:text-sm uppercase tracking-widest transition-all`}
+            } font-black pb-4 px-2 whitespace-nowrap text-xs sm:text-sm  tracking-widest transition-all`}
           >
             Who Hired Me
           </button>
