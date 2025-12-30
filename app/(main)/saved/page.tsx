@@ -1,4 +1,21 @@
+import type { Metadata } from "next";
 import { Bookmark, Play, Lock } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "Saved | Talenzy",
+  description: "Access your saved posts and content on Talenzy. Keep track of your favorite creative content.",
+  openGraph: {
+    title: "Saved | Talenzy",
+    description: "Access your saved posts and content on Talenzy. Keep track of your favorite creative content.",
+    type: "website",
+    url: "https://www.talenzy.com/saved",
+  },
+  twitter: {
+    card: "summary",
+    title: "Saved | Talenzy",
+    description: "Access your saved posts and content on Talenzy. Keep track of your favorite creative content.",
+  },
+};
 
 export default function SavedPage() {
   const savedItems = [

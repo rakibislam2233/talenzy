@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ModeToggle } from "@/components/ui/ModeToggle";
 import { ReactNode } from "react";
 
 interface AuthLayoutProps {
@@ -26,7 +27,7 @@ export default function AuthLayout({
 
           {/* Content */}
           <div className="relative z-10 w-full flex flex-col p-12 justify-between">
-            <div>
+            <div className="flex items-center justify-between">
               <Link href="/" className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20">
                   <span className="text-white text-xl">✨</span>
@@ -35,6 +36,7 @@ export default function AuthLayout({
                   Talenzy
                 </span>
               </Link>
+              <ModeToggle />
             </div>
 
             <div className="mb-12">{sideContent}</div>
@@ -67,7 +69,7 @@ export default function AuthLayout({
   // Centered Variant (Forgot Password, Verify, Reset)
   return (
     <div className="min-h-screen bg-background-dark flex flex-col">
-      <header className="p-6">
+      <header className="p-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-10 h-10 bg-[#3a0d5c] rounded-xl flex items-center justify-center">
             <span className="text-white text-xl">✨</span>{" "}
@@ -75,6 +77,7 @@ export default function AuthLayout({
           </div>
           <span className="text-white text-xl font-bold">Talenzy</span>
         </Link>
+        <ModeToggle />
       </header>
 
       <div className="flex-1 flex items-center justify-center p-4 relative overflow-hidden">

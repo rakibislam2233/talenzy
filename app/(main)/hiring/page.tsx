@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -15,7 +14,6 @@ import { MapPin, Search, Star } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-
 export default function Hire() {
   const router = useRouter();
   const searchParams = useSearchParams();

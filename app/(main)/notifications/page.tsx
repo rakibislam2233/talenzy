@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import {
   CheckCircle2,
@@ -6,6 +7,22 @@ import {
   MessageCircle,
   UserPlus,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Notifications | Talenzy",
+  description: "Stay updated with your activity on Talenzy - likes, comments, follows, and more.",
+  openGraph: {
+    title: "Notifications | Talenzy",
+    description: "Stay updated with your activity on Talenzy - likes, comments, follows, and more.",
+    type: "website",
+    url: "https://www.talenzy.com/notifications",
+  },
+  twitter: {
+    card: "summary",
+    title: "Notifications | Talenzy",
+    description: "Stay updated with your activity on Talenzy - likes, comments, follows, and more.",
+  },
+};
 
 export default function NotificationsPage() {
   const notifications = [

@@ -1,5 +1,5 @@
-"use client";
-
+'use client'
+import type { Metadata } from "next";
 import {
   CheckCheck,
   FileText,
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+
 
 export default function Messages() {
   const contacts = [

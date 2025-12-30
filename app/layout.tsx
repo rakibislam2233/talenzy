@@ -70,7 +70,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${beVietnamPro.className} antialiased`}>
+      <body className={`${beVietnamPro.className} antialiased bg-background text-foreground`}>
         <Providers>
           {children}
           <ToastContainer />
