@@ -1,8 +1,23 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Image as ImageIcon, TrendingUp, User, Video } from "lucide-react";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Explore | Talenzy",
+  description: "Discover amazing content and creative professionals on Talenzy. Explore trending posts, videos, and talented creators.",
+  openGraph: {
+    title: "Explore | Talenzy",
+    description: "Discover amazing content and creative professionals on Talenzy. Explore trending posts, videos, and talented creators.",
+    type: "website",
+    url: "https://www.talenzy.com/explore",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Explore | Talenzy",
+    description: "Discover amazing content and creative professionals on Talenzy. Explore trending posts, videos, and talented creators.",
+  },
+};
 
 export default function Explore() {
   const exploreItems = [

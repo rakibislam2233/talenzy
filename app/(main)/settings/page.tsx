@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,6 +12,22 @@ import {
   Pencil,
   Phone,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Settings | Talenzy",
+  description: "Manage your account settings, privacy, and preferences on Talenzy.",
+  openGraph: {
+    title: "Settings | Talenzy",
+    description: "Manage your account settings, privacy, and preferences on Talenzy.",
+    type: "website",
+    url: "https://www.talenzy.com/settings",
+  },
+  twitter: {
+    card: "summary",
+    title: "Settings | Talenzy",
+    description: "Manage your account settings, privacy, and preferences on Talenzy.",
+  },
+};
 
 export default function SettingsPage() {
   return (

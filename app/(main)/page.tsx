@@ -1,8 +1,8 @@
-"use client";
+
+'use client'
 import PostCard from "@/components/FeedPost";
 import PublicHome from "@/components/pages/PublicHome";
 import { useAuth } from "@/context/AuthContext";
-
 import { MOCK_POSTS } from "@/lib/data";
 
 export default function Home() {

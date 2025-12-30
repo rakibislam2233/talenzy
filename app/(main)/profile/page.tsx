@@ -1,5 +1,4 @@
-"use client";
-
+import type { Metadata } from "next";
 import PostViewModal from "@/components/modals/PostViewModal";
 import { Button } from "@/components/ui/button";
 import { MOCK_POSTS } from "@/lib/data";
@@ -20,6 +19,22 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
+
+export const metadata: Metadata = {
+  title: "Profile | Talenzy",
+  description: "View your profile on Talenzy - showcase your talents and connect with other creative professionals.",
+  openGraph: {
+    title: "Profile | Talenzy",
+    description: "View your profile on Talenzy - showcase your talents and connect with other creative professionals.",
+    type: "profile",
+    url: "https://www.talenzy.com/profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Profile | Talenzy",
+    description: "View your profile on Talenzy - showcase your talents and connect with other creative professionals.",
+  },
+};
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("Posts");

@@ -78,7 +78,7 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-4 px-4 py-3.5 rounded-xl   to-transparent border-l-[6px]  text-white group transition-all ${
+                className={`flex items-center gap-4 px-4 py-3.5 rounded-xl   to-transparent border-l-4  text-white group transition-all ${
                   active
                     ? "bg-surface-dark text-white  border-primary shadow-sm"
                     : "text-text-secondary hover:bg-surface-dark hover:text-white border-transparent"

@@ -1,6 +1,21 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Info } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us | Talenzy",
+  description: "Learn about Talenzy, the premier platform for discovering and hiring top talent across the globe.",
+  openGraph: {
+    title: "About Us | Talenzy",
+    description: "Learn about Talenzy, the premier platform for discovering and hiring top talent across the globe.",
+    type: "website",
+    url: "https://www.talenzy.com/about",
+  },
+  twitter: {
+    card: "summary",
+    title: "About Us | Talenzy",
+    description: "Learn about Talenzy, the premier platform for discovering and hiring top talent across the globe.",
+  },
+};
 
 export default function About() {
   return (

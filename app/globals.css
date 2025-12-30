@@ -2,39 +2,38 @@
 
 @layer base {
   :root {
-    --background: 268 34% 6%; /* #0f0f13 */
-    --foreground: 0 0% 100%;
-    --card: 270 26% 10%; /* #1b1121 */
+    /* Minimal black dark theme with your purple primary */
+    --background: 0 0% 0%; /* #000000 - Pure black background */
+    --foreground: 0 0% 100%; /* White text */
+    --card: 0 0% 7%; /* #121212 - Dark surface (Instagram/TikTok style) */
     --card-foreground: 0 0% 100%;
-    --popover: 270 26% 10%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 100%;
+    
+    /* Your primary purple retained */
     --primary: 277 85% 27%; /* #500e7c */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 280 18% 19%; /* #322938 */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+    
+    --secondary: 0 0% 10%; /* #1a1a1a */
     --secondary-foreground: 0 0% 100%;
-    --muted: 280 18% 19%;
-    --muted-foreground: 280 15% 66%; /* #ae9db8 */
-    --accent: 270 26% 10%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 70%; /* #b3b3b3 - Secondary text */
+    --accent: 0 0% 7%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 280 18% 19%; /* #322938 */
-    --input: 280 18% 19%;
-    --ring: 277 85% 27%;
-    --radius: 0.25rem;
-    --chart-1: 277 70% 50%;
-    --chart-2: 280 60% 45%;
-    --chart-3: 260 50% 40%;
-    --chart-4: 290 65% 60%;
-    --chart-5: 270 75% 55%;
+    --border: 0 0% 12%; /* #1f1f1f - Subtle borders */
+    --input: 0 0% 10%;
+    --ring: 277 85% 27%; /* Ring matches your primary */
+    --radius: 0.5rem;
 
-    /* Custom theme colors - Talenzy palette */
+    /* Custom colors */
     --color-primary: #500e7c;
-    --color-primary-hover: #6a1b9a;
-    --color-background-dark: #0f0f13;
-    --color-surface-dark: #1b1121;
-    --color-border-dark: #322938;
-    --color-text-secondary: #ae9db8;
+    --color-primary-hover: #6a1b9a; /* Slightly lighter hover */
+    --color-background-dark: #000000;
+    --color-surface-dark: #121212;
+    --color-border-dark: #1f1f1f;
+    --color-text-secondary: #b3b3b3;
   }
 }
 
@@ -59,23 +58,20 @@
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
 
-  /* Custom theme colors - Talenzy palette */
+  /* Custom */
   --color-primary-hover: #6a1b9a;
-  --color-background-dark: #0f0f13;
-  --color-surface-dark: #1b1121;
-  --color-border-dark: #322938;
-  --color-text-secondary: #ae9db8;
+  --color-background-dark: #000000;
+  --color-surface-dark: #121212;
+  --color-border-dark: #1f1f1f;
+  --color-text-secondary: #b3b3b3;
 
-  /* Border radius */
-  --radius-sm: 0.25rem;
+  /* Radius */
+  --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
-
-  /* Font family */
-  --font-display: var(--font-display);
 }
 
 @layer base {
@@ -86,19 +82,19 @@
     @apply bg-background text-foreground;
   }
 
-  /* Custom scrollbar styling for the Talenzy theme */
+  /* Clean minimal scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #0f0f13;
+    background: #000000;
   }
   ::-webkit-scrollbar-thumb {
-    background: #322938;
+    background: #1f1f1f;
     border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #500e7c;
+    background: #500e7c; /* Your primary on hover */
   }
 }
 
@@ -111,24 +107,18 @@
     display: none;
   }
 
-  /* Glass panel effect for Talenzy */
+  /* Very subtle panel - no heavy glass */
   .glass-panel {
-    background: rgba(15, 15, 19, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(18, 18, 18, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
-  /* Card hover effect */
+  /* Simple hover lift - no glow */
   .card-hover-effect {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease;
   }
   .card-hover-effect:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 10px 30px -10px rgba(80, 14, 124, 0.4);
-  }
-
-  /* Glow effect for primary elements */
-  .shadow-glow {
-    box-shadow: 0 0 15px rgba(80, 14, 124, 0.3);
+    transform: translateY(-3px);
   }
 }

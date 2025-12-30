@@ -103,7 +103,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     <>
       <article
         onClick={() => !isHome && handleOpenView()}
-        className={`relative w-full aspect-4/5 bg-surface-dark rounded-2xl overflow-hidden border border-border-dark shadow-2xl group transition-all duration-300 hover:-translate-y-1 hover:shadow-primary/20 ${
+        className={`relative w-full aspect-4/5 bg-surface-dark rounded-2xl overflow-hidden border border-border-dark shadow-2xl group transition-all duration-300  hover:shadow-primary/20 ${
           !isHome ? "cursor-pointer" : ""
         }`}
       >
