@@ -8,7 +8,6 @@ import {
   Briefcase,
   Calendar,
   Camera,
-  CheckCircle2,
   FolderHeart,
   Link as LinkIcon,
   MapPin,
