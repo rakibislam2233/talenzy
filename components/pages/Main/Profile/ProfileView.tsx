@@ -10,29 +10,25 @@ import {
   Calendar,
   Camera,
   ExternalLink,
-  FolderHeart,
   Link as LinkIcon,
   MapPin,
   MessageSquare,
   MoreHorizontal,
-  Play,
   Share,
   Star,
-  ThumbsUp,
   UserPlus,
   Verified,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import ProfileTabs from "./ProfileTabs";
 import {
   CURRENT_USER_SLUG,
   currentUserPosts,
   PROFILE_RECORDS,
-  profileReviews,
-  savedCollections,
 } from "./mock-data";
+import ProfileTabs from "./ProfileTabs";
+import ProfileTabPanels from "./tabs/ProfileTabPanels";
 import { ProfileViewProps } from "./types";
 
 function getProfileRecord(slug: string) {
@@ -63,15 +59,6 @@ function getProfileRecord(slug: string) {
       website: `${slug}.com`,
     }
   );
-}
-
-function renderStars(rating: number) {
-  return Array.from({ length: 5 }).map((_, index) => (
-    <Star
-      key={index}
-      className={`h-3.5 w-3.5 ${index < rating ? "text-yellow-500 fill-yellow-500" : "text-border"}`}
-    />
-  ));
 }
 
 export default function ProfileView({
@@ -291,163 +278,13 @@ export default function ProfileView({
         <ProfileTabs basePath={`/${profile.slug}`} activeTab={activeTab} />
 
         <div className="min-h-75">
-          {activeTab === "posts" && (
-            <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-500 md:grid-cols-3">
-              {profilePosts.map((post) => (
-                <div
-                  key={post.id}
-                  onClick={() => setSelectedPost(post)}
-                  className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-border bg-card"
-                >
-                  <Image
-                    src={post.mediaUrl}
-                    alt={post.caption}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/40 opacity-0 transition-opacity group-hover:opacity-100 md:gap-2">
-                    {post.mediaItems?.some(
-                      (media) => media.type === "video",
-                    ) && (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground/20 text-foreground backdrop-blur-md">
-                        ▶
-                      </div>
-                    )}
-                    <p className="hidden translate-y-4 px-4  text-sm font-bold text-foreground transition-transform duration-300 group-hover:translate-y-0 md:block line-clamp-2">
-                      {post.caption}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === "videos" && (
-            <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-500 md:grid-cols-3">
-              {videoPosts.length > 0 ? (
-                videoPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    onClick={() => setSelectedPost(post)}
-                    className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl border border-border bg-card"
-                  >
-                    <Image
-                      src={post.mediaUrl}
-                      alt={post.caption}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-background/40 opacity-0 transition-opacity group-hover:opacity-100">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-foreground/20 text-foreground backdrop-blur-md">
-                        <Play className="h-6 w-6 fill-white" />
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-full py-20 text-center">
-                  <p className="font-medium text-muted-foreground">
-                    No videos found.
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "saved" && (
-            <div className="grid grid-cols-2 gap-4 animate-in fade-in duration-500 md:grid-cols-4">
-              {isOwnProfile ? (
-                savedCollections.map((collection) => (
-                  <div
-                    key={collection.id}
-                    className="group overflow-hidden rounded-2xl border border-border bg-card text-left transition-transform"
-                  >
-                    <div className="relative aspect-4/5 overflow-hidden">
-                      <Image
-                        src={collection.cover}
-                        alt={collection.name}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <p className="text-sm font-semibold text-white">
-                          {collection.name}
-                        </p>
-                        <p className="text-[11px] text-white/75">
-                          {collection.count} items
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <div className="col-span-full rounded-2xl border border-border bg-card p-8 text-center">
-                  <FolderHeart className="mx-auto h-10 w-10 text-primary" />
-                  <h3 className="mt-3 text-lg font-semibold text-foreground">
-                    Saved content is private
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    This user has not shared saved items publicly.
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "reviews" && (
-            <div className="grid grid-cols-1 gap-6 animate-in fade-in duration-500 md:grid-cols-2">
-              <div className="col-span-full mb-2">
-                <h3 className="text-xl font-bold text-foreground">
-                  Reviews & Feedback
-                </h3>
-              </div>
-              {profileReviews.map((review) => (
-                <div
-                  key={review.id}
-                  className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/30"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="relative size-10 overflow-hidden rounded-full border border-border bg-muted">
-                        <Image
-                          src={review.avatar}
-                          alt={review.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-foreground">
-                          {review.name}
-                        </h4>
-                        <span className="text-xs text-muted-foreground">
-                          {review.date}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex gap-0.5">
-                      {renderStars(review.rating)}
-                    </div>
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {review.comment}
-                  </p>
-                  <div className="mt-auto flex items-center gap-4 border-t border-border/50 pt-4">
-                    <button className="flex items-center gap-1 text-xs font-medium text-muted-foreground hover:text-foreground">
-                      <ThumbsUp className="h-3 w-3" /> Helpful
-                    </button>
-                    <button className="flex items-center gap-1 text-xs font-medium text-foreground hover:text-foreground">
-                      <MessageSquare className="h-3 w-3" /> Reply
-                    </button>
-                    <button className="ml-auto text-muted-foreground hover:text-foreground">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
+          <ProfileTabPanels
+            activeTab={activeTab}
+            profilePosts={profilePosts}
+            videoPosts={videoPosts}
+            isOwnProfile={isOwnProfile}
+            onSelectPost={setSelectedPost}
+          />
         </div>
       </div>
 
