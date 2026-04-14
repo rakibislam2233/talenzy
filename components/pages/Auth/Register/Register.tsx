@@ -1,52 +1,20 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
     Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Mail, User } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-const registerSchema = z
-  .object({
-    fullName: z.string().min(2, "Full name must be at least 2 characters"),
-    username: z.string().min(3, "Username must be at least 3 characters"),
-    email: z.string().email("Invalid email address"),
-    password: z
-      .string()
-      .min(8, "Password must be at least 8 characters")
-      .regex(/[0-9]/, "Password must contain at least one number")
-      .regex(
-        /[^A-Za-z0-9]/,
-        "Password must contain at least one special character",
-      ),
-    confirmPassword: z.string(),
-    agreeToTerms: z.boolean().refine((val) => val === true, {
-      message: "You must agree to the terms",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
-
-type RegisterFormValues = z.infer<typeof registerSchema>;
+import RegisterFormFields from "./RegisterFormFields";
+import RegisterTermsField from "./RegisterTermsField";
+import { RegisterFormValues, registerSchema } from "./register-schema";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [usernameAvailable] = useState(true);
 
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -78,161 +46,20 @@ export default function Register() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
+            <RegisterFormFields
               control={form.control}
-              name="fullName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Full Name</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type="text"
-                        placeholder="e.g. Sarah Jenkins"
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground"
-                      />
-                      <User className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              showPassword={showPassword}
+              onTogglePassword={() => setShowPassword((current) => !current)}
+              showConfirmPassword={showConfirmPassword}
+              onToggleConfirmPassword={() => setShowConfirmPassword((current) => !current)}
             />
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Email Address</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type="email"
-                        placeholder="name@example.com"
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground"
-                      />
-                      <Mail className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">Password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
-                        className="bg-background border-border text-foreground placeholder:text-muted-foreground"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        {showPassword ? (
-                          <EyeOff className="h-5 w-5" />
-                        ) : (
-                          <Eye className="h-5 w-5" />
-                        )}
-                      </button>
-                    </div>
-                  </FormControl>
-                  {/* Password Strength Indicators - Keeping simple/hidden based on design, checking image... 
-                        Image shows dots and then some colored bars? 
-                        Yes, underneath functionality: Red/Orange/Green/Gray bars. 
-                        I should reinstate the strength bars. */}
-                  <div className="flex gap-1 h-1 mt-2">
-                    <div className="h-full flex-1 rounded bg-red-500" />
-                    <div className="h-full flex-1 rounded bg-orange-500" />
-                    {/* Mocked for design */}
-                    <div className="h-full flex-1 rounded bg-gray-700" />
-                    <div className="h-full flex-1 rounded bg-gray-700" />
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="space-y-4">
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground">
-                      Confirm Password
-                    </FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input
-                          {...field}
-                          type={showConfirmPassword ? "text" : "password"}
-                          placeholder="••••••••"
-                          className="bg-background border-border text-foreground placeholder:text-muted-foreground"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                        >
-                          {showConfirmPassword ? (
-                            <EyeOff className="h-5 w-5" />
-                          ) : (
-                            <Eye className="h-5 w-5" />
-                          )}
-                        </button>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <FormField
-              control={form.control}
-              name="agreeToTerms"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="border-border data-[state=checked]:bg-primary data-[state=checked]:border-primary"
-                    />
-                  </FormControl>
-                  <FormLabel className="text-foreground/70 text-sm font-normal cursor-pointer">
-                    I agree to the{" "}
-                    <Link
-                      href="/terms"
-                      className="text-foreground hover:underline underline-offset-4"
-                    >
-                      Terms of Service
-                    </Link>{" "}
-                    and{" "}
-                    <Link
-                      href="/privacy-policy"
-                      className="text-foreground hover:underline underline-offset-4"
-                    >
-                      Privacy Policy
-                    </Link>
-                    .
-                  </FormLabel>
-                </FormItem>
-              )}
-            />
+            <RegisterTermsField control={form.control} />
+            {form.formState.errors.agreeToTerms?.message ? (
+              <p className="text-sm font-medium text-destructive">
+                {form.formState.errors.agreeToTerms.message}
+              </p>
+            ) : null}
 
             <Button
               type="submit"
