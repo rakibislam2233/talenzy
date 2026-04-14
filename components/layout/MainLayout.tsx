@@ -23,7 +23,7 @@ export default function MainLayout({
     <div className="flex min-h-screen bg-background text-foreground font-display selection:bg-primary selection:text-primary-foreground overflow-hidden md:pl-64">
       <Sidebar />
       <MobileBottomNav />
-      <main className="flex-1 flex flex-col h-screen overflow-hidden relative group/main w-full">
+      <main className="relative flex h-dvh w-full flex-1 flex-col overflow-hidden group/main">
         {/* Sticky Header */}
         <Header />
         <HeaderCategories />
@@ -35,7 +35,7 @@ export default function MainLayout({
       </main>
 
       {!hideRightSidebar && (
-        <div className="hidden xl:block w-80 border-l border-border-dark bg-background-dark h-screen sticky top-0">
+        <div className="sticky top-0 hidden h-dvh w-80 border-l border-border-dark bg-background-dark xl:block">
           <RightSidebar />
         </div>
       )}

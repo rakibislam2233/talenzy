@@ -40,7 +40,9 @@ export default function PublicPageShell({
 
       <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 sm:px-6 sm:pt-14">
         <div className="mb-8 max-w-3xl">
-          <h1 className="text-3xl font-bold leading-tight sm:text-5xl">{title}</h1>
+          <h1 className="text-3xl font-bold leading-tight sm:text-5xl">
+            {title}
+          </h1>
           <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base">
             {subtitle}
           </p>
@@ -53,7 +55,9 @@ export default function PublicPageShell({
 
       <footer className="border-t border-border/70 py-8">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 text-xs text-muted-foreground sm:px-6">
-          <span>© 2026 Talenzy. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} Talenzy. All rights reserved.
+          </span>
           <div className="flex gap-4">
             <Link href="/privacy-policy" className="hover:text-foreground">
               Privacy

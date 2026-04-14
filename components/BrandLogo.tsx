@@ -25,9 +25,13 @@ export default function BrandLogo({
 
       {withText && (
         <div className="flex flex-col leading-tight">
-          <span className="text-xl font-bold tracking-tight text-foreground">Talenzy</span>
+          <span className="text-xl font-bold tracking-tight text-foreground">
+            Talenzy
+          </span>
           {showTagline && (
-            <span className="text-xs font-medium text-muted-foreground">Unleash Your Potential</span>
+            <span className="text-xs font-medium text-muted-foreground">
+              Unleash Your Potential
+            </span>
           )}
         </div>
       )}
