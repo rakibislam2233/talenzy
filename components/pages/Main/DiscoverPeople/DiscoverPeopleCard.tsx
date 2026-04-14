@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
-import IProfile from "@/interface/profile.interface";
 import { MessageSquare, Verified } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { DiscoverProfile } from "./types";
 
 interface DiscoverPeopleCardProps {
-  profile: IProfile;
+  profile: DiscoverProfile;
 }
 
 const DiscoverPeopleCard = ({ profile }: DiscoverPeopleCardProps) => {
@@ -16,10 +16,10 @@ const DiscoverPeopleCard = ({ profile }: DiscoverPeopleCardProps) => {
       className="bg-card rounded-lg p-6 border border-border/30 group relative overflow-hidden cursor-pointer "
     >
       {/* Gradient Background Effect */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-accent to-transparent opacity-50"></div>
+      <div className="absolute top-0 left-0 right-0 h-24 bg-linear-to-b from-accent to-transparent opacity-50"></div>
 
       <div className="relative flex flex-col items-center text-center">
-        <Link href={`/discover-people/${profile.username.replace("@", "")}`}>
+        <Link href={`/discover/${profile.username.replace("@", "")}`}>
           <div className="relative mb-4">
             <div className="w-20 h-20 rounded-full p-1 bg-card border border-border/50">
               <div className="w-full h-full rounded-full overflow-hidden relative">
