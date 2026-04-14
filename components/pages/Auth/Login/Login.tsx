@@ -46,8 +46,8 @@ export default function Login() {
   };
 
   return (
-    <section className="w-full max-w-md mx-auto fade-in">
-      <div className="bg-transparent lg:bg-background lg:rounded-2xl lg:p-8 lg:shadow-2xl lg:border lg:border-border/30">
+    <section className="w-full max-w-lg mx-auto fade-in">
+      <div className="w-full bg-transparent">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-foreground mb-2">
             Welcome Back!

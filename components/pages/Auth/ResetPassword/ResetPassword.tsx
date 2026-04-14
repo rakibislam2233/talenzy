@@ -1,21 +1,28 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ArrowLeft, ArrowRight, Check, Eye, EyeOff, RefreshCw } from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  Eye,
+  EyeOff,
+  RefreshCw,
+} from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 const resetPasswordSchema = z
   .object({
@@ -23,20 +30,23 @@ const resetPasswordSchema = z
       .string()
       .min(8, "Password must be at least 8 characters")
       .regex(/[0-9]/, "Password must contain at least one number")
-      .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character")
+      .regex(
+        /[^A-Za-z0-9]/,
+        "Password must contain at least one special character",
+      )
       .refine((val) => !/\s/.test(val), "Password must not contain spaces"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  })
+  });
 
-type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>
+type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPassword() {
-  const [showNewPassword, setShowNewPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const form = useForm<ResetPasswordFormValues>({
     resolver: zodResolver(resetPasswordSchema),
@@ -44,48 +54,50 @@ export default function ResetPassword() {
       newPassword: "",
       confirmPassword: "",
     },
-  })
+  });
 
-  const newPassword = form.watch("newPassword")
+  const newPassword = form.watch("newPassword");
 
   const checkRequirement = (requirement: string) => {
     switch (requirement) {
       case "length":
-        return newPassword.length >= 8
+        return newPassword.length >= 8;
       case "number":
-        return /[0-9]/.test(newPassword)
+        return /[0-9]/.test(newPassword);
       case "special":
-        return /[^A-Za-z0-9]/.test(newPassword)
+        return /[^A-Za-z0-9]/.test(newPassword);
       case "noSpaces":
-        return !/\s/.test(newPassword)
+        return !/\s/.test(newPassword);
       default:
-        return false
+        return false;
     }
-  }
+  };
 
   const getPasswordStrength = (password: string) => {
-    if (!password) return { strength: 0, label: "", color: "" }
-    let strength = 0
-    if (password.length >= 8) strength++
-    if (/[0-9]/.test(password)) strength++
-    if (/[^A-Za-z0-9]/.test(password)) strength++
-    if (!/\s/.test(password)) strength++
+    if (!password) return { strength: 0, label: "", color: "" };
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    if (!/\s/.test(password)) strength++;
 
-    if (strength <= 1) return { strength: 1, label: "Weak", color: "bg-red-500" }
-    if (strength === 2) return { strength: 2, label: "Medium", color: "bg-orange-500" }
-    return { strength: 3, label: "Strong", color: "bg-green-500" }
-  }
+    if (strength <= 1)
+      return { strength: 1, label: "Weak", color: "bg-red-500" };
+    if (strength === 2)
+      return { strength: 2, label: "Medium", color: "bg-orange-500" };
+    return { strength: 3, label: "Strong", color: "bg-green-500" };
+  };
 
-  const passwordStrength = getPasswordStrength(newPassword)
+  const passwordStrength = getPasswordStrength(newPassword);
 
   const onSubmit = (data: ResetPasswordFormValues) => {
-    console.log(data)
+    console.log(data);
     // Handle reset password logic here
-  }
+  };
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-background rounded-2xl p-8 shadow-2xl border border-border/30">
+      <div className="w-full bg-transparent">
         <div className="flex justify-center mb-6">
           <div className="relative">
             <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
@@ -98,7 +110,9 @@ export default function ResetPassword() {
         </div>
 
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Reset Password</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Reset Password
+          </h1>
           <p className="text-muted-foreground text-sm">
             Your new password must be different from previously used passwords.
           </p>
@@ -111,7 +125,9 @@ export default function ResetPassword() {
               name="newPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-foreground">New Password</FormLabel>
+                  <FormLabel className="text-foreground">
+                    New Password
+                  </FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -138,22 +154,30 @@ export default function ResetPassword() {
                       <div className="flex gap-1 h-1">
                         <div
                           className={`h-full flex-1 rounded ${
-                            passwordStrength.strength >= 1 ? passwordStrength.color : "bg-gray-700"
+                            passwordStrength.strength >= 1
+                              ? passwordStrength.color
+                              : "bg-gray-700"
                           }`}
                         />
                         <div
                           className={`h-full flex-1 rounded ${
-                            passwordStrength.strength >= 2 ? passwordStrength.color : "bg-gray-700"
+                            passwordStrength.strength >= 2
+                              ? passwordStrength.color
+                              : "bg-gray-700"
                           }`}
                         />
                         <div
                           className={`h-full flex-1 rounded ${
-                            passwordStrength.strength >= 3 ? passwordStrength.color : "bg-gray-700"
+                            passwordStrength.strength >= 3
+                              ? passwordStrength.color
+                              : "bg-gray-700"
                           }`}
                         />
                       </div>
                       {passwordStrength.label && (
-                        <p className={`text-xs ${passwordStrength.color.replace("bg-", "text-")}`}>
+                        <p
+                          className={`text-xs ${passwordStrength.color.replace("bg-", "text-")}`}
+                        >
                           {passwordStrength.label}
                         </p>
                       )}
@@ -169,7 +193,9 @@ export default function ResetPassword() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-foreground">Confirm New Password</FormLabel>
+                  <FormLabel className="text-foreground">
+                    Confirm New Password
+                  </FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
@@ -180,7 +206,9 @@ export default function ResetPassword() {
                       />
                       <button
                         type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                       >
                         {showConfirmPassword ? (
@@ -197,7 +225,9 @@ export default function ResetPassword() {
             />
 
             <div className="space-y-3">
-              <h3 className="text-foreground text-sm font-semibold">PASSWORD REQUIREMENTS</h3>
+              <h3 className="text-foreground text-sm font-semibold">
+                PASSWORD REQUIREMENTS
+              </h3>
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   {checkRequirement("length") ? (
@@ -205,7 +235,9 @@ export default function ResetPassword() {
                   ) : (
                     <div className="h-4 w-4 rounded-full border-2 border-border" />
                   )}
-                  <span className="text-sm text-muted-foreground">At least 8 characters long</span>
+                  <span className="text-sm text-muted-foreground">
+                    At least 8 characters long
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   {checkRequirement("number") ? (
@@ -213,7 +245,9 @@ export default function ResetPassword() {
                   ) : (
                     <div className="h-4 w-4 rounded-full border-2 border-border" />
                   )}
-                  <span className="text-sm text-muted-foreground">Contains at least one number</span>
+                  <span className="text-sm text-muted-foreground">
+                    Contains at least one number
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   {checkRequirement("special") ? (
@@ -221,7 +255,9 @@ export default function ResetPassword() {
                   ) : (
                     <div className="h-4 w-4 rounded-full border-2 border-border" />
                   )}
-                  <span className="text-sm text-muted-foreground">Contains at least one special character</span>
+                  <span className="text-sm text-muted-foreground">
+                    Contains at least one special character
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   {checkRequirement("noSpaces") ? (
@@ -229,7 +265,9 @@ export default function ResetPassword() {
                   ) : (
                     <div className="h-4 w-4 rounded-full border-2 border-border" />
                   )}
-                  <span className="text-sm text-muted-foreground">No spaces</span>
+                  <span className="text-sm text-muted-foreground">
+                    No spaces
+                  </span>
                 </div>
               </div>
             </div>
@@ -255,5 +293,5 @@ export default function ResetPassword() {
         </div>
       </div>
     </div>
-  )
+  );
 }

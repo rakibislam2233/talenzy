@@ -36,8 +36,8 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="bg-background rounded-2xl p-8 shadow-2xl border border-border/30">
+    <div className="w-full max-w-lg mx-auto">
+      <div className="w-full bg-transparent">
         <div className="flex justify-center mb-6">
           <div className="relative">
             <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center">
@@ -83,10 +83,7 @@ export default function ForgotPassword() {
               )}
             />
 
-            <Button
-              type="submit"
-              className="w-full"
-            >
+            <Button type="submit" className="w-full">
               Send Reset Link
             </Button>
           </form>

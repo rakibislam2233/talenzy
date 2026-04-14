@@ -41,7 +41,7 @@ export default function VerifyOtp() {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-border/30">
+      <div className="w-full bg-transparent">
         <div className="flex justify-center mb-6">
           <div className="relative w-16 h-16 bg-primary rounded-full flex items-center justify-center">
             <Mail className="h-8 w-8 text-primary-foreground" />
