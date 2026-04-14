@@ -58,7 +58,7 @@ export default function Header() {
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
     { href: "/messages", icon: MessageCircle, label: "Messages" },
     { href: "/notifications", icon: Bell, label: "Notifications" },
-    { href: "/saved", icon: Bookmark, label: "Saved" },
+    { href: `/${CURRENT_USER_SLUG}/saved`, icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
     { href: `/${CURRENT_USER_SLUG}`, icon: User, label: "Profile" },
     { href: "/settings", icon: Settings, label: "Settings" },

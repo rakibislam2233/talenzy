@@ -7,12 +7,12 @@ import {
     Calendar,
     Eye,
     EyeOff,
-    Filter,
     Gift,
     RefreshCw,
     TrendingDown,
     TrendingUp,
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function WalletPage() {
@@ -66,207 +66,141 @@ export default function WalletPage() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8 pb-32 font-outfit">
-      {/* Balance Card */}
-      <div className="bg-gradient-to-br from-[#9419e6] to-[#7a14c4] rounded-2xl p-6 sm:p-8 mb-6">
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-primary-foreground/90 text-[10px] sm:text-xs  uppercase tracking-[0.2em]">
-              AVAILABLE BALANCE
-            </span>
+    <div className="mx-auto w-full max-w-5xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8">
+      <section className="rounded-2xl border border-border bg-card">
+        <div className="border-b border-border p-5 sm:p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
+                Wallet
+              </p>
+              <h1 className="mt-1 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                Balance
+              </h1>
+            </div>
+            <button
+              onClick={() => setBalanceVisible(!balanceVisible)}
+              className="rounded-full border border-border bg-background p-2 text-muted-foreground"
+            >
+              {balanceVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
           </div>
-          <button
-            onClick={() => setBalanceVisible(!balanceVisible)}
-            className="p-2 bg-foreground/10 rounded-full text-foreground/80 hover:text-foreground transition-colors"
-          >
-            {balanceVisible ? (
-              <EyeOff className="h-4 w-4 sm:h-5 sm:w-5" />
-            ) : (
-              <Eye className="h-4 w-4 sm:h-5 sm:w-5" />
-            )}
-          </button>
         </div>
-        <div className="flex items-center gap-3 mb-8">
-          <span className="text-4xl sm:text-5xl lg:text-6xl  text-primary-foreground tracking-tighter">
+
+        <div className="p-5 sm:p-6">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Available Balance</p>
+          <p className="mt-2 text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             {balanceVisible ? "$24,593.00" : "••••••"}
-          </span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Button className="bg-foreground text-primary hover:bg-foreground/90 rounded-xl h-12 font-bold">
-            <ArrowDown className="h-5 w-5 mr-2" />
-            Deposit
-          </Button>
-          <Button className="bg-foreground/20 hover:bg-foreground/30 text-foreground border border-foreground/10 backdrop-blur-md rounded-xl h-12 font-bold">
-            <ArrowUp className="h-5 w-5 mr-2" />
-            Withdraw
-          </Button>
-          <Button className="bg-foreground/20 hover:bg-foreground/30 text-foreground border border-foreground/10 backdrop-blur-md rounded-xl h-12 font-bold">
-            <RefreshCw className="h-5 w-5 mr-2" />
-            History
-          </Button>
-        </div>
-      </div>
-
-      {/* Tabs */}
-      <div className="flex gap-6 sm:gap-10 mb-8 border-b border-border overflow-x-auto scrollbar-hide scroll-smooth no-scrollbar">
-        {[
-          "Overview",
-          "Transactions",
-          "Deposit",
-          "Withdraw",
-          "Payment Methods",
-        ].map((tab, index) => (
-          <button
-            key={tab}
-            className={`pb-4 px-1 border-b-2 transition-all whitespace-nowrap text-xs sm:text-sm  uppercase tracking-widest ${
-              index === 0
-                ? "border-primary text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
-
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-        <div className="bg-background rounded-2xl p-5 sm:p-6 border border-border hover:border-primary/30 transition-colors group">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-muted-foreground text-[10px]  uppercase tracking-widest">
-              Total Earned
-            </p>
-            <div className="p-2 bg-green-500/10 rounded-lg">
-              <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" />
-            </div>
-          </div>
-          <p className="text-2xl sm:text-3xl  text-foreground">
-            $8,430.50
           </p>
-        </div>
-        <div className="bg-background rounded-2xl p-5 sm:p-6 border border-border hover:border-primary/30 transition-colors group">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-muted-foreground text-[10px]  uppercase tracking-widest">
-              Total Spent
-            </p>
-            <div className="p-2 bg-red-500/10 rounded-lg">
-              <TrendingDown className="h-4 w-4 sm:h-5 sm:w-5 text-red-500" />
-            </div>
-          </div>
-          <p className="text-2xl sm:text-3xl  text-foreground">
-            $1,240.00
-          </p>
-        </div>
-        <div className="bg-background rounded-2xl p-5 sm:p-6 border border-border hover:border-primary/30 transition-colors group sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-muted-foreground text-[10px]  uppercase tracking-widest">
-              Gifts Received
-            </p>
-            <div className="p-2 bg-yellow-500/10 rounded-lg">
-              <Gift className="h-4 w-4 sm:h-5 sm:w-5 text-yellow-500" />
-            </div>
-          </div>
-          <p className="text-2xl sm:text-3xl  text-foreground">
-            450 Gifts
-          </p>
-        </div>
-      </div>
 
-      {/* Recent Transactions */}
-      <div className="bg-background rounded-3xl p-5 sm:p-8 border border-border">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
-          <h2 className="text-foreground  text-xl uppercase tracking-tight">
-            Recent <span className="text-primary italic">Activity</span>
-          </h2>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              className="bg-background border-border text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl h-10 w-10 p-0"
-            >
-              <Calendar className="h-5 w-5" />
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <Button asChild className="h-11 rounded-xl bg-primary text-primary-foreground">
+              <Link href="/wallet/deposit">
+                <ArrowDown className="mr-2 h-4 w-4" />
+                Deposit
+              </Link>
             </Button>
-            <Button
-              variant="outline"
-              className="bg-background border-border text-muted-foreground hover:text-foreground hover:bg-accent rounded-xl h-10 w-10 p-0"
-            >
-              <Filter className="h-5 w-5" />
+            <Button asChild variant="outline" className="h-11 rounded-xl border-border bg-background text-foreground">
+              <Link href="/wallet/withdraw">
+                <ArrowUp className="mr-2 h-4 w-4" />
+                Withdraw
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="h-11 rounded-xl border-border bg-background text-foreground">
+              <Link href="/wallet/transactions">
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Statement
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-5 rounded-2xl border border-border bg-card">
+        <div className="grid grid-cols-1 divide-y divide-border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+          <div className="p-4 sm:p-5">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Total Earned</p>
+            <div className="mt-2 flex items-center gap-2">
+              <TrendingUp className="h-4 w-4 text-emerald-500" />
+              <p className="text-xl font-semibold text-foreground">$8,430.50</p>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-5">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Total Spent</p>
+            <div className="mt-2 flex items-center gap-2">
+              <TrendingDown className="h-4 w-4 text-red-500" />
+              <p className="text-xl font-semibold text-foreground">$1,240.00</p>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-5">
+            <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Gifts Received</p>
+            <div className="mt-2 flex items-center gap-2">
+              <Gift className="h-4 w-4 text-amber-500" />
+              <p className="text-xl font-semibold text-foreground">450 Gifts</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-5 rounded-2xl border border-border bg-card">
+        <div className="border-b border-border p-4 sm:p-5">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-foreground sm:text-xl">Recent Transactions</h2>
+              <p className="text-xs text-muted-foreground">Latest wallet activity and settlement status</p>
+            </div>
+            <Button variant="outline" className="h-9 rounded-lg border-border bg-background px-3 text-xs text-foreground">
+              <Calendar className="mr-1.5 h-4 w-4" />
+              This Month
             </Button>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="divide-y divide-border">
           {transactions.map((transaction) => (
-            <div
-              key={transaction.id}
-              className="group flex flex-col sm:flex-row sm:items-center gap-4 p-4 bg-background/50 border border-transparent hover:border-primary/20 rounded-2xl transition-all"
-            >
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div
-                  className={`size-12 rounded-2xl bg-gradient-to-br from-background to-background border border-border flex items-center justify-center shrink-0 relative overflow-hidden group-hover:border-primary/40`}
-                >
-                  <div
-                    className={`absolute inset-0 ${transaction.color} opacity-10 group-hover:opacity-20 transition-opacity`}
-                  ></div>
-                  <span
-                    className={` text-sm relative z-10 ${transaction.color.replace(
-                      "bg-",
-                      "text-"
-                    )}`}
-                  >
-                    {transaction.from.substring(0, 1).replace("@", "")}
-                  </span>
-                </div>
+            <article key={transaction.id} className="p-4 sm:p-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
-                  <p className="text-foreground font-bold text-sm sm:text-base mb-0.5 truncate uppercase tracking-tight">
+                  <p className="truncate text-sm font-semibold text-foreground sm:text-base">
                     {transaction.description}
                   </p>
-                  <p className="text-muted-foreground text-xs sm:text-sm truncate">
-                    {transaction.detail}
+                  <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
+                    {transaction.detail} · {transaction.time}
                   </p>
                 </div>
-              </div>
 
-              <div className="flex items-center justify-between sm:justify-end gap-6 sm:text-right border-t border-border/30 sm:border-0 pt-3 sm:pt-0">
-                <div className="flex-1 sm:flex-none">
+                <div className="flex items-center justify-between gap-4 sm:justify-end">
                   <p
-                    className={`text-lg sm:text-xl  ${
-                      transaction.amount > 0 ? "text-green-500" : "text-red-500"
+                    className={`text-sm font-semibold sm:text-base ${
+                      transaction.amount > 0 ? "text-emerald-500" : "text-red-500"
                     }`}
                   >
-                    {transaction.amount > 0 ? "+" : ""}$
-                    {Math.abs(transaction.amount).toFixed(2)}
+                    {transaction.amount > 0 ? "+" : "-"}${Math.abs(transaction.amount).toFixed(2)}
                   </p>
-                  <p className="text-muted-foreground/60 text-[10px] font-bold uppercase tracking-widest">
-                    {transaction.time}
-                  </p>
-                </div>
-                <div className="flex-none">
+
                   <span
-                    className={`px-3 py-1.5 rounded-lg text-[10px]  uppercase tracking-widest border ${
-                      transaction.status === "Completed" ||
-                      transaction.status === "Processed"
-                        ? "bg-green-500/5 text-green-500 border-green-500/20"
-                        : "bg-orange-500/5 text-orange-500 border-orange-500/20"
+                    className={`rounded-full border px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest ${
+                      transaction.status === "Completed" || transaction.status === "Processed"
+                        ? "border-emerald-500/30 text-emerald-600"
+                        : "border-amber-500/30 text-amber-600"
                     }`}
                   >
                     {transaction.status}
                   </span>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
-        <div className="mt-10">
-          <Button
-            variant="ghost"
-            className="w-full text-primary hover:text-primary-hover hover:bg-primary/5  uppercase tracking-widest text-xs h-12 rounded-xl border border-primary/20"
-          >
-            View Full Statement
+        <div className="border-t border-border p-4 sm:p-5">
+          <Button asChild variant="outline" className="h-11 w-full rounded-lg border-border bg-background text-foreground">
+            <Link href="/wallet/transactions">View Full Statement</Link>
           </Button>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

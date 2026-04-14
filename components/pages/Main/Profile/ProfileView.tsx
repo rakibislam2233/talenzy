@@ -505,7 +505,7 @@ export default function ProfileView({
   );
 
   return (
-    <div className="mx-auto w-full pb-32">
+    <div className="mx-auto w-full max-w-6xl pb-32">
       <div className="relative h-72 overflow-hidden rounded-t-xl bg-linear-to-br from-[#2d0845] to-primary">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"

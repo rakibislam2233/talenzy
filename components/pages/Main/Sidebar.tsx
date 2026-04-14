@@ -5,7 +5,6 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import {
     Bell,
-    Bookmark,
     Briefcase,
     Home,
     Info,
@@ -44,7 +43,6 @@ const Sidebar =() => {
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
     { href: "/messages", icon: MessageCircle, label: "Messages" },
     { href: "/notifications", icon: Bell, label: "Notifications" },
-    { href: "/saved", icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
     { href: `/${CURRENT_USER_SLUG}`, icon: User, label: "Profile" },
     { href: "/settings", icon: Settings, label: "Settings" },
