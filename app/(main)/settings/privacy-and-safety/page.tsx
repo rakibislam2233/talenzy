@@ -17,7 +17,7 @@ export default function PrivacySafetyPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Private account</h3>
                 <p className="text-sm text-muted-foreground">When your account is private, only people you approve can see your photos and videos.</p>
@@ -33,7 +33,7 @@ export default function PrivacySafetyPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <div>
                 <h3 className="font-medium text-foreground">Comment filtering</h3>
                 <p className="text-sm text-muted-foreground">Hide offensive comments</p>
@@ -41,7 +41,7 @@ export default function PrivacySafetyPage() {
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <div>
                 <h3 className="font-medium text-foreground">Manual approval</h3>
                 <p className="text-sm text-muted-foreground">Review all comments before they appear</p>
@@ -49,7 +49,7 @@ export default function PrivacySafetyPage() {
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Hide comments</h3>
                 <p className="text-sm text-muted-foreground">Turn off comments from everyone</p>
@@ -65,7 +65,7 @@ export default function PrivacySafetyPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <div>
                 <h3 className="font-medium text-foreground">Photo tags</h3>
                 <p className="text-sm text-muted-foreground">Who can tag you in photos</p>
@@ -73,7 +73,7 @@ export default function PrivacySafetyPage() {
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <div>
                 <h3 className="font-medium text-foreground">Mentions</h3>
                 <p className="text-sm text-muted-foreground">Who can mention you</p>
@@ -89,7 +89,7 @@ export default function PrivacySafetyPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Allow appearing in search results</h3>
                 <p className="text-sm text-muted-foreground">Let other accounts find and tag you</p>
@@ -97,7 +97,7 @@ export default function PrivacySafetyPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Suggested for follow</h3>
                 <p className="text-sm text-muted-foreground">Appear in suggested users</p>
@@ -113,7 +113,7 @@ export default function PrivacySafetyPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">See all blocked accounts</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>

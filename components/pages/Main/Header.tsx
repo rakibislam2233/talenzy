@@ -77,7 +77,7 @@ export default function Header() {
             <Link href={"/"} className="block md:hidden">
               <BrandLogo size={40} withText={false} className="cursor-pointer" />
             </Link>
-            <div className={`w-full relative flex-1 max-w-md`}>
+            <div className="w-full relative flex-1 md:max-w-md">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-4 w-4 text-text-secondary" />
               </div>
@@ -162,7 +162,7 @@ export default function Header() {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden absolute  top-full left-0 w-full bg-background border-b border-border py-4 px-4 shadow-xl animate-in slide-in-from-top-2">
+          <div className="md:hidden absolute top-full left-0 w-full max-h-[calc(100dvh-72px)] overflow-y-auto bg-background border-b border-border py-4 px-4 shadow-xl animate-in slide-in-from-top-2 z-40">
             <nav className="flex flex-col gap-2">
               {currentNavItems.map((item) => (
                 <Link

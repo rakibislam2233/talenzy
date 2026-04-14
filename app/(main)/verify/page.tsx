@@ -3,17 +3,18 @@
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Calendar, Camera, CheckCircle2, FileText, Link as LinkIcon, Lock, User } from "lucide-react"
+import Link from "next/link"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -51,15 +52,15 @@ export default function VerifyPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="bg-[#221c26] rounded-2xl p-8 border border-[#4a3c53]/30">
+    <div className="max-w-4xl mx-auto p-4 sm:p-6">
+      <div className="bg-[#221c26] rounded-2xl p-5 sm:p-8 border border-[#4a3c53]/30">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-[#9419e6] rounded-full flex items-center justify-center mx-auto mb-4">
             <CheckCircle2 className="h-10 w-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-2">Get Verified on Talenzy</h1>
-          <p className="text-gray-400 text-lg">
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">Get Verified on Talenzy</h1>
+          <p className="text-gray-400 text-sm sm:text-lg">
             Unlock exclusive monetization features, increased visibility, and build trust with your audience. Join the
             elite circle of Talenzy creators.
           </p>
@@ -168,7 +169,7 @@ export default function VerifyPage() {
               <p className="text-gray-400 text-sm mb-4">
                 Please upload a clear photo of your government-issued ID (Passport, Driver&apos;s License, or National ID).
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="border-2 border-dashed border-[#4a3c53] rounded-lg p-6 text-center hover:border-[#9419e6] transition-colors cursor-pointer">
                   <FileText className="h-8 w-8 text-[#9419e6] mx-auto mb-2" />
                   <p className="text-white text-sm font-medium mb-1">Front of ID</p>
@@ -191,12 +192,12 @@ export default function VerifyPage() {
               <p className="text-gray-400 text-sm mb-4">
                 Take a selfie holding your ID card next to your face. Make sure details are legible.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1 border-2 border-dashed border-[#4a3c53] rounded-lg p-8 text-center hover:border-[#9419e6] transition-colors cursor-pointer">
                   <Camera className="h-10 w-10 text-[#9419e6] mx-auto mb-2" />
                   <p className="text-white text-sm font-medium">Upload Selfie</p>
                 </div>
-                <div className="w-32 h-32 bg-[#2a2330] rounded-lg flex items-center justify-center">
+                <div className="w-full sm:w-32 h-32 bg-[#2a2330] rounded-lg flex items-center justify-center">
                   <span className="text-gray-400 text-xs">Example</span>
                 </div>
               </div>
@@ -289,13 +290,13 @@ export default function VerifyPage() {
                     <div className="space-y-1 leading-none">
                       <FormLabel className="text-gray-400 text-sm cursor-pointer">
                         I agree to the{" "}
-                        <a href="/terms" className="text-[#9419e6] hover:underline">
+                        <Link href="/terms" className="text-[#9419e6] hover:underline">
                           Terms of Service
-                        </a>{" "}
+                        </Link>{" "}
                         and{" "}
-                        <a href="/privacy-policy" className="text-[#9419e6] hover:underline">
+                        <Link href="/privacy-policy" className="text-[#9419e6] hover:underline">
                           Privacy Policy
-                        </a>
+                        </Link>
                         .
                       </FormLabel>
                     </div>

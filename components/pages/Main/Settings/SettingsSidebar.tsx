@@ -43,7 +43,7 @@ const SettingsSidebar = () => {
   ];
 
   return (
-    <div className="fixed w-72 border-r border-border bg-background">
+    <aside className="hidden lg:block sticky top-0 h-dvh w-72 border-r border-border bg-background overflow-y-auto">
       <div className="p-6 bg-background">
         <h1 className="text-2xl font-bold text-foreground">Settings</h1>
       </div>
@@ -80,7 +80,7 @@ const SettingsSidebar = () => {
           ))}
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

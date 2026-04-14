@@ -17,7 +17,7 @@ export default function NotificationSettingsPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Bell className="h-5 w-5 text-primary" />
@@ -37,7 +37,7 @@ export default function NotificationSettingsPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Heart className="h-5 w-5 text-primary" />
@@ -50,7 +50,7 @@ export default function NotificationSettingsPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <MessageCircle className="h-5 w-5 text-primary" />
@@ -63,7 +63,7 @@ export default function NotificationSettingsPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <User className="h-5 w-5 text-primary" />
@@ -76,7 +76,7 @@ export default function NotificationSettingsPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Video className="h-5 w-5 text-primary" />
@@ -97,7 +97,7 @@ export default function NotificationSettingsPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Mail className="h-5 w-5 text-primary" />
@@ -110,7 +110,7 @@ export default function NotificationSettingsPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <User className="h-5 w-5 text-primary" />
@@ -131,12 +131,12 @@ export default function NotificationSettingsPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Frequency</span>
               <span className="text-muted-foreground text-sm">Normal</span>
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Time sensitivity</span>
               <span className="text-muted-foreground text-sm">Real-time</span>
             </button>
@@ -149,12 +149,12 @@ export default function NotificationSettingsPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Sound</span>
               <span className="text-muted-foreground text-sm">Default</span>
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Vibrate</span>
               <span className="text-muted-foreground text-sm">Medium</span>
             </button>

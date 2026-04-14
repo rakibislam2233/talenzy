@@ -6,7 +6,7 @@ import { Lock, ShieldCheck } from "lucide-react";
 
 export default function ChangePasswordPage() {
   return (
-    <div className="mx-auto w-full max-w-3xl p-4 pb-24 pt-6 sm:p-6 md:pl-80">
+    <div className="mx-auto w-full max-w-3xl p-4 pb-24 pt-6 sm:p-6">
       <section className="rounded-2xl border border-border bg-card">
         <div className="border-b border-border p-5 sm:p-6">
           <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">Security</p>

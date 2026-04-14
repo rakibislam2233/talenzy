@@ -2,7 +2,6 @@
 
 import CreatePostModal from "@/components/modals/CreatePostModal";
 import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Bell, Compass, Home, Info, Plus, User } from "lucide-react";
 import Link from "next/link";
@@ -21,10 +20,7 @@ export default function MobileBottomNav() {
 
   return (
     <>
-      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-background border-t border-border flex items-center justify-between px-6 z-40 pb-safe">
-        {/* Theme Toggle - Added as leftmost item */}
-        <ThemeToggle />
-
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-background border-t border-border flex items-center justify-between px-3 sm:px-6 z-40 pb-safe">
         {/* Original Left Side */}
         <Link
           href="/"
@@ -47,20 +43,20 @@ export default function MobileBottomNav() {
         </Link>
 
         {/* Center Create Button */}
-        <div className="relative -top-5">
+        <div className="relative -top-4 sm:-top-5">
           {isAuthenticated ? (
             <button
               onClick={() => setIsCreateModalOpen(true)}
-              className="w-14 h-14 rounded-full bg-linear-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background active:scale-95 transition-transform"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-linear-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background active:scale-95 transition-transform"
             >
-              <Plus className="h-7 w-7 text-white" />
+              <Plus className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
             </button>
           ) : (
             <Link
               href="/auth/login"
-              className="w-14 h-14 rounded-full bg-linear-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-linear-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background"
             >
-              <Plus className="h-7 w-7 text-white" />
+              <Plus className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
             </Link>
           )}
         </div>
@@ -83,7 +79,9 @@ export default function MobileBottomNav() {
             <Link
               href={`/${CURRENT_USER_SLUG}`}
               className={`flex flex-col items-center gap-1 ${
-                isActive(`/${CURRENT_USER_SLUG}`) ? "text-primary" : "text-gray-400"
+                isActive(`/${CURRENT_USER_SLUG}`)
+                  ? "text-primary"
+                  : "text-gray-400"
               }`}
             >
               <User
@@ -101,7 +99,9 @@ export default function MobileBottomNav() {
                 isActive("/help") ? "text-primary" : "text-gray-400"
               }`}
             >
-              <Info className={`h-6 w-6 ${isActive("/help") ? "fill-current" : ""}`} />
+              <Info
+                className={`h-6 w-6 ${isActive("/help") ? "fill-current" : ""}`}
+              />
             </Link>
             <Link
               href="/auth/login"

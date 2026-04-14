@@ -11,7 +11,7 @@ export default function GiftsPage() {
 
   return (
     <>
-      <div className="max-w-2xl mx-auto p-6">
+      <div className="max-w-2xl mx-auto p-4 sm:p-6">
         <Post
           id="1"
           username="Jessica Melody"
@@ -61,7 +61,7 @@ export default function GiftsPage() {
 
       {/* Gift Sent Notification */}
       {showGiftModal && (
-        <div className="fixed top-4 right-4 bg-background rounded-lg p-4 border border-border/30 shadow-2xl  max-w-sm">
+        <div className="fixed top-4 left-4 right-4 sm:left-auto sm:right-4 bg-background rounded-lg p-4 border border-border/30 shadow-2xl max-w-sm z-50">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
               <Gift className="h-5 w-5 text-white" />

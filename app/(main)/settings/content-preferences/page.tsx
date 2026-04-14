@@ -17,17 +17,17 @@ export default function ContentPreferencesPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Manage interests</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Topics you follow</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Topics to avoid</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
@@ -40,12 +40,12 @@ export default function ContentPreferencesPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Mute words in posts</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <span className="text-foreground font-medium">Mute words in comments</span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
@@ -58,21 +58,21 @@ export default function ContentPreferencesPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Auto-play videos</h3>
               </div>
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Show muted videos</h3>
               </div>
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Reduce motion</h3>
               </div>
@@ -87,14 +87,14 @@ export default function ContentPreferencesPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Show sensitive content</h3>
               </div>
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Show mature content</h3>
               </div>

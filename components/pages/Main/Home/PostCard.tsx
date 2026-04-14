@@ -2,26 +2,26 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Bookmark,
-  Briefcase,
-  Gift,
-  Heart,
-  MessageCircle,
-  Pause,
-  Play,
-  Share2,
-  Volume2,
-  VolumeX,
+    Bookmark,
+    Briefcase,
+    Gift,
+    Heart,
+    MessageCircle,
+    Pause,
+    Play,
+    Share2,
+    Volume2,
+    VolumeX,
 } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import { toast } from "@/hooks/use-toast";
-import { Post } from "@/lib/types";
-import { usePathname } from "next/navigation";
 import PostViewModal from "@/components/modals/PostViewModal";
 import SendGiftModal from "@/components/modals/SendGiftModal";
 import ShareModal from "@/components/modals/ShareModal";
+import { toast } from "@/hooks/use-toast";
+import { Post } from "@/lib/types";
+import { usePathname } from "next/navigation";
 
 interface PostCardProps {
   post: Post;
@@ -103,7 +103,7 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
     <>
       <article
         onClick={() => !isHome && handleOpenView()}
-        className={`relative w-full aspect-4/5 bg-card rounded-2xl overflow-hidden border border-border shadow-2xl group transition-all duration-300  hover:shadow-primary/20 ${
+        className={`relative w-full max-w-xl mx-auto aspect-[4/5] bg-card rounded-2xl overflow-hidden border border-border shadow-2xl group transition-all duration-300 hover:shadow-primary/20 ${
           !isHome ? "cursor-pointer" : ""
         }`}
       >
@@ -260,7 +260,10 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
             </span>
           </button>
           <button
-            onClick={() => setSaved(!saved)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSaved(!saved);
+            }}
             className="flex flex-col items-center gap-1 group/icon cursor-pointer outline-none"
           >
             <div

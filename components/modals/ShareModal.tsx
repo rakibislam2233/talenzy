@@ -3,18 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Post } from "@/lib/types";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  Copy,
-  Facebook,
-  Linkedin,
-  LucideIcon,
-  MessageCircle,
-  MoreHorizontal,
-  QrCode,
-  Repeat2,
-  Send,
-  Share2,
-  Twitter,
-  X as XIcon,
+    Copy,
+    Facebook,
+    Linkedin,
+    LucideIcon,
+    MessageCircle,
+    MoreHorizontal,
+    QrCode,
+    Repeat2,
+    Send,
+    Share2,
+    Twitter,
+    X as XIcon,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useSyncExternalStore } from "react";
@@ -44,18 +44,19 @@ export default function ShareModal({ isOpen, onClose, post }: ShareModalProps) {
   return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-70 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+        <div className="fixed inset-0 z-70 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-md">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            className="absolute inset-0"
           />
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="bg-background w-full max-w-lg rounded-3xl overflow-hidden border border-border shadow-2xl relative z-10"
+            className="bg-background w-full max-w-lg max-h-[92vh] rounded-3xl overflow-hidden border border-border shadow-2xl relative z-10"
           >
             {/* Header */}
             <div className="p-6 border-b border-border/50 flex items-center justify-between">
@@ -70,7 +71,7 @@ export default function ShareModal({ isOpen, onClose, post }: ShareModalProps) {
               </button>
             </div>
 
-            <div className="p-6 space-y-8 max-h-[80vh] overflow-y-auto custom-scrollbar">
+            <div className="p-4 sm:p-6 space-y-6 sm:space-y-8 max-h-[calc(92vh-92px)] overflow-y-auto custom-scrollbar">
               {/* Preview Card */}
               <div className="bg-background/50 p-4 rounded-2xl border border-border flex gap-4">
                 <div className="relative size-20 rounded-lg overflow-hidden shrink-0">

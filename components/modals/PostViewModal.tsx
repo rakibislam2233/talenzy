@@ -328,7 +328,7 @@ export default function PostViewModal({
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-background w-full max-w-6xl h-full lg:h-[90vh] overflow-hidden flex flex-col lg:flex-row shadow-2xl relative rounded-lg border border-border"
+            className="bg-background w-full max-w-6xl h-[95vh] sm:h-[92vh] lg:h-[90vh] overflow-hidden flex flex-col lg:flex-row shadow-2xl relative rounded-lg border border-border"
           >
             {/* Left Column: Media */}
             <div className="relative w-full h-[50vh] lg:h-full lg:w-[60%] bg-background flex items-center justify-center overflow-hidden group">
@@ -349,13 +349,13 @@ export default function PostViewModal({
                 <>
                   <button
                     onClick={prevMedia}
-                    className="absolute left-4 p-2 md:p-3 bg-foreground/50 hover:bg-black/70 rounded-full text-foreground backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 z-10"
+                    className="absolute left-4 p-2 md:p-3 bg-foreground/50 hover:bg-black/70 rounded-full text-foreground backdrop-blur-sm transition-all z-10"
                   >
                     <ChevronLeft className="h-6 w-6" />
                   </button>
                   <button
                     onClick={nextMedia}
-                    className="absolute right-4 p-2 md:p-3 bg-foreground/50 hover:bg-black/70 rounded-full text-foreground backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 z-10"
+                    className="absolute right-4 p-2 md:p-3 bg-foreground/50 hover:bg-black/70 rounded-full text-foreground backdrop-blur-sm transition-all z-10"
                   >
                     <ChevronRight className="h-6 w-6" />
                   </button>

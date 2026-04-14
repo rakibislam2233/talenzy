@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import LinkExtension from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -16,9 +17,8 @@ import {
   ListOrdered,
   MapPin,
   Smile,
-  X
+  X,
 } from "lucide-react";
-import { Input } from "../../../../ui/input";
 
 interface CreatePostFormProps {
   onClose: () => void;
@@ -34,6 +34,8 @@ interface CreatePostFormProps {
 
 export default function CreatePostForm({
   onClose,
+  isHiring,
+  setIsHiring,
   allowComments,
   setAllowComments,
   allowDownloads,
@@ -41,7 +43,6 @@ export default function CreatePostForm({
   privacy,
   setPrivacy,
 }: CreatePostFormProps) {
-  // Tiptap Editor Configuration
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -64,10 +65,10 @@ export default function CreatePostForm({
 
   return (
     <div className="w-full lg:w-[40%] bg-background flex flex-col flex-1 lg:h-full overflow-y-auto custom-scrollbar border-l border-border relative z-20">
-      {/* Header */}
       <div className="p-4 border-b border-border flex items-center justify-between sticky top-0 bg-background backdrop-blur-md z-30">
         <div className="flex items-center gap-3">
           <button
+            type="button"
             onClick={onClose}
             className="lg:hidden text-gray-400 hover:text-foreground transition-colors"
           >
@@ -78,35 +79,23 @@ export default function CreatePostForm({
       </div>
 
       <div className="p-4 flex flex-col gap-4 md:gap-6 flex-1">
-        {/* User Info & Privacy Selector */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-linear-to-br from-primary to-purple-400 p-0.5">
-              <div className="w-full h-full rounded-full bg-background relative overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center bg-gray-800 text-foreground font-bold text-xs md:text-sm">
-                  AT
-                </div>
-              </div>
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-linear-to-br from-primary to-purple-400 p-0.5">
+            <div className="w-full h-full rounded-full bg-background flex items-center justify-center text-foreground font-bold text-xs md:text-sm">
+              AT
             </div>
-            <div>
-              <h4 className="text-foreground font-bold text-sm md:text-base">
-                Alex Talent
-              </h4>
-              <p className="text-gray-400 text-xs md:text-sm">Creator</p>
-            </div>
+          </div>
+          <div>
+            <h4 className="text-foreground font-bold text-sm md:text-base">Alex Talent</h4>
+            <p className="text-gray-400 text-xs md:text-sm">Creator</p>
           </div>
         </div>
 
-        {/* Rich Text Caption Editor */}
         <div className="space-y-3">
-          <div
-            className="min-h-35 cursor-text"
-            onClick={() => editor?.commands.focus()}
-          >
+          <div className="min-h-35 cursor-text" onClick={() => editor?.commands.focus()}>
             <EditorContent editor={editor} />
           </div>
 
-          {/* Editor Toolbar */}
           <div className="flex items-center justify-between border-t border-border pt-3">
             <div className="flex gap-2">
               <ToolbarButton
@@ -126,31 +115,23 @@ export default function CreatePostForm({
               />
               <ToolbarButton
                 active={editor?.isActive("orderedList")}
-                onClick={() =>
-                  editor?.chain().focus().toggleOrderedList().run()
-                }
+                onClick={() => editor?.chain().focus().toggleOrderedList().run()}
                 icon={ListOrdered}
               />
             </div>
             <div className="flex gap-2 border-l border-border pl-2">
-              <ToolbarButton onClick={() => {}} icon={Smile} active={false} />
-              <ToolbarButton onClick={() => {}} icon={AtSign} active={false} />
-              <ToolbarButton onClick={() => {}} icon={Hash} active={false} />
+              <ToolbarButton onClick={() => {}} icon={Smile} />
+              <ToolbarButton onClick={() => {}} icon={AtSign} />
+              <ToolbarButton onClick={() => {}} icon={Hash} />
             </div>
           </div>
         </div>
 
-        {/* Location Input */}
         <div className="relative group">
           <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 md:h-5 md:w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
-          <Input
-            type="text"
-            placeholder="Location"
-            className="pl-10 md:pl-12"
-          />
+          <Input type="text" placeholder="Location" className="pl-10 md:pl-12" />
         </div>
 
-        {/* Advanced Settings */}
         <div className="border-t border-border pt-4">
           <details className="group">
             <summary className="flex items-center justify-between cursor-pointer list-none text-foreground font-bold text-sm mb-4">
@@ -163,70 +144,54 @@ export default function CreatePostForm({
               animate={{ height: "auto", opacity: 1 }}
               className="flex flex-col gap-4 pl-1"
             >
-              {/* Instagram-style: Turn off commenting */}
-              <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-foreground text-sm font-medium">
-                    Allow sharing
-                  </span>
-                  <Switch
-                    checked={allowDownloads}
-                    onChange={() => setAllowDownloads(!allowDownloads)}
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Harum molestias ea earum illo quam. Porro assumenda est
-                  voluptate accusamus quo.
-                </p>
-              </div>
+              <SettingRow
+                title="Open to hiring"
+                description="Let clients send hiring requests for this post."
+                checked={isHiring}
+                onChange={() => setIsHiring(!isHiring)}
+              />
 
-              {/* Common on Instagram Reels: Allow Downloads */}
-              <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-foreground text-sm font-medium">
-                    Allow sharing
-                  </span>
-                  <Switch
-                    checked={allowDownloads}
-                    onChange={() => setAllowDownloads(!allowDownloads)}
-                  />
+              <SettingRow
+                title="Allow comments"
+                description="Viewers can comment on this post."
+                checked={allowComments}
+                onChange={() => setAllowComments(!allowComments)}
+              />
+
+              <SettingRow
+                title="Allow downloads"
+                description="Allow others to download media from this post."
+                checked={allowDownloads}
+                onChange={() => setAllowDownloads(!allowDownloads)}
+              />
+
+              <div className="space-y-2">
+                <div className="text-foreground text-sm font-medium">Post visibility</div>
+                <div className="grid grid-cols-3 gap-2">
+                  {(["public", "connections", "private"] as const).map((item) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setPrivacy(item)}
+                      className={`rounded-lg border px-3 py-2 text-xs font-semibold capitalize ${
+                        privacy === item
+                          ? "border-primary text-primary"
+                          : "border-border text-muted-foreground"
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  ))}
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Harum molestias ea earum illo quam. Porro assumenda est
-                  voluptate accusamus quo.
-                </p>
-              </div>
-              {/* Common on both FB & IG: Allow others to share */}
-              <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-foreground text-sm font-medium">
-                    Allow sharing
-                  </span>
-                  <Switch
-                    checked={allowDownloads}
-                    onChange={() => setAllowDownloads(!allowDownloads)}
-                  />
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Harum molestias ea earum illo quam. Porro assumenda est
-                  voluptate accusamus quo.
-                </p>
+                <p className="text-sm text-muted-foreground">Control who can see this post.</p>
               </div>
             </motion.div>
           </details>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="p-4 border-t border-border bg-background sticky bottom-0 z-30 flex gap-6">
-        <Button
-          variant="outline"
-          onClick={onClose}
-          className="w-full cursor-pointer"
-        >
+      <div className="p-4 border-t border-border bg-background sticky bottom-0 z-30 flex gap-4">
+        <Button variant="outline" onClick={onClose} className="w-full cursor-pointer">
           Cancel
         </Button>
         <Button className="w-full cursor-pointer">
@@ -238,7 +203,6 @@ export default function CreatePostForm({
   );
 }
 
-// Helper Components
 function ToolbarButton({
   active,
   onClick,
@@ -250,15 +214,36 @@ function ToolbarButton({
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={`p-2 rounded-lg transition-colors ${
-        active
-          ? "bg-white/10 text-primary"
-          : "text-gray-400 hover:text-foreground"
+        active ? "bg-white/10 text-primary" : "text-gray-400 hover:text-foreground"
       }`}
     >
       <Icon className="w-5 h-5" />
     </button>
+  );
+}
+
+function SettingRow({
+  title,
+  description,
+  checked,
+  onChange,
+}: {
+  title: string;
+  description: string;
+  checked: boolean;
+  onChange: () => void;
+}) {
+  return (
+    <div className="space-y-1">
+      <div className="flex items-center justify-between">
+        <span className="text-foreground text-sm font-medium">{title}</span>
+        <Switch checked={checked} onChange={onChange} />
+      </div>
+      <p className="text-sm text-muted-foreground">{description}</p>
+    </div>
   );
 }
 
@@ -271,6 +256,7 @@ function Switch({
 }) {
   return (
     <button
+      type="button"
       onClick={onChange}
       className={`w-11 h-5 rounded-full relative transition-colors duration-300 ease-in-out cursor-pointer ${
         checked ? "bg-primary" : "bg-gray-600"

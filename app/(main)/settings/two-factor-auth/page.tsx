@@ -19,7 +19,7 @@ export default function TwoFactorAuthPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Smartphone className="h-5 w-5 text-primary" />
@@ -32,7 +32,7 @@ export default function TwoFactorAuthPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Mail className="h-5 w-5 text-primary" />
@@ -45,7 +45,7 @@ export default function TwoFactorAuthPage() {
               <Checkbox />
             </div>
             
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
                   <Key className="h-5 w-5 text-primary" />
@@ -100,7 +100,7 @@ export default function TwoFactorAuthPage() {
           </div>
           
           <div className="divide-y divide-border">
-            <div className="flex justify-between items-center p-4">
+            <div className="flex items-start justify-between gap-3 p-4">
               <div>
                 <h3 className="font-medium text-foreground">Require authentication</h3>
                 <p className="text-sm text-muted-foreground">For sensitive actions</p>
@@ -108,7 +108,7 @@ export default function TwoFactorAuthPage() {
               <Checkbox />
             </div>
             
-            <button className="w-full flex justify-between items-center p-4 hover:bg-accent transition-colors">
+            <button className="w-full flex items-start justify-between gap-3 p-4 hover:bg-accent transition-colors">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-destructive/10 rounded-lg">
                   <ShieldAlert className="h-5 w-5 text-destructive" />

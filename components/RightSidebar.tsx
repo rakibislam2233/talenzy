@@ -11,7 +11,7 @@ export default function RightSidebar() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <aside className="w-80 h-full px-5 py-4 space-y-6 overflow-y-auto scrollbar-hide hidden xl:block border-l border-border bg-background fixed right-0 top-0  ">
+    <aside className="w-full h-dvh px-4 2xl:px-5 py-4 space-y-6 overflow-y-auto scrollbar-hide border-l border-border bg-background">
       {/* Join Card (if not authenticated) */}
       {!isAuthenticated && (
         <div className="bg-card rounded-2xl p-5 border border-border shadow-glow relative overflow-hidden group">

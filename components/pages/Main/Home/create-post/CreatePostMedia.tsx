@@ -26,7 +26,6 @@ interface CreatePostMediaProps {
   onPrevSlide: () => void;
   onApplyFilter: (index: number, filterClass: string) => void;
   fileInputRef: React.RefObject<HTMLInputElement | null>;
-  setCurrentSlide: (index: number) => void;
 }
 
 export default function CreatePostMedia({
@@ -37,7 +36,7 @@ export default function CreatePostMedia({
   onNextSlide,
   onPrevSlide,
   onApplyFilter,
-  fileInputRef
+  fileInputRef,
 }: CreatePostMediaProps) {
   // Local UI state for tools (only relevant to this component)
   const [activeTool, setActiveTool] = useState<"none" | "crop" | "filter">(
@@ -52,7 +51,7 @@ export default function CreatePostMedia({
   const currentFile = selectedFiles[currentSlide];
 
   return (
-    <div className="relative w-full h-[40vh] sm:h-[50vh] lg:h-full lg:w-[60%] bg-background flex flex-col justify-center  group overflow-hidden">
+    <div className="relative w-full h-[38vh] sm:h-[48vh] md:h-[52vh] lg:h-full lg:w-[60%] bg-background flex flex-col justify-center group overflow-hidden">
       {selectedFiles.length > 0 ? (
         <>
           {/* Main Preview Area */}
@@ -114,7 +113,7 @@ export default function CreatePostMedia({
                   <video
                     src={currentFile.url}
                     controls
-                    className="max-w-full max-h-full object-contain"
+                    className="w-full h-full object-contain"
                     onContextMenu={(e) => e.preventDefault()}
                     controlsList="nodownload"
                   />

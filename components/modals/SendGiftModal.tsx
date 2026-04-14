@@ -107,15 +107,15 @@ export default function SendGiftModal({
   const modalContent = (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-80 flex items-center justify-center p-4 bg-foreground/60 backdrop-blur-md">
+        <div className="fixed inset-0 z-80 flex items-center justify-center p-3 sm:p-4 bg-foreground/60 backdrop-blur-md">
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
-            className="bg-background w-full max-w-xl rounded-3xl overflow-hidden border border-border shadow-2xl relative"
+            className="bg-background w-full max-w-xl max-h-[92vh] rounded-3xl overflow-hidden border border-border shadow-2xl relative"
           >
             {/* Header */}
-            <div className="p-6 pb-4 border-b border-border/50 flex items-center justify-between">
+            <div className="p-4 sm:p-6 pb-4 border-b border-border/50 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0 justify-between">
               <div>
                 <h3 className="text-xl font-bold text-foreground flex items-center gap-2">
                   Send a Gift to{" "}
@@ -125,7 +125,7 @@ export default function SendGiftModal({
                   Support Talent Creativity
                 </p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 self-end sm:self-auto">
                 <div className="bg-background/50 px-4 py-2 rounded-full flex items-center gap-2 border border-border">
                   <Wallet className="h-4 w-4 text-primary" />
                   <span className="text-foreground text-sm font-bold">
@@ -144,13 +144,13 @@ export default function SendGiftModal({
               </div>
             </div>
 
-            <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto custom-scrollbar">
+            <div className="p-4 sm:p-6 space-y-6 max-h-[calc(92vh-180px)] overflow-y-auto custom-scrollbar">
               {/* Gift Grid */}
               <div className="space-y-3">
                 <label className="text-muted-foreground text-xs font-bold uppercase tracking-wider">
                   Select a Gift
                 </label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {GIFTS.map((gift) => (
                     <button
                       key={gift.id}

@@ -70,7 +70,7 @@ const sections = [
 
 export default function SettingsPage() {
 	return (
-		<div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-6 sm:px-6 sm:pt-8 md:pl-80">
+		<div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-6 sm:px-6 sm:pt-8">
 			<section className="rounded-2xl border border-border bg-card">
 				<div className="border-b border-border p-5 sm:p-6">
 					<p className="text-[11px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
