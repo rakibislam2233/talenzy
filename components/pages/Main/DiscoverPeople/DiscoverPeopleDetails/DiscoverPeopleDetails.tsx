@@ -6,88 +6,28 @@ import { toast } from "@/hooks/use-toast";
 import { MOCK_POSTS } from "@/lib/data";
 import { Post } from "@/lib/types";
 import {
-  Calendar,
-  Gift,
-  Link as LinkIcon,
-  MapPin,
-  MessageSquare,
-  MoreHorizontal,
-  Play,
-  Star,
-  ThumbsUp,
-  UserPlus,
-  Verified,
+    Calendar,
+    Gift,
+    Link as LinkIcon,
+    MapPin,
+    MessageSquare,
+    MoreHorizontal,
+    Star,
+    UserPlus,
+    Verified,
 } from "lucide-react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useMemo, useState } from "react";
-const getProfileData = (username: string) => {
-  const profiles = [
-    {
-      name: "GuitarMaster",
-      username: "guitarmaster",
-      avatar: "https://images.unsplash.com/photo-1549213783-8284d0336c4f?w=400",
-      role: "Musician",
-      location: "Los Angeles, CA",
-      bio: "Creating soulful riffs and melodies. Exploring the boundaries of sound and expression. #guitarist #music #live",
-      followers: "45.2k",
-      following: "128",
-      rating: "4.9",
-      verified: true,
-      hiring: true,
-    },
-    {
-      name: "Alex Creator",
-      username: "alexcreates",
-      avatar:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400",
-      role: "Digital Artist",
-      location: "New York, USA",
-      bio: "Digital Artist & 3D Animator 🎨 exploring the boundaries of motion and surrealism. Creating visual experiences for brands and dreamers. #3dart #blender",
-      followers: "12.5k",
-      following: "842",
-      rating: "4.8",
-      verified: true,
-      hiring: true,
-    },
-    {
-      name: "Sarah Sterling",
-      username: "sarah_dance",
-      avatar:
-        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400",
-      role: "Dancer",
-      location: "New York, USA",
-      bio: "Contemporary dancer & choreographer. Moving through life one step at a time. #dance #art #motion",
-      followers: "18.4k",
-      following: "342",
-      rating: "4.7",
-      verified: false,
-      hiring: false,
-    },
-  ];
-  return (
-    profiles.find(
-      (p) => p.username.toLowerCase() === username.toLowerCase()
-    ) || {
-      name: username.charAt(0).toUpperCase() + username.slice(1),
-      username: username,
-      avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`,
-      role: "Content Creator",
-      location: "Unknown Location",
-      bio: `Passionate creator ${username} sharing amazing content on Talenzy.`,
-      followers: "0",
-      following: "0",
-      rating: "0.0",
-      verified: false,
-      hiring: false,
-    }
-  );
-};
+import DiscoverPeopleTabs from "./DiscoverPeopleTabs";
+import { getProfileData } from "./profile-data";
+import DiscoverTabPanels from "./tabs/DiscoverTabPanels";
+import { DiscoverProfileTab } from "./types";
 
 const DiscoverPeopleDetails = () => {
   const params = useParams();
   const usernameParam = params.username as string;
-  const [activeTab, setActiveTab] = useState("Portfolio");
+  const [activeTab, setActiveTab] = useState<DiscoverProfileTab>("Portfolio");
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [isHireModalOpen, setIsHireModalOpen] = useState(false);
 
@@ -114,9 +54,9 @@ const DiscoverPeopleDetails = () => {
   return (
     <div className="max-w-6xl mx-auto pb-32 font-outfit">
       {/* Cover Image */}
-      <div className="relative h-64 bg-gradient-to-br from-[#2d0845] to-primary overflow-hidden rounded-t-xl">
+      <div className="relative h-64 bg-linear-to-br from-[#2d0845] to-primary overflow-hidden rounded-t-xl">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1200&q=80')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent"></div>
       </div>
 
       {/* Profile Header */}
@@ -244,184 +184,15 @@ const DiscoverPeopleDetails = () => {
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-6 sm:gap-10 border-b border-border mb-8 overflow-x-auto scrollbar-hide scroll-smooth">
-          {["Portfolio", "Videos", "About", "Gifts"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => {
-                setActiveTab(tab);
-              }}
-              className={`pb-4 px-1 border-b-2 transition-all text-xs sm:text-sm  uppercase tracking-widest whitespace-nowrap ${
-                activeTab === tab
-                  ? "border-primary text-foreground"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
+        <DiscoverPeopleTabs activeTab={activeTab} onChange={setActiveTab} />
 
-        {/* Tab Content */}
-        <div className="min-h-[300px]">
-          {activeTab === "Portfolio" && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-in fade-in duration-500">
-              {displayPosts.map((item) => (
-                <div
-                  key={item.id}
-                  onClick={() => setSelectedPost(item)}
-                  className="relative aspect-square bg-card rounded-xl overflow-hidden group cursor-pointer border border-border"
-                >
-                  <Image
-                    src={item.mediaUrl}
-                    alt={item.caption}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center md:gap-2">
-                    {item.mediaItems?.some((m) => m.type === "video") && (
-                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-xl">
-                        ▶
-                      </div>
-                    )}
-                    <p className="text-white font-bold text-sm px-4 text-center line-clamp-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hidden md:block">
-                      {item.caption}
-                    </p>
-                  </div>
-                </div>
-              ))}
-              {displayPosts.length === 0 && (
-                <div className="col-span-full py-20 text-center">
-                  <p className="text-muted-foreground font-medium">
-                    No portfolio items yet.
-                  </p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "Videos" && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-in fade-in duration-500">
-              {displayPosts
-                .filter(
-                  (item) =>
-                    item.mediaUrl.endsWith(".mp4") ||
-                    item.mediaItems?.some((m) => m.type === "video")
-                )
-                .map((item) => (
-                  <div
-                    key={item.id}
-                    onClick={() => setSelectedPost(item)}
-                    className="relative aspect-square bg-card rounded-xl overflow-hidden group cursor-pointer border border-border"
-                  >
-                    <Image
-                      src={item.mediaUrl}
-                      alt={item.caption}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-                        <Play className="h-6 w-6 fill-white" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              {displayPosts.filter(
-                (item) =>
-                  item.mediaUrl.endsWith(".mp4") ||
-                  item.mediaItems?.some((m) => m.type === "video")
-              ).length === 0 && (
-                <div className="col-span-full py-20 text-center">
-                  <p className="text-muted-foreground font-medium">No videos found.</p>
-                </div>
-              )}
-            </div>
-          )}
-
-          {activeTab === "About" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in duration-500 text-foreground">
-              <div className="col-span-full mb-4">
-                <h3 className="text-xl font-bold mb-4">
-                  User Experience & Reviews
-                </h3>
-              </div>
-              {[1, 2, 3].map((id) => (
-                <div
-                  key={id}
-                  className="bg-card p-6 rounded-2xl border border-border flex flex-col gap-4 hover:border-primary/30 transition-colors"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="size-10 rounded-full overflow-hidden relative border border-border bg-muted">
-                        <Image
-                          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=reviewer${id}`}
-                          alt="Reviewer"
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-foreground font-bold text-sm">
-                          Reviewer {id}
-                        </h4>
-                        <span className="text-muted-foreground text-xs">
-                          2 weeks ago
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-3 w-3 ${
-                            i < 5 - (id % 2)
-                              ? "text-yellow-500 fill-yellow-500"
-                              : "text-gray-600"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    Great work by {profile.name}! Very professional and
-                    creative. The attention to detail in the work is amazing.
-                    Definitely recommend working with them.
-                  </p>
-                  <div className="flex items-center gap-4 mt-auto pt-4 border-t border-border/50">
-                    <button className="text-xs text-muted-foreground font-medium hover:text-foreground flex items-center gap-1">
-                      <ThumbsUp className="h-3 w-3" /> Helpful
-                    </button>
-                    <button className="text-xs text-foreground font-medium hover:text-foreground flex items-center gap-1">
-                      <MessageSquare className="h-3 w-3" /> Reply
-                    </button>
-                    <button className="ml-auto text-muted-foreground hover:text-foreground">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {activeTab === "Gifts" && (
-            <div className="flex flex-col items-center justify-center py-20 animate-in fade-in duration-500">
-              <div className="w-20 h-20 rounded-full bg-card border border-border flex items-center justify-center mb-4">
-                <Gift className="h-10 w-10 text-primary" />
-              </div>
-              <h3 className="text-foreground font-bold text-xl mb-2">
-                No Gifts Yet
-              </h3>
-              <p className="text-muted-foreground text-sm mb-6">
-                Send a gift to show your appreciation!
-              </p>
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full h-10 px-6 font-bold shadow-glow">
-                <Gift className="h-4 w-4 mr-2" />
-                Send Gift
-              </Button>
-            </div>
-          )}
+        <div className="min-h-75">
+          <DiscoverTabPanels
+            activeTab={activeTab}
+            posts={displayPosts}
+            onSelectPost={setSelectedPost}
+            profileName={profile.name}
+          />
         </div>
       </div>
 

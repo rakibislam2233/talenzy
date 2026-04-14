@@ -1,17 +1,16 @@
 "use client";
 
+import CounterOfferEditor from "@/components/pages/Main/Hiring/Details/CounterOfferEditor";
+import DetailHeader from "@/components/pages/Main/Hiring/Details/DetailHeader";
+import NegotiationHighlight from "@/components/pages/Main/Hiring/Details/NegotiationHighlight";
+import NegotiationHistory from "@/components/pages/Main/Hiring/Details/NegotiationHistory";
+import PartyCard from "@/components/pages/Main/Hiring/Details/PartyCard";
+import RequirementsCard from "@/components/pages/Main/Hiring/Details/RequirementsCard";
+import StatusPill from "@/components/pages/Main/Hiring/Details/StatusPill";
+import { NegotiationEntry } from "@/components/pages/Main/Hiring/Details/types";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  ArrowLeft,
-  CheckCircle2,
-  Clock,
-  DollarSign,
-  MessageSquare,
-  Upload,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { CheckCircle2, Clock, Upload } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 
@@ -31,11 +30,9 @@ export default function WhoHiredMeDetailPage() {
   const [status, setStatus] = useState<RequestStatus>("NEGOTIATING");
   const [workDescription, setWorkDescription] = useState("");
   const [counterOffer, setCounterOffer] = useState("");
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [showNegotiation, setShowNegotiation] = useState(false);
 
-  // Mock negotiation history
-  const [negotiations, setNegotiations] = useState([
+  const [negotiations, setNegotiations] = useState<NegotiationEntry[]>([
     {
       from: "client",
       amount: 1200,
@@ -56,7 +53,6 @@ export default function WhoHiredMeDetailPage() {
     },
   ]);
 
-  // Mock data
   const requestData = {
     id: hiringId,
     title: "Website Redesign Project",
@@ -118,7 +114,6 @@ export default function WhoHiredMeDetailPage() {
     }
   };
 
-  // ... (getStatusBadge and other helpers)
   const getStatusBadge = () => {
     const badges = {
       PENDING: {
@@ -139,73 +134,20 @@ export default function WhoHiredMeDetailPage() {
 
   return (
     <div className="min-h-screen bg-background pb-32">
-      {/* Header */}
-      <div className="border-b border-border/30 bg-background/50 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center gap-4">
-            <Link href="/hiring">
-              <Button
-                variant="ghost"
-                className="text-muted-foreground hover:text-foreground h-10 w-10 p-0"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            </Link>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
-                <span>Who Hired Me</span>
-                <span>/</span>
-                <span className="text-foreground">Request #{hiringId}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DetailHeader sectionLabel="Who Hired Me" requestId={hiringId} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Sidebar */}
           <div className="lg:col-span-1 space-y-6">
-            <div className="bg-background/50 backdrop-blur-xl rounded-3xl p-6 border border-border/40">
-              <div className="text-center mb-6">
-                <div className="relative inline-block mb-4">
-                  <div className="size-24 rounded-3xl overflow-hidden border-2 border-primary/50 shadow-xl shadow-primary/20">
-                    <Image
-                      src={requestData.client.image}
-                      alt={requestData.client.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="absolute -bottom-1 -right-1 bg-blue-500 p-1 rounded-full border-2 border-background">
-                    <CheckCircle2 className="size-4 text-primary-foreground" />
-                  </div>
-                </div>
-                <h3 className="text-xl  text-foreground uppercase tracking-tight">
-                  {requestData.client.name}
-                </h3>
-                <p className="text-primary text-sm font-bold">
-                  {requestData.client.username}
-                </p>
-              </div>
+            <PartyCard
+              image={requestData.client.image}
+              name={requestData.client.name}
+              username={requestData.client.username}
+              priceLabel="Current Offer"
+              priceValue={requestData.financials.currentOffer}
+              messageLabel="Message Client"
+            />
 
-              <div className="border-t border-border/30 pt-6 space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground text-xs  uppercase tracking-widest">
-                    Current Offer
-                  </span>
-                  <span className="text-foreground  text-xl">
-                    ${requestData.financials.currentOffer}
-                  </span>
-                </div>
-                <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl h-12  uppercase tracking-widest text-xs">
-                  <MessageSquare className="size-4 mr-2" />
-                  Message Client
-                </Button>
-              </div>
-            </div>
-
-            {/* Financial Status After Acceptance */}
             {(status === "ACCEPTED" || status === "IN_PROGRESS") && (
               <div className="bg-background/50 backdrop-blur-xl rounded-3xl p-6 border border-border/40">
                 <h4 className="text-foreground  uppercase text-xs tracking-widest mb-4">
@@ -229,72 +171,29 @@ export default function WhoHiredMeDetailPage() {
             )}
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-background/50 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-border/40">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-xs text-muted-foreground uppercase ">
                   Request #{requestData.id}
                 </span>
-                <span
-                  className={`${
-                    getStatusBadge().color
-                  } px-2 py-0.5 rounded text-[10px]  uppercase`}
-                >
-                  {getStatusBadge().text}
-                </span>
+                <StatusPill badge={getStatusBadge()} />
               </div>
               <h1 className="text-2xl sm:text-3xl  text-foreground mb-6 uppercase tracking-tight">
                 {requestData.title}
               </h1>
 
-              {/* NEGOTIATION SYSTEM */}
               {status === "NEGOTIATING" && (
                 <div className="space-y-6">
-                  {/* Latest Offer Highlight Box */}
                   {isClientTurn && (
-                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-2xl p-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                      <div className="flex items-start gap-4">
-                        <div className="size-10 rounded-xl bg-blue-500/20 flex items-center justify-center shrink-0">
-                          <DollarSign className="size-5 text-blue-400" />
-                        </div>
-                        <div>
-                          <p className="text-blue-400  uppercase text-xs tracking-widest mb-1">
-                            Latest Client Offer
-                          </p>
-                          <h4 className="text-2xl  text-foreground mb-1">
-                            ${latestOffer.amount}
-                          </h4>
-                          <p className="text-muted-foreground text-xs">
-                            You can accept this offer, reject it, or send a new
-                            counter-offer.
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* 3-Button System */}
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
-                        <Button
-                          onClick={handleAcceptOffer}
-                          className="bg-green-500 hover:bg-green-600 text-primary-foreground rounded-xl h-11  uppercase tracking-widest text-xs shadow-lg shadow-green-500/20"
-                        >
-                          Accept Offer
-                        </Button>
-                        <Button
-                          onClick={handleRejectOffer}
-                          variant="outline"
-                          className="bg-transparent border-red-500/50 text-red-500 hover:bg-red-500/10 rounded-xl h-11  uppercase tracking-widest text-xs"
-                        >
-                          Reject Offer
-                        </Button>
-                        <Button
-                          onClick={() => setShowNegotiation(true)}
-                          className="bg-primary hover:bg-primary-hover text-primary-foreground rounded-xl h-11  uppercase tracking-widest text-xs"
-                        >
-                          Counter Offer
-                        </Button>
-                      </div>
-                    </div>
+                    <NegotiationHighlight
+                      title="Latest Client Offer"
+                      amount={latestOffer.amount}
+                      description="You can accept this offer, reject it, or send a new counter-offer."
+                      onAccept={handleAcceptOffer}
+                      onReject={handleRejectOffer}
+                      onCounter={() => setShowNegotiation(true)}
+                    />
                   )}
 
                   {!isClientTurn && (
@@ -311,76 +210,23 @@ export default function WhoHiredMeDetailPage() {
                   )}
 
                   {showNegotiation && (
-                    <div className="p-6 bg-background/50 rounded-2xl border border-border/30 animate-in zoom-in-95 duration-200">
-                      <label className="text-foreground  uppercase text-[10px] tracking-widest mb-3 block">
-                        Your New Offer ($)
-                      </label>
-                      <input
-                        type="number"
-                        value={counterOffer}
-                        onChange={(e) => setCounterOffer(e.target.value)}
-                        placeholder="Enter amount..."
-                        className="w-full bg-background border border-border/40 rounded-xl h-12 px-4 text-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/20 mb-4"
-                      />
-                      <div className="flex gap-3">
-                        <Button
-                          onClick={handleSendCounterOffer}
-                          className="flex-1 bg-primary text-primary-foreground h-11  uppercase text-xs"
-                        >
-                          Send Offer
-                        </Button>
-                        <Button
-                          onClick={() => setShowNegotiation(false)}
-                          variant="ghost"
-                          className="flex-1 text-muted-foreground h-11  uppercase text-xs"
-                        >
-                          Cancel
-                        </Button>
-                      </div>
-                    </div>
+                    <CounterOfferEditor
+                      value={counterOffer}
+                      onChange={setCounterOffer}
+                      onSubmit={handleSendCounterOffer}
+                      onCancel={() => setShowNegotiation(false)}
+                    />
                   )}
 
-                  {/* Negotiation History */}
-                  <div className="space-y-4 mt-8">
-                    <h4 className="text-muted-foreground  uppercase text-xs tracking-widest">
-                      Negotiation History
-                    </h4>
-                    {negotiations.map((neg, i) => (
-                      <div
-                        key={i}
-                        className={`flex items-start gap-3 ${
-                          neg.from === "freelancer" ? "flex-row-reverse" : ""
-                        }`}
-                      >
-                        <div
-                          className={`p-4 rounded-2xl max-w-[80%] ${
-                            neg.from === "freelancer"
-                              ? "bg-primary/20 border border-primary/30 rounded-tr-none"
-                              : "bg-background/80 border border-border/40 rounded-tl-none"
-                          }`}
-                        >
-                          <div className="flex justify-between gap-4 mb-2">
-                            <span className="text-[10px]  uppercase tracking-tight text-muted-foreground">
-                              {neg.from === "client" ? "Client" : "You"}
-                            </span>
-                            <span className="text-[10px] text-muted-foreground font-bold">
-                              {neg.timestamp}
-                            </span>
-                          </div>
-                          <p className="text-foreground  text-lg">
-                            ${neg.amount}
-                          </p>
-                          <p className="text-muted-foreground text-xs mt-1">
-                            {neg.message}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <NegotiationHistory
+                    entries={negotiations}
+                    reverseFor="freelancer"
+                    rightLabel="You"
+                    leftLabel="Client"
+                  />
                 </div>
               )}
 
-              {/* Post-Acceptance / Work Submission */}
               {(status === "ACCEPTED" || status === "IN_PROGRESS") && (
                 <div className="space-y-6">
                   <div className="bg-green-500/10 border border-green-500/30 rounded-2xl p-6">
@@ -423,26 +269,12 @@ export default function WhoHiredMeDetailPage() {
               )}
             </div>
 
-            {/* Description Card */}
-            <div className="bg-background/50 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-border/40">
-              <h3 className="text-foreground  uppercase text-sm tracking-widest mb-4">
-                Project Requirements
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                {requestData.description}
-              </p>
-              <div className="space-y-2">
-                {requestData.requirements.map((req, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-2 text-muted-foreground text-sm"
-                  >
-                    <div className="size-1.5 bg-primary rounded-full mt-1.5 shrink-0" />
-                    <span>{req}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <RequirementsCard
+              title="Project Requirements"
+              description={requestData.description}
+              requirements={requestData.requirements}
+              mode="list"
+            />
           </div>
         </div>
       </div>
