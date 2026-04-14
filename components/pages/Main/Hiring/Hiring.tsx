@@ -1,7 +1,6 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -9,41 +8,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { MapPin, Search, Star } from "lucide-react";
+import { Briefcase, Search, ShieldCheck, Sparkles, Star } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+
+type HiringTab = "all" | "my-requests" | "hired-me";
+
 const Hiring = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeTab =
-    (searchParams.get("tab") as "all" | "my-requests" | "hired-me") || "all";
+  const activeTab = (searchParams.get("tab") as HiringTab) || "all";
+  const [talentQuery, setTalentQuery] = useState("");
+  const [talentCountry, setTalentCountry] = useState("all");
+  const [talentCategory, setTalentCategory] = useState("all");
+  const [talentBudget, setTalentBudget] = useState("all");
+  const [talentAvailability, setTalentAvailability] = useState("all");
+  const [talentOther, setTalentOther] = useState("all");
 
-  const handleTabChange = (newTab: "all" | "my-requests" | "hired-me") => {
+  const handleTabChange = (newTab: HiringTab) => {
     router.push(`/hiring?tab=${newTab}`);
   };
-
-  // Filter states
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState([150]);
-  const [availability, setAvailability] = useState("anytime");
-  const [location, setLocation] = useState("");
-  const [verifiedOnly, setVerifiedOnly] = useState(false);
-
-  const categories = [
-    { id: "music", name: "Music & Audio" },
-    { id: "dance", name: "Dance & Performance" },
-    { id: "visual", name: "Visual Arts" },
-    { id: "tech", name: "Tech & Development" },
-    { id: "lifestyle", name: "Lifestyle & Model" },
-  ];
 
   const talents = [
     {
       name: "GuitarMaster",
       username: "@guitarmaster",
       role: "Musician",
+      category: "music",
+      country: "us",
+      availability: "available",
+      hourlyRate: 80,
+      verified: true,
       rating: 4.9,
       jobs: 120,
       rate: "$80/hr",
@@ -57,6 +53,11 @@ const Hiring = () => {
       name: "Sarah_S",
       username: "@sarahdance",
       role: "Dancer",
+      category: "performance",
+      country: "us",
+      availability: "busy",
+      hourlyRate: 120,
+      verified: false,
       rating: 5.0,
       jobs: 45,
       rate: "$120/hr",
@@ -70,6 +71,11 @@ const Hiring = () => {
       name: "Jenny_Art",
       username: "@jennycolors",
       role: "Artist",
+      category: "visual",
+      country: "fr",
+      availability: "available",
+      hourlyRate: 95,
+      verified: true,
       rating: 4.8,
       jobs: 82,
       rate: "$95/hr",
@@ -83,6 +89,11 @@ const Hiring = () => {
       name: "Tom_Tech",
       username: "@tomcodes",
       role: "Reviewer",
+      category: "tech",
+      country: "ca",
+      availability: "available",
+      hourlyRate: 250,
+      verified: true,
       rating: 5.0,
       jobs: 210,
       rate: "$250/hr",
@@ -96,6 +107,11 @@ const Hiring = () => {
       name: "CreativeAgency",
       username: "@creative_hq",
       role: "Agency",
+      category: "design",
+      country: "de",
+      availability: "busy",
+      hourlyRate: 150,
+      verified: true,
       rating: 4.7,
       jobs: "300+",
       rate: "$150/hr",
@@ -109,6 +125,11 @@ const Hiring = () => {
       name: "Anna K.",
       username: "@annadance",
       role: "Dancer",
+      category: "performance",
+      country: "it",
+      availability: "available",
+      hourlyRate: 75,
+      verified: false,
       rating: 4.6,
       jobs: 28,
       rate: "$75/hr",
@@ -120,240 +141,284 @@ const Hiring = () => {
     },
   ];
 
-  const handleCategoryToggle = (categoryId: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(categoryId)
-        ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId],
-    );
-  };
+  const myRequests = [
+    {
+      id: "84920",
+      title: "Video Editing for Campaign Q3",
+      freelancer: "Sarah Jenkins",
+      username: "@sarahcreative",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
+      status: "IN PROGRESS",
+      progress: 60,
+      budget: 500,
+      dueDate: "Oct 20, 2023",
+      category: "Video Editing",
+    },
+    {
+      id: "84915",
+      title: "Logo Design for Startup",
+      freelancer: "Davide Rossi",
+      username: "@davide_design",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+      status: "COMPLETED",
+      progress: 100,
+      budget: 350,
+      dueDate: "Oct 15, 2023",
+      category: "Design",
+    },
+    {
+      id: "84910",
+      title: "Music Production for Podcast",
+      freelancer: "GuitarMaster",
+      username: "@guitarmaster",
+      avatar: "https://images.unsplash.com/photo-1549213783-8284d0336c4f?w=200",
+      status: "PENDING",
+      progress: 20,
+      budget: 800,
+      dueDate: "Nov 5, 2023",
+      category: "Music",
+    },
+  ];
 
-  const handleResetFilters = () => {
-    setSelectedCategories([]);
-    setPriceRange([150]);
-    setAvailability("anytime");
-    setLocation("");
-    setVerifiedOnly(false);
-  };
+  const hiredMe = [
+    {
+      id: "84925",
+      title: "Website Redesign Project",
+      client: "Tech Startup Inc",
+      username: "@techstartup",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200",
+      status: "ACTIVE",
+      budget: 1200,
+      startDate: "Oct 25, 2023",
+      category: "Web Design",
+    },
+    {
+      id: "84922",
+      title: "Brand Identity Package",
+      client: "Coffee Shop",
+      username: "@coffeeshop",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200",
+      status: "PENDING APPROVAL",
+      budget: 650,
+      startDate: "Oct 28, 2023",
+      category: "Branding",
+    },
+  ];
+
+  const filteredTalents = talents.filter((talent) => {
+    const q = talentQuery.trim().toLowerCase();
+    const byName =
+      q.length === 0 ||
+      talent.name.toLowerCase().includes(q) ||
+      talent.username.toLowerCase().includes(q);
+    const byCountry =
+      talentCountry === "all" || talent.country === talentCountry;
+    const byCategory = talentCategory === "all" || talent.category === talentCategory;
+    const byAvailability =
+      talentAvailability === "all" || talent.availability === talentAvailability;
+    const byBudget =
+      talentBudget === "all" ||
+      (talentBudget === "under100" && talent.hourlyRate < 100) ||
+      (talentBudget === "100to200" && talent.hourlyRate >= 100 && talent.hourlyRate <= 200) ||
+      (talentBudget === "200plus" && talent.hourlyRate > 200);
+    const byOther =
+      talentOther === "all" ||
+      (talentOther === "verified" && talent.verified) ||
+      (talentOther === "toprated" && talent.rating >= 4.9) ||
+      (talentOther === "pricing" && talent.hourlyRate <= 120);
+
+    return byName && byCountry && byCategory && byAvailability && byBudget && byOther;
+  });
+
+  const visibleTalents = filteredTalents.slice(0, 4);
 
   return (
     <div className="flex h-full">
-      {/* Inner Filter Sidebar */}
-      <div className="w-64 p-6 border-r border-border/30 hidden lg:block overflow-y-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-foreground  text-lg uppercase tracking-tight">
-            Filters
-          </h2>
-          <button
-            onClick={handleResetFilters}
-            className="text-primary text-xs hover:underline font-bold uppercase tracking-wider"
-          >
-            Reset
-          </button>
-        </div>
+      <div className="flex-1 overflow-y-auto p-4 pb-32 sm:p-7 lg:p-8">
+        <section className="rounded-3xl border border-border bg-card/30 p-5 sm:p-7">
+          <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                <Sparkles className="h-3.5 w-3.5" />
+                Talent Marketplace
+              </p>
+              <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                Find the Right Professional for Your Work
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
+                Review portfolios, compare rates, and hire with confidence. Use
+                advanced filters to find creators who match your budget and
+                timeline.
+              </p>
+            </div>
 
-        <div className="space-y-6">
-          {/* Categories */}
-          <div>
-            <h3 className="text-foreground font-bold text-sm mb-4 uppercase tracking-wide">
-              Categories
-            </h3>
-            <div className="space-y-3">
-              {categories.map((cat) => (
-                <div key={cat.id} className="flex items-center space-x-3">
-                  <Checkbox
-                    id={cat.id}
-                    checked={selectedCategories.includes(cat.id)}
-                    onCheckedChange={() => handleCategoryToggle(cat.id)}
-                  />
-                  <Label
-                    htmlFor={cat.id}
-                    className="text-sm text-muted-foreground cursor-pointer hover:text-foreground transition-colors font-medium"
-                  >
-                    {cat.name}
-                  </Label>
-                </div>
-              ))}
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              <div className="rounded-2xl border border-border bg-background px-4 py-3 text-center">
+                <p className="text-xs text-muted-foreground">Talents</p>
+                <p className="text-lg font-semibold text-foreground">2.4k+</p>
+              </div>
+              <div className="rounded-2xl border border-border bg-background px-4 py-3 text-center">
+                <p className="text-xs text-muted-foreground">Avg Rating</p>
+                <p className="text-lg font-semibold text-foreground">4.8</p>
+              </div>
+              <div className="rounded-2xl border border-border bg-background px-4 py-3 text-center">
+                <p className="text-xs text-muted-foreground">Avg Reply</p>
+                <p className="text-lg font-semibold text-foreground">2h</p>
+              </div>
             </div>
           </div>
 
-          {/* Price Range */}
-          <div>
-            <h3 className="text-foreground font-bold text-sm mb-3 uppercase tracking-wide">
-              Price Range / Hr
-            </h3>
-            <div className="flex items-center justify-between text-xs text-muted-foreground mb-3 font-medium">
-              <span>$10</span>
-              <span>$500+</span>
-            </div>
-            <Slider
-              value={priceRange}
-              onValueChange={setPriceRange}
-              max={500}
-              min={10}
-              step={10}
-              className="mb-3"
-            />
-            <div className="text-center text-primary  text-sm">
-              ${priceRange[0]}/hr
-            </div>
-          </div>
-
-          {/* Availability */}
-          <div>
-            <h3 className="text-foreground font-bold text-sm mb-3 uppercase tracking-wide">
-              Availability
-            </h3>
-            <Select value={availability} onValueChange={setAvailability}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select availability" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="anytime">Anytime</SelectItem>
-                <SelectItem value="week">This Week</SelectItem>
-                <SelectItem value="month">This Month</SelectItem>
-                <SelectItem value="urgent">Urgent (24hrs)</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {/* Location */}
-          <div>
-            <h3 className="text-foreground font-bold text-sm mb-3 uppercase tracking-wide">
-              Location
-            </h3>
-            <div className="relative">
-              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="City or Country"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full bg-background border border-border/30 rounded-xl h-12 pl-10 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
+                value={talentQuery}
+                onChange={(e) => setTalentQuery(e.target.value)}
+                placeholder="Search talents by name or username"
+                className="h-11 w-full rounded-xl border border-border bg-background pl-10 pr-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20"
               />
             </div>
-          </div>
 
-          {/* Verified toggle */}
-          <div className="flex items-center justify-between py-3 px-4 bg-background/50 rounded-xl border border-border/30">
-            <Label
-              htmlFor="verified"
-              className="text-foreground font-bold text-sm cursor-pointer"
+            <Select value={talentCountry} onValueChange={setTalentCountry}>
+              <SelectTrigger className="h-11 w-full sm:w-56 bg-background">
+                <SelectValue placeholder="Country" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Countries</SelectItem>
+                <SelectItem value="us">United States</SelectItem>
+                <SelectItem value="ca">Canada</SelectItem>
+                <SelectItem value="it">Italy</SelectItem>
+                <SelectItem value="de">Germany</SelectItem>
+                <SelectItem value="fr">France</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={talentCategory} onValueChange={setTalentCategory}>
+              <SelectTrigger className="h-11 w-full sm:w-56 bg-background">
+                <SelectValue placeholder="Category" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
+                <SelectItem value="music">Music</SelectItem>
+                <SelectItem value="performance">Performance</SelectItem>
+                <SelectItem value="visual">Visual Arts</SelectItem>
+                <SelectItem value="tech">Tech</SelectItem>
+                <SelectItem value="design">Design</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={talentBudget} onValueChange={setTalentBudget}>
+              <SelectTrigger className="h-11 w-full sm:w-56 bg-background">
+                <SelectValue placeholder="Budget" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Budgets</SelectItem>
+                <SelectItem value="under100">Under $100/hr</SelectItem>
+                <SelectItem value="100to200">$100-$200/hr</SelectItem>
+                <SelectItem value="200plus">$200+/hr</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select
+              value={talentAvailability}
+              onValueChange={setTalentAvailability}
             >
-              Verified Only
-            </Label>
-            <Checkbox
-              id="verified"
-              checked={verifiedOnly}
-              onCheckedChange={(checked) => setVerifiedOnly(checked as boolean)}
-            />
-          </div>
+              <SelectTrigger className="h-11 w-full sm:w-56 bg-background">
+                <SelectValue placeholder="Availability" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Availability</SelectItem>
+                <SelectItem value="available">Available</SelectItem>
+                <SelectItem value="busy">Busy</SelectItem>
+              </SelectContent>
+            </Select>
 
-          <Button className="w-full bg-primary hover:bg-primary-hover text-primary-foreground  uppercase tracking-wider text-xs h-12 rounded-xl shadow-xl shadow-primary/20">
-            Apply Filters
-          </Button>
-          <Button
-            onClick={handleResetFilters}
-            variant="outline"
-            className="w-full border-border text-foreground hover:bg-accent bg-transparent font-bold uppercase tracking-wider text-xs h-12 rounded-xl"
-          >
-            Clear All
-          </Button>
-        </div>
-      </div>
+            <Select value={talentOther} onValueChange={setTalentOther}>
+              <SelectTrigger className="h-11 w-full sm:w-56 bg-background">
+                <SelectValue placeholder="Other" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="verified">Verified Only</SelectItem>
+                <SelectItem value="toprated">Top Rated</SelectItem>
+                <SelectItem value="pricing">Budget Friendly</SelectItem>
+              </SelectContent>
+            </Select>
 
-      {/* Main Content */}
-      <div className="flex-1 p-4 sm:p-8 overflow-y-auto pb-32">
-        {/* Gradient Hero Header */}
-        <div className="bg-gradient-to-br from-primary via-purple-900 to-[#2e1065] rounded-3xl p-6 sm:p-10 mb-8 text-center shadow-2xl relative overflow-hidden group">
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-48 h-48 bg-foreground/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 group-hover:bg-foreground/10 transition-colors" />
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-foreground/5 rounded-full blur-3xl translate-x-1/4 translate-y-1/4 group-hover:bg-foreground/10 transition-colors" />
-
-          <h1 className="text-2xl sm:text-4xl lg:text-5xl  text-primary-foreground mb-3 relative ">
-            Hire Top <span className="text-purple-300">Talent</span>
-          </h1>
-          <p className="text-primary-foreground/70 mb-8 max-w-lg mx-auto relative text-sm sm:text-base font-medium leading-relaxed">
-            Connect with industry-leading creators for your next project.
-            Premium members get priority access to vetted profiles.
-          </p>
-
-          <div className="relative max-w-xl mx-auto group/search">
-            <input
-              type="text"
-              placeholder="Who are you looking for?"
-              className="w-full h-14 sm:h-16 rounded-2xl pl-6 sm:pl-8 pr-16 sm:pr-36 bg-foreground/10 backdrop-blur-xl border border-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40 focus:outline-none focus:bg-foreground/20 focus:border-foreground/40 transition-all shadow-2xl"
-            />
-            <Button className="absolute right-2 top-2 rounded-full size-10 cursor-pointer">
-              <Search />
+            <Button
+              variant="outline"
+              className="h-11 border-border"
+              onClick={() => {
+                setTalentQuery("");
+                setTalentCountry("all");
+                setTalentCategory("all");
+                setTalentBudget("all");
+                setTalentAvailability("all");
+                setTalentOther("all");
+              }}
+            >
+              Reset
             </Button>
           </div>
-        </div>
+        </section>
 
-        {/* Filter Tabs */}
-        <div className="flex items-center gap-6 sm:gap-10 mb-8 border-b border-border/40 overflow-x-auto scrollbar-hide no-scrollbar">
+        <div className="mt-7 flex items-center gap-3 overflow-x-auto pb-1 scrollbar-hide">
           <button
             onClick={() => handleTabChange("all")}
-            className={`${
+            className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-all ${
               activeTab === "all"
-                ? "text-primary border-b-2 border-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }  pb-4 px-2 whitespace-nowrap text-xs sm:text-sm  tracking-widest transition-all`}
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border bg-background text-muted-foreground hover:text-foreground"
+            }`}
           >
-            All People
+            All Talents
           </button>
           <button
             onClick={() => handleTabChange("my-requests")}
-            className={`${
+            className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-all ${
               activeTab === "my-requests"
-                ? "text-primary border-b-2 border-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }  pb-4 px-2 whitespace-nowrap cursor-pointer text-xs sm:text-sm  tracking-widest transition-all`}
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border bg-background text-muted-foreground hover:text-foreground"
+            }`}
           >
             My Hire Requests
           </button>
           <button
             onClick={() => handleTabChange("hired-me")}
-            className={`${
+            className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm transition-all ${
               activeTab === "hired-me"
-                ? "text-primary border-b-2 border-primary"
-                : "text-muted-foreground hover:text-foreground"
-            }  pb-4 px-2 whitespace-nowrap cursor-pointer text-xs sm:text-sm  tracking-widest transition-all`}
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border bg-background text-muted-foreground hover:text-foreground"
+            }`}
           >
             Who Hired Me
           </button>
         </div>
 
-        {/* Mobile Filter Toggle (Visible only on small screens) */}
-        <div className="lg:hidden mb-6 flex items-center justify-between p-4 bg-background border border-border rounded-2xl">
-          <span className="text-foreground font-bold text-sm">
-            Advanced Filters
-          </span>
-          <Button
-            variant="ghost"
-            className="text-primary h-8 px-3 font-bold text-xs uppercase tracking-tighter hover:bg-primary/10"
-          >
-            Open Filters
-          </Button>
-        </div>
-
-        {/* Talent Grid - All Talents Tab */}
         {activeTab === "all" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
-            {talents.map((talent, i) => (
+          <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2 2xl:grid-cols-4">
+            {visibleTalents.map((talent, i) => (
               <div
                 key={i}
-                className="bg-background rounded-3xl p-5 sm:p-6 border border-border/40 hover:border-primary/50 transition-all group card-hover-effect relative overflow-hidden"
+                className="group relative overflow-hidden rounded-lg border border-border/30 bg-card p-6 cursor-pointer"
               >
+                <div className="absolute left-0 right-0 top-0 h-24 bg-linear-to-b from-accent to-transparent opacity-50" />
+
                 <div
                   onClick={() =>
-                    router.push(`/discover-people/${talent.username}`)
+                    router.push(
+                      `/discover/${talent.username.replace(/^@/, "")}`,
+                    )
                   }
-                  className="flex items-start justify-between mb-6 relative z-10 cursor-pointer"
+                  className="relative mb-5 flex items-start justify-between"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="relative">
-                      <div className="size-14 sm:size-16 rounded-full overflow-hidden border-2 border-border group-hover:border-primary/50 transition-colors">
+                    <div className="relative shrink-0">
+                      <div className="size-14 overflow-hidden rounded-full border border-border">
                         <Image
                           src={talent.image || ""}
                           alt={talent.name}
@@ -361,162 +426,124 @@ const Hiring = () => {
                           className="object-cover rounded-full"
                         />
                       </div>
-                      <div className="absolute -bottom-1 -right-1 size-4 bg-green-500 border-2 border-background rounded-full shadow-lg" />
+                      <div className="absolute -bottom-1 -right-1 size-4 rounded-full border-2 border-background bg-green-500" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-1.5 mb-0.5">
-                        <h3 className="text-foreground  text-base sm:text-lg tracking-tight uppercase">
+                      <div className="mb-1 flex items-center gap-2">
+                        <h3 className="text-base font-semibold text-foreground sm:text-lg">
                           {talent.name}
                         </h3>
-                        <div className="bg-blue-500 p-0.5 rounded-full">
-                          <svg
-                            className="size-2.5 text-primary-foreground"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                          >
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                          </svg>
-                        </div>
+                        <ShieldCheck className="h-4 w-4 text-primary" />
                       </div>
-                      <p className="text-primary font-bold text-[10px] sm:text-xs tracking-tight">
+                      <p className="text-xs font-medium text-primary">
                         {talent.username}
                       </p>
-                      <div className="flex items-center gap-2 mt-2">
-                        <span className="bg-yellow-500/10 text-yellow-500 text-[10px]  px-2 py-0.5 rounded flex items-center gap-1">
-                          <Star className="size-2.5 fill-current" />
+                      <div className="mt-2 flex items-center gap-2">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-yellow-500/15 px-2 py-0.5 text-[11px] font-medium text-yellow-600">
+                          <Star className="h-3 w-3 fill-current" />
                           {talent.rating}
                         </span>
-                        <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-tighter">
-                          {talent.jobs} JOBS
+                        <span className="text-[11px] text-muted-foreground">
+                          {talent.jobs} completed jobs
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2 mb-6 relative z-10">
+                <div className="relative mb-4 flex flex-wrap gap-2">
                   {talent.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-background/80 text-muted-foreground text-[10px] sm:text-xs px-3 py-1 rounded-lg border border-border/50 font-bold uppercase tracking-tight"
+                      className="bg-accent px-3 py-1 rounded-full text-xs text-muted-foreground border border-border/30"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                <p className="text-muted-foreground text-sm mb-8 line-clamp-2 leading-relaxed font-medium">
+                <p className="relative mb-6 line-clamp-2 h-10 text-sm text-muted-foreground">
                   {talent.bio}
                 </p>
 
-                <div className="grid grid-cols-2 gap-4 py-6 border-t border-border/30 relative z-10">
+                <div className="relative grid grid-cols-2 gap-4 border-t border-border/30 py-4">
                   <div className="text-left">
-                    <p className="text-muted-foreground text-[10px]  uppercase tracking-widest mb-1 leading-none">
+                    <p className="mb-1 text-xs text-muted-foreground">
                       Audience
                     </p>
-                    <p className="text-foreground  text-lg tracking-tight">
+                    <p className="text-base font-semibold text-foreground">
                       {talent.followers}
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-muted-foreground text-[10px]  uppercase tracking-widest mb-1 leading-none">
+                    <p className="mb-1 text-xs text-muted-foreground">
                       Starting At
                     </p>
-                    <p className="text-foreground  text-lg tracking-tight">
+                    <p className="text-base font-semibold text-foreground">
                       {talent.rate}
                     </p>
                   </div>
                 </div>
 
-                <Button className="w-full h-12 cursor-pointer bg-primary hover:bg-primary-hover text-primary-foreground text-sm  tracking-widest rounded-xl shadow-xl shadow-primary/20 relative z-10">
+                <Button className="relative mt-3 h-10 w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
+                  <Briefcase className="mr-2 h-4 w-4" />
                   Hire Now
                 </Button>
-
-                {/* Subtle background aesthetic */}
-                <div className="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
               </div>
             ))}
+
+            {visibleTalents.length === 0 && (
+              <div className="col-span-full rounded-2xl border border-border bg-background p-8 text-center">
+                <p className="text-lg font-medium text-foreground">
+                  No talents found
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Try another name or country.
+                </p>
+              </div>
+            )}
           </div>
         )}
 
-        {/* My Hire Requests Tab */}
         {activeTab === "my-requests" && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {[
-              {
-                id: "84920",
-                title: "Video Editing for Campaign Q3",
-                freelancer: "Sarah Jenkins",
-                username: "@sarahcreative",
-                avatar:
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
-                status: "IN PROGRESS",
-                progress: 60,
-                budget: 500,
-                dueDate: "Oct 20, 2023",
-                category: "Video Editing",
-              },
-              {
-                id: "84915",
-                title: "Logo Design for Startup",
-                freelancer: "Davide Rossi",
-                username: "@davide_design",
-                avatar:
-                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
-                status: "COMPLETED",
-                progress: 100,
-                budget: 350,
-                dueDate: "Oct 15, 2023",
-                category: "Design",
-              },
-              {
-                id: "84910",
-                title: "Music Production for Podcast",
-                freelancer: "GuitarMaster",
-                username: "@guitarmaster",
-                avatar:
-                  "https://images.unsplash.com/photo-1549213783-8284d0336c4f?w=200",
-                status: "PENDING",
-                progress: 20,
-                budget: 800,
-                dueDate: "Nov 5, 2023",
-                category: "Music",
-              },
-            ].map((order) => (
+          <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2 2xl:grid-cols-3">
+            {myRequests.map((order) => (
               <div
                 key={order.id}
                 onClick={() => router.push(`/hiring/my-requests/${order.id}`)}
-                className="bg-background rounded-3xl p-6 border border-border/40 hover:border-primary/50 transition-all cursor-pointer group relative overflow-hidden"
+                className="relative cursor-pointer overflow-hidden rounded-lg border border-border/30 bg-card p-6"
               >
+                <div className="absolute left-0 right-0 top-0 h-24 bg-linear-to-b from-accent to-transparent opacity-50" />
+
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs text-muted-foreground font-medium">
+                      <span className="text-xs text-muted-foreground">
                         Order #{order.id}
                       </span>
                       <span
-                        className={`px-2 py-0.5 rounded text-[10px]  uppercase ${
+                        className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
                           order.status === "COMPLETED"
-                            ? "bg-green-500/20 text-green-500"
+                            ? "bg-green-500/15 text-green-600"
                             : order.status === "IN PROGRESS"
-                              ? "bg-primary/20 text-primary"
-                              : "bg-orange-500/20 text-orange-500"
+                              ? "bg-primary/15 text-primary"
+                              : "bg-orange-500/15 text-orange-600"
                         }`}
                       >
                         {order.status}
                       </span>
                     </div>
-                    <h3 className="text-foreground  text-lg mb-2 uppercase tracking-tight">
+                    <h3 className="mb-2 text-lg font-semibold text-foreground">
                       {order.title}
                     </h3>
-                    <p className="text-muted-foreground text-xs font-medium">
+                    <p className="text-xs text-muted-foreground">
                       {order.category} • Due: {order.dueDate}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 mb-4 pb-4 border-b border-border/30">
-                  <div className="size-12 rounded-xl overflow-hidden border-2 border-border">
+                <div className="relative mb-4 flex items-center gap-4 border-b border-border/30 pb-4">
+                  <div className="size-12 overflow-hidden rounded-xl border border-border">
                     <Image
                       src={order.avatar}
                       alt={order.freelancer}
@@ -526,117 +553,91 @@ const Hiring = () => {
                     />
                   </div>
                   <div>
-                    <p className="text-foreground font-bold text-sm">
+                    <p className="text-sm font-medium text-foreground">
                       {order.freelancer}
                     </p>
-                    <p className="text-primary text-xs font-medium">
-                      {order.username}
-                    </p>
+                    <p className="text-xs text-primary">{order.username}</p>
                   </div>
                 </div>
 
-                <div className="mb-4">
+                <div className="relative mb-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold text-muted-foreground uppercase">
+                    <span className="text-xs text-muted-foreground">
                       Progress
                     </span>
-                    <span className="text-sm  text-primary">
+                    <span className="text-sm font-medium text-primary">
                       {order.progress}%
                     </span>
                   </div>
-                  <div className="h-2 bg-background rounded-full overflow-hidden">
+                  <div className="h-2 overflow-hidden rounded-full bg-muted/40">
                     <div
-                      className="h-full bg-gradient-to-r from-primary to-purple-600 transition-all"
+                      className="h-full bg-linear-to-r from-primary to-purple-600 transition-all"
                       style={{ width: `${order.progress}%` }}
                     />
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="relative flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-xs font-medium">
+                    <p className="text-xs text-muted-foreground">
                       Total Budget
                     </p>
-                    <p className="text-foreground  text-xl">${order.budget}</p>
+                    <p className="text-xl font-semibold text-foreground">
+                      ${order.budget}
+                    </p>
                   </div>
                   <Button
                     onClick={(e) => {
                       e.stopPropagation();
-                      router.push(`/hiring/${order.id}`);
+                      router.push(`/hiring/my-requests/${order.id}`);
                     }}
-                    className="bg-foreground text-primary hover:bg-foreground/90 rounded-xl h-10 px-6  uppercase text-xs"
+                    className="h-10 rounded-xl bg-foreground px-5 text-xs text-background hover:bg-foreground/90"
                   >
                     View Details
                   </Button>
                 </div>
-
-                <div className="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
               </div>
             ))}
           </div>
         )}
 
-        {/* Who Hired Me Tab */}
         {activeTab === "hired-me" && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {[
-              {
-                id: "84925",
-                title: "Website Redesign Project",
-                client: "Tech Startup Inc",
-                username: "@techstartup",
-                avatar:
-                  "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200",
-                status: "ACTIVE",
-                budget: 1200,
-                startDate: "Oct 25, 2023",
-                category: "Web Design",
-              },
-              {
-                id: "84922",
-                title: "Brand Identity Package",
-                client: "Coffee Shop",
-                username: "@coffeeshop",
-                avatar:
-                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200",
-                status: "PENDING APPROVAL",
-                budget: 650,
-                startDate: "Oct 28, 2023",
-                category: "Branding",
-              },
-            ].map((hire) => (
+          <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2 2xl:grid-cols-3">
+            {hiredMe.map((hire) => (
               <div
                 key={hire.id}
                 onClick={() => router.push(`/hiring/hired-me/${hire.id}`)}
-                className="bg-background rounded-3xl p-6 border border-border/40 hover:border-primary/50 transition-all cursor-pointer group relative overflow-hidden"
+                className="relative cursor-pointer overflow-hidden rounded-lg border border-border/30 bg-card p-6"
               >
+                <div className="absolute left-0 right-0 top-0 h-24 bg-linear-to-b from-accent to-transparent opacity-50" />
+
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs text-muted-foreground font-medium">
+                      <span className="text-xs text-muted-foreground">
                         Request #{hire.id}
                       </span>
                       <span
-                        className={`px-2 py-0.5 rounded text-[10px]  uppercase ${
+                        className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
                           hire.status === "ACTIVE"
-                            ? "bg-green-500/20 text-green-500"
-                            : "bg-orange-500/20 text-orange-500"
+                            ? "bg-green-500/15 text-green-600"
+                            : "bg-orange-500/15 text-orange-600"
                         }`}
                       >
                         {hire.status}
                       </span>
                     </div>
-                    <h3 className="text-foreground  text-lg mb-2 uppercase tracking-tight">
+                    <h3 className="mb-2 text-lg font-semibold text-foreground">
                       {hire.title}
                     </h3>
-                    <p className="text-muted-foreground text-xs font-medium">
+                    <p className="text-xs text-muted-foreground">
                       {hire.category} • Started: {hire.startDate}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 mb-6 pb-4 border-b border-border/30">
-                  <div className="size-12 rounded-xl overflow-hidden border-2 border-border">
+                <div className="relative mb-6 flex items-center gap-4 border-b border-border/30 pb-4">
+                  <div className="size-12 overflow-hidden rounded-xl border border-border">
                     <Image
                       src={hire.avatar}
                       alt={hire.client}
@@ -646,43 +647,41 @@ const Hiring = () => {
                     />
                   </div>
                   <div>
-                    <p className="text-foreground font-bold text-sm">
+                    <p className="text-sm font-medium text-foreground">
                       {hire.client}
                     </p>
-                    <p className="text-primary text-xs font-medium">
-                      {hire.username}
-                    </p>
+                    <p className="text-xs text-primary">{hire.username}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="relative flex items-center justify-between">
                   <div>
-                    <p className="text-muted-foreground text-xs font-medium">
+                    <p className="text-xs text-muted-foreground">
                       Project Budget
                     </p>
-                    <p className="text-foreground  text-xl">${hire.budget}</p>
+                    <p className="text-xl font-semibold text-foreground">
+                      ${hire.budget}
+                    </p>
                   </div>
                   <Button
                     onClick={(e) => {
                       e.stopPropagation();
                       router.push(`/hiring/hired-me/${hire.id}`);
                     }}
-                    className="bg-primary hover:bg-primary-hover text-primary-foreground rounded-xl h-10 px-6  uppercase text-xs shadow-lg shadow-primary/20"
+                    className="h-10 rounded-xl bg-primary px-5 text-xs text-primary-foreground hover:bg-primary-hover"
                   >
                     View Request
                   </Button>
                 </div>
-
-                <div className="absolute top-0 right-0 size-32 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
               </div>
             ))}
           </div>
         )}
 
-        <div className="flex justify-center mt-12 pb-12 relative z-10">
+        <div className="relative z-10 mt-10 flex justify-center pb-12">
           <Button
             variant="outline"
-            className="rounded-2xl px-10 h-14 border-border text-foreground hover:bg-accent bg-transparent  uppercase tracking-widest text-xs"
+            className="h-12 rounded-xl border-border bg-transparent px-8"
           >
             Show More Talents
           </Button>

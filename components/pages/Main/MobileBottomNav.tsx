@@ -3,7 +3,7 @@
 import CreatePostModal from "@/components/modals/CreatePostModal";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
-import { Bell, Compass, Home, MessageCircle, Plus, User } from "lucide-react";
+import { Bell, Compass, Home, Info, Plus, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -35,24 +35,33 @@ export default function MobileBottomNav() {
         </Link>
 
         <Link
-          href="/explore"
+          href="/discover"
           className={`flex flex-col items-center gap-1 ${
-            isActive("/explore") ? "text-primary" : "text-gray-400"
+            isActive("/discover") ? "text-primary" : "text-gray-400"
           }`}
         >
           <Compass
-            className={`h-6 w-6 ${isActive("/explore") ? "fill-current" : ""}`}
+            className={`h-6 w-6 ${isActive("/discover") ? "fill-current" : ""}`}
           />
         </Link>
 
         {/* Center Create Button */}
         <div className="relative -top-5">
-          <button
-            onClick={() => setIsCreateModalOpen(true)}
-            className="w-14 h-14 rounded-full bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background active:scale-95 transition-transform"
-          >
-            <Plus className="h-7 w-7 text-white" />
-          </button>
+          {isAuthenticated ? (
+            <button
+              onClick={() => setIsCreateModalOpen(true)}
+              className="w-14 h-14 rounded-full bg-linear-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background active:scale-95 transition-transform"
+            >
+              <Plus className="h-7 w-7 text-white" />
+            </button>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="w-14 h-14 rounded-full bg-linear-to-r from-primary to-purple-600 flex items-center justify-center shadow-lg shadow-primary/40 border-4 border-background"
+            >
+              <Plus className="h-7 w-7 text-white" />
+            </Link>
+          )}
         </div>
 
         {/* Right Side */}
@@ -86,16 +95,12 @@ export default function MobileBottomNav() {
         ) : (
           <>
             <Link
-              href="/messages"
+              href="/help"
               className={`flex flex-col items-center gap-1 ${
-                isActive("/messages") ? "text-primary" : "text-gray-400"
+                isActive("/help") ? "text-primary" : "text-gray-400"
               }`}
             >
-              <MessageCircle
-                className={`h-6 w-6 ${
-                  isActive("/messages") ? "fill-current" : ""
-                }`}
-              />
+              <Info className={`h-6 w-6 ${isActive("/help") ? "fill-current" : ""}`} />
             </Link>
             <Link
               href="/auth/login"

@@ -1,5 +1,5 @@
-import { useAuth } from "@/context/AuthContext";
 import { ModeToggle } from "@/components/ui/ModeToggle";
+import { useAuth } from "@/context/AuthContext";
 import {
   Bell,
   Bookmark,
@@ -21,10 +21,10 @@ import {
   Wallet,
   X,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import Image from "next/image";
 
 const CATEGORIES = [
   { id: "all", label: "All", icon: null },
@@ -46,21 +46,21 @@ export default function Header() {
 
   const publicNavItems = [
     { href: "/", icon: Home, label: "Home" },
-    { href: "/explore", icon: Compass, label: "Explore" },
+    { href: "/discover", icon: Compass, label: "Discover" },
     { href: "/about", icon: Info, label: "About" },
-    { href: "/discover", icon: Users, label: "Discover User" },
+    { href: "/help", icon: Users, label: "Help" },
   ];
 
   const authNavItems = [
     { href: "/", icon: Home, label: "Home" },
-    { href: "/explore", icon: Compass, label: "Explore" },
+    { href: "/discover", icon: Compass, label: "Discover" },
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
-    { href: "/messages", icon: MessageCircle, label: "Message" },
-    { href: "/notifications", icon: Bell, label: "Notification" },
+    { href: "/messages", icon: MessageCircle, label: "Messages" },
+    { href: "/notifications", icon: Bell, label: "Notifications" },
     { href: "/saved", icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
     { href: "/profile", icon: User, label: "Profile" },
-    { href: "/settings", icon: Settings, label: "Setting" },
+    { href: "/settings", icon: Settings, label: "Settings" },
   ];
 
   const currentNavItems = isAuthenticated ? authNavItems : publicNavItems;

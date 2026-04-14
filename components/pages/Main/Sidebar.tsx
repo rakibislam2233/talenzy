@@ -4,8 +4,8 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import {
   Bell,
+  Bookmark,
   Briefcase,
-  Compass,
   Home,
   Info,
   MessageCircle,
@@ -32,19 +32,21 @@ const Sidebar =() => {
 
   const publicNavItems = [
     { href: "/", icon: Home, label: "Home" },
+    { href: "/discover", icon: Users, label: "Discover" },
     { href: "/about", icon: Info, label: "About" },
-    { href: "/discover-people", icon: Users, label: "Discover People" },
+    { href: "/help", icon: Info, label: "Help" },
   ];
 
   const authNavItems = [
     { href: "/", icon: Home, label: "Home" },
-    { href: "/discover-people", icon: Users, label: "Discover People" },
+    { href: "/discover", icon: Users, label: "Discover" },
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
-    { href: "/messages", icon: MessageCircle, label: "Message" },
-    { href: "/notifications", icon: Bell, label: "Notification" },
+    { href: "/messages", icon: MessageCircle, label: "Messages" },
+    { href: "/notifications", icon: Bell, label: "Notifications" },
+    { href: "/saved", icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
     { href: "/profile", icon: User, label: "Profile" },
-    { href: "/settings", icon: Settings, label: "Setting" },
+    { href: "/settings", icon: Settings, label: "Settings" },
   ];
 
   const currentNavItems = isAuthenticated ? authNavItems : publicNavItems;
@@ -104,7 +106,7 @@ const Sidebar =() => {
             {isAuthenticated && (
               <button
                 onClick={() => setIsCreateModalOpen(true)}
-                className="mt-4 w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-primary to-purple-600  text-primary-foreground font-bold rounded-xl shadow-lg shadow-purple-900/20 transition-all cursor-pointer"
+                className="mt-4 w-full flex items-center justify-center gap-2 py-3 bg-linear-to-r from-primary to-purple-600  text-primary-foreground font-bold rounded-xl shadow-lg shadow-purple-900/20 transition-all cursor-pointer"
               >
                 <PlusCircle className="h-6 w-6 transition-colors group-hover:text-primary" />
                 Create Post

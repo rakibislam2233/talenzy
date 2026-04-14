@@ -1,8 +1,5 @@
-import DiscoverPeople from "@/components/pages/Main/DiscoverPeople/DiscoverPeople";
+import { redirect } from "next/navigation";
 
-
-const page = () => {
-  return <DiscoverPeople />;
-};
-
-export default page;
+export default function LegacyDiscoverPeoplePage() {
+  redirect("/discover");
+}

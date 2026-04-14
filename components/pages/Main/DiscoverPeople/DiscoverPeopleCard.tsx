@@ -58,7 +58,9 @@ const DiscoverPeopleCard = ({ profile }: DiscoverPeopleCardProps) => {
         {/* Stats */}
         <div className="flex items-center justify-center gap-8 w-full border-t border-border/30 pt-4 mb-6">
           <div className="text-center">
-            <p className="text-foreground font-bold text-lg">{profile.followers}</p>
+            <p className="text-foreground font-bold text-lg">
+              {profile.followers}
+            </p>
             <p className="text-muted-foreground text-[10px] uppercase tracking-wider">
               Followers
             </p>
@@ -93,7 +95,7 @@ const DiscoverPeopleCard = ({ profile }: DiscoverPeopleCardProps) => {
                 e.stopPropagation();
                 toast.follow(profile.username.replace("@", ""));
               }}
-              className="flex-1 cursor-pointer bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-10 shadow-lg shadow-primary/25 transition-all"
+              className="flex-1 cursor-pointer bg-primary hover:bg-primary/90 text-primary-foreground font-semibold h-10  transition-all"
             >
               Follow
             </Button>

@@ -1,7 +1,10 @@
-import DiscoverPeopleDetails from "@/components/pages/Main/DiscoverPeople/DiscoverPeopleDetails/DiscoverPeopleDetails";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return <DiscoverPeopleDetails />;
-};
-
-export default page;
+export default async function LegacyDiscoverProfilePage({
+  params,
+}: {
+  params: Promise<{ username: string }>;
+}) {
+  const { username } = await params;
+  redirect(`/discover/${username}`);
+}
