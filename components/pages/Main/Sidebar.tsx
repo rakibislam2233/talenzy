@@ -32,14 +32,12 @@ const Sidebar =() => {
 
   const publicNavItems = [
     { href: "/", icon: Home, label: "Home" },
-    { href: "/explore", icon: Compass, label: "Explore" },
     { href: "/about", icon: Info, label: "About" },
     { href: "/discover-people", icon: Users, label: "Discover People" },
   ];
 
   const authNavItems = [
     { href: "/", icon: Home, label: "Home" },
-    { href: "/explore", icon: Compass, label: "Explore" },
     { href: "/discover-people", icon: Users, label: "Discover People" },
     { href: "/hiring", icon: Briefcase, label: "Hiring" },
     { href: "/messages", icon: MessageCircle, label: "Message" },
