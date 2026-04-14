@@ -1,20 +1,21 @@
 "use client";
 import CreatePostModal from "@/components/modals/CreatePostModal";
+import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import {
-  Bell,
-  Bookmark,
-  Briefcase,
-  Home,
-  Info,
-  MessageCircle,
-  PlusCircle,
-  Settings,
-  Sparkles,
-  User,
-  Users,
-  Wallet,
+    Bell,
+    Bookmark,
+    Briefcase,
+    Home,
+    Info,
+    MessageCircle,
+    PlusCircle,
+    Settings,
+    Sparkles,
+    User,
+    Users,
+    Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,7 +46,7 @@ const Sidebar =() => {
     { href: "/notifications", icon: Bell, label: "Notifications" },
     { href: "/saved", icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
-    { href: "/profile", icon: User, label: "Profile" },
+    { href: `/${CURRENT_USER_SLUG}`, icon: User, label: "Profile" },
     { href: "/settings", icon: Settings, label: "Settings" },
   ];
 

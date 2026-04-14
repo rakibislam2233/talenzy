@@ -1,6 +1,7 @@
 "use client";
 
 import CreatePostModal from "@/components/modals/CreatePostModal";
+import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useAuth } from "@/context/AuthContext";
 import { Bell, Compass, Home, Info, Plus, User } from "lucide-react";
@@ -80,14 +81,14 @@ export default function MobileBottomNav() {
               />
             </Link>
             <Link
-              href="/profile"
+              href={`/${CURRENT_USER_SLUG}`}
               className={`flex flex-col items-center gap-1 ${
-                isActive("/profile") ? "text-primary" : "text-gray-400"
+                isActive(`/${CURRENT_USER_SLUG}`) ? "text-primary" : "text-gray-400"
               }`}
             >
               <User
                 className={`h-6 w-6 ${
-                  isActive("/profile") ? "fill-current" : ""
+                  isActive(`/${CURRENT_USER_SLUG}`) ? "fill-current" : ""
                 }`}
               />
             </Link>

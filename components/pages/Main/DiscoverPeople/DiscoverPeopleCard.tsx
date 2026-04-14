@@ -19,7 +19,7 @@ const DiscoverPeopleCard = ({ profile }: DiscoverPeopleCardProps) => {
       <div className="absolute top-0 left-0 right-0 h-24 bg-linear-to-b from-accent to-transparent opacity-50"></div>
 
       <div className="relative flex flex-col items-center text-center">
-        <Link href={`/discover/${profile.username.replace("@", "")}`}>
+        <Link href={`/${profile.username.replace("@", "")}`}>
           <div className="relative mb-4">
             <div className="w-20 h-20 rounded-full p-1 bg-card border border-border/50">
               <div className="w-full h-full rounded-full overflow-hidden relative">

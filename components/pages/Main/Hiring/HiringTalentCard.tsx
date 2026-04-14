@@ -16,7 +16,7 @@ export default function HiringTalentCard({ talent }: HiringTalentCardProps) {
       <div className="absolute left-0 right-0 top-0 h-24 bg-linear-to-b from-accent to-transparent opacity-50" />
 
       <div
-        onClick={() => router.push(`/discover/${talent.username.replace(/^@/, "")}`)}
+        onClick={() => router.push(`/${talent.username.replace(/^@/, "")}`)}
         className="relative mb-5 flex items-start justify-between"
       >
         <div className="flex items-center gap-4">

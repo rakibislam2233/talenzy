@@ -1,25 +1,26 @@
+import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { useAuth } from "@/context/AuthContext";
 import {
-  Bell,
-  Bookmark,
-  Briefcase,
-  Compass,
-  Home,
-  Info,
-  Menu,
-  MessageCircle,
-  Mic,
-  Music,
-  Palette,
-  PlusSquare,
-  Search,
-  Settings,
-  Sparkles,
-  User,
-  Users,
-  Wallet,
-  X,
+    Bell,
+    Bookmark,
+    Briefcase,
+    Compass,
+    Home,
+    Info,
+    Menu,
+    MessageCircle,
+    Mic,
+    Music,
+    Palette,
+    PlusSquare,
+    Search,
+    Settings,
+    Sparkles,
+    User,
+    Users,
+    Wallet,
+    X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,7 +60,7 @@ export default function Header() {
     { href: "/notifications", icon: Bell, label: "Notifications" },
     { href: "/saved", icon: Bookmark, label: "Saved" },
     { href: "/wallet", icon: Wallet, label: "Wallet" },
-    { href: "/profile", icon: User, label: "Profile" },
+    { href: `/${CURRENT_USER_SLUG}`, icon: User, label: "Profile" },
     { href: "/settings", icon: Settings, label: "Settings" },
   ];
 
@@ -126,7 +127,7 @@ export default function Header() {
                   <Bell className="size-6" />
                   <span className="absolute top-1.5 right-1.5 size-3 bg-red-500 rounded-full border-2 border-background"></span>
                 </button>
-                <Link href="/profile">
+                <Link href={`/${CURRENT_USER_SLUG}`}>
                   <div className="size-10 rounded-full">
                     <Image
                       src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100"

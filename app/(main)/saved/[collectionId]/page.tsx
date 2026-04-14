@@ -1,5 +1,6 @@
-import { ArrowLeft, Pencil, Share2, Trash2, Play, Lock, Image as ImageIcon, Music } from "lucide-react"
+import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data"
 import { Button } from "@/components/ui/button"
+import { Image as ImageIcon, Lock, Music, Pencil, Play, Share2, Trash2 } from "lucide-react"
 import Link from "next/link"
 
 export default function SavedCollectionPage({ params }: { params: { collectionId: string } }) {
@@ -18,7 +19,7 @@ export default function SavedCollectionPage({ params }: { params: { collectionId
     <div className="max-w-7xl mx-auto p-6">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-        <Link href="/profile" className="hover:text-white">Profile</Link>
+        <Link href={`/${CURRENT_USER_SLUG}`} className="hover:text-white">Profile</Link>
         <span>/</span>
         <Link href="/saved" className="hover:text-white">Saved</Link>
         <span>/</span>
@@ -28,7 +29,7 @@ export default function SavedCollectionPage({ params }: { params: { collectionId
       {/* Collection Header */}
       <div className="bg-[#221c26] rounded-2xl p-6 border border-[#4a3c53]/30 mb-6">
         <div className="flex items-start gap-6">
-          <div className="w-48 h-64 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl flex-shrink-0"></div>
+          <div className="w-48 h-64 bg-linear-to-br from-gray-800 to-gray-900 rounded-xl shrink-0"></div>
           <div className="flex-1">
             <div className="flex items-start justify-between mb-4">
               <div>
@@ -108,7 +109,7 @@ export default function SavedCollectionPage({ params }: { params: { collectionId
             key={item.id}
             className="bg-[#221c26] rounded-xl overflow-hidden border border-[#4a3c53]/30 hover:border-[#9419e6]/50 transition-colors cursor-pointer group"
           >
-            <div className="relative aspect-square bg-gradient-to-br from-[#9419e6]/20 to-[#7a14c4]/20">
+            <div className="relative aspect-square bg-linear-to-br from-[#9419e6]/20 to-[#7a14c4]/20">
               {item.type === "video" && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-colors">
@@ -128,7 +129,7 @@ export default function SavedCollectionPage({ params }: { params: { collectionId
               )}
               {item.type === "text" && (
                 <div className="absolute inset-0 flex items-center justify-center p-4">
-                  <div className="bg-gradient-to-br from-[#9419e6] to-[#7a14c4] rounded-lg p-4 w-full h-full flex items-center justify-center">
+                  <div className="bg-linear-to-br from-[#9419e6] to-[#7a14c4] rounded-lg p-4 w-full h-full flex items-center justify-center">
                     <p className="text-white text-sm font-medium text-center">"{item.quote}"</p>
                   </div>
                 </div>
