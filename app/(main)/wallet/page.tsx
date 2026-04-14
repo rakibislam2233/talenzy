@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { getWalletTransactions } from "@/lib/wallet";
 import {
     ArrowDown,
     ArrowUp,
@@ -13,57 +14,27 @@ import {
     TrendingUp,
 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function WalletPage() {
   const [balanceVisible, setBalanceVisible] = useState(true);
+  const [transactions, setTransactions] = useState(() => getWalletTransactions());
 
-  const transactions = [
-    {
-      id: 1,
-      type: "gift",
-      from: "@Davide_R",
-      description: "Gift from @Davide_R",
-      detail: "Live Stream",
-      amount: 50.0,
-      status: "Completed",
-      time: "Today, 10:45 AM",
-      color: "bg-green-500",
-    },
-    {
-      id: 2,
-      type: "withdrawal",
-      from: "Chase Bank",
-      description: "Withdrawal to Chase Bank",
-      detail: "**** 4829",
-      amount: -500.0,
-      status: "Processed",
-      time: "Yesterday, 4:20 PM",
-      color: "bg-blue-500",
-    },
-    {
-      id: 3,
-      type: "job",
-      from: "CreativeAgency",
-      description: "Graphic Design Job",
-      detail: "Video Post",
-      amount: 1200.0,
-      status: "Completed",
-      time: "Oct 24, 2:15 PM",
-      color: "bg-purple-500",
-    },
-    {
-      id: 4,
-      type: "gift",
-      from: "@Sarah_S",
-      description: "Gift from @Sarah_S",
-      detail: "Comment Gift",
-      amount: 15.0,
-      status: "Pending Release",
-      time: "Oct 23, 8:30 AM",
-      color: "bg-yellow-500",
-    },
-  ];
+  useEffect(() => {
+    setTransactions(getWalletTransactions());
+  }, []);
+
+  const stats = useMemo(() => {
+    const earned = transactions
+      .filter((tx) => tx.amount > 0)
+      .reduce((sum, tx) => sum + tx.amount, 0);
+    const spent = Math.abs(
+      transactions.filter((tx) => tx.amount < 0).reduce((sum, tx) => sum + tx.amount, 0),
+    );
+    const gifts = transactions.filter((tx) => tx.category === "gift" && tx.amount > 0).length;
+
+    return { earned, spent, gifts };
+  }, [transactions]);
 
   return (
     <div className="mx-auto w-full max-w-5xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8">
@@ -122,7 +93,7 @@ export default function WalletPage() {
             <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Total Earned</p>
             <div className="mt-2 flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-emerald-500" />
-              <p className="text-xl font-semibold text-foreground">$8,430.50</p>
+              <p className="text-xl font-semibold text-foreground">${stats.earned.toFixed(2)}</p>
             </div>
           </div>
 
@@ -130,7 +101,7 @@ export default function WalletPage() {
             <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Total Spent</p>
             <div className="mt-2 flex items-center gap-2">
               <TrendingDown className="h-4 w-4 text-red-500" />
-              <p className="text-xl font-semibold text-foreground">$1,240.00</p>
+              <p className="text-xl font-semibold text-foreground">${stats.spent.toFixed(2)}</p>
             </div>
           </div>
 
@@ -138,7 +109,7 @@ export default function WalletPage() {
             <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">Gifts Received</p>
             <div className="mt-2 flex items-center gap-2">
               <Gift className="h-4 w-4 text-amber-500" />
-              <p className="text-xl font-semibold text-foreground">450 Gifts</p>
+              <p className="text-xl font-semibold text-foreground">{stats.gifts} Gifts</p>
             </div>
           </div>
         </div>
@@ -159,7 +130,7 @@ export default function WalletPage() {
         </div>
 
         <div className="divide-y divide-border">
-          {transactions.map((transaction) => (
+          {transactions.slice(0, 5).map((transaction) => (
             <article key={transaction.id} className="p-4 sm:p-5">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="min-w-0">
@@ -167,7 +138,7 @@ export default function WalletPage() {
                     {transaction.description}
                   </p>
                   <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
-                    {transaction.detail} · {transaction.time}
+                    {transaction.detail} · {transaction.timeLabel}
                   </p>
                 </div>
 

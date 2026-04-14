@@ -1,15 +1,18 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { getWalletTransactions, type WalletTransaction } from "@/lib/wallet";
 import { Calendar, Download, Filter } from "lucide-react";
 import Link from "next/link";
-
-const rows = [
-  { id: 1, label: "Gift from @Davide_R", time: "Today, 10:45 AM", amount: "+$50.00", status: "Completed" },
-  { id: 2, label: "Withdrawal to Chase Bank", time: "Yesterday, 4:20 PM", amount: "-$500.00", status: "Processed" },
-  { id: 3, label: "Graphic Design Job", time: "Oct 24, 2:15 PM", amount: "+$1,200.00", status: "Completed" },
-  { id: 4, label: "Gift from @Sarah_S", time: "Oct 23, 8:30 AM", amount: "+$15.00", status: "Pending" },
-];
+import { useEffect, useState } from "react";
 
 export default function WalletTransactionsPage() {
+  const [rows, setRows] = useState<WalletTransaction[]>([]);
+
+  useEffect(() => {
+    setRows(getWalletTransactions());
+  }, []);
+
   return (
     <div className="mx-auto w-full max-w-4xl px-4 pb-32 pt-6 sm:px-6 sm:pt-8">
       <section className="rounded-2xl border border-border bg-card">
@@ -38,12 +41,12 @@ export default function WalletTransactionsPage() {
             <article key={row.id} className="p-4 sm:p-5">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-foreground sm:text-base">{row.label}</p>
-                  <p className="text-xs text-muted-foreground sm:text-sm">{row.time}</p>
+                  <p className="text-sm font-semibold text-foreground sm:text-base">{row.description}</p>
+                  <p className="text-xs text-muted-foreground sm:text-sm">{row.detail} · {row.timeLabel}</p>
                 </div>
                 <div className="flex items-center gap-3 sm:gap-4">
-                  <p className={`text-sm font-semibold sm:text-base ${row.amount.startsWith("+") ? "text-emerald-500" : "text-red-500"}`}>
-                    {row.amount}
+                  <p className={`text-sm font-semibold sm:text-base ${row.amount >= 0 ? "text-emerald-500" : "text-red-500"}`}>
+                    {row.amount >= 0 ? "+" : "-"}${Math.abs(row.amount).toFixed(2)}
                   </p>
                   <span className={`rounded-full border px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest ${row.status === "Pending" ? "border-amber-500/30 text-amber-600" : "border-emerald-500/30 text-emerald-600"}`}>
                     {row.status}
