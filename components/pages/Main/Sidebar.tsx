@@ -2,17 +2,22 @@
 import BrandLogo from "@/components/BrandLogo";
 import CreatePostModal from "@/components/modals/CreatePostModal";
 import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { ModeToggle } from "@/components/ui/ModeToggle";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import {
     Bell,
     Briefcase,
     Home,
     Info,
+    LogIn,
+    LogOut,
     MessageCircle,
+    Palette,
     PlusCircle,
     Settings,
     User,
+    UserPlus,
     Users,
     Wallet,
 } from "lucide-react";
@@ -109,30 +114,43 @@ const Sidebar =() => {
         />
 
         {/* Footer Buttons */}
-        <div className="flex flex-col gap-3 mt-auto">
-          {/* Theme Toggle */}
-          <div className="w-full h-10 rounded-xl bg-surface-dark border border-border flex items-center justify-center hover:bg-accent transition-colors duration-200">
-            <ThemeToggle />
+        <div className="flex flex-col gap-3 mt-auto pt-3 border-t border-border/60">
+          <div className="w-full rounded-xl border border-border bg-muted/20 px-3 py-2.5 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-sm text-foreground/90 font-medium">
+              <Palette className="h-4 w-4 text-primary" />
+              Theme
+            </div>
+            <ModeToggle />
           </div>
-          
+
           {isAuthenticated ? (
-            <button
+            <Button
+              type="button"
+              variant="outline"
+              size="default"
               onClick={logout}
-              className="w-full h-10 rounded-lg border border-border hover:bg-accent text-foreground text-sm font-bold transition-all"
+              className="w-full h-11 justify-center gap-2 rounded-xl border-border text-foreground font-semibold"
             >
+              <LogOut className="h-4 w-4" />
               Log Out
-            </button>
+            </Button>
           ) : (
             <>
               <Link href="/auth/register" className="w-full">
-                <button className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-bold shadow-glow transition-all cursor-pointer">
+                <Button className="w-full h-11 rounded-xl font-semibold gap-2">
+                  <UserPlus className="h-4 w-4" />
                   Sign Up
-                </button>
+                </Button>
               </Link>
               <Link href="/auth/login" className="w-full">
-                <button className="w-full h-10 rounded-lg border border-border hover:bg-accent text-foreground text-sm font-bold transition-all cursor-pointer">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full h-11 rounded-xl border-border font-semibold gap-2"
+                >
+                  <LogIn className="h-4 w-4" />
                   Log In
-                </button>
+                </Button>
               </Link>
             </>
           )}

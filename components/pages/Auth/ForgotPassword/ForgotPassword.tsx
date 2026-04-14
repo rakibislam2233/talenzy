@@ -1,26 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Lock, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-const forgotPasswordSchema = z.object({
-  email: z.string().email("Invalid email address"),
-});
-
-type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
+import ForgotPasswordEmailField from "./ForgotPasswordEmailField";
+import {
+  ForgotPasswordFormValues,
+  forgotPasswordSchema,
+} from "./forgot-password-schema";
 
 export default function ForgotPassword() {
   const form = useForm<ForgotPasswordFormValues>({
@@ -61,27 +51,7 @@ export default function ForgotPassword() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm font-medium text-foreground/70">
-                    Email Address
-                  </FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        type="email"
-                        placeholder="name@example.com"
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <ForgotPasswordEmailField control={form.control} />
 
             <Button type="submit" className="w-full">
               Send Reset Link
