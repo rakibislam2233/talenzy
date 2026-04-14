@@ -63,7 +63,7 @@ const SettingsSidebar = () => {
   ];
 
   return (
-    <div className="w-72 border-r border-border min-h-screen bg-background sticky top-0 z-10 ">
+    <div className="w-72 border-r bg-background border-border fixed">
       <div className="p-6 bg-background">
         <h1 className="text-2xl font-bold text-foreground">Settings</h1>
       </div>

@@ -20,7 +20,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-export default function Sidebar() {
+const Sidebar =() => {
   const pathname = usePathname();
   const { isAuthenticated, logout } = useAuth();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -57,7 +57,7 @@ export default function Sidebar() {
         {/* Logo */}
         <Link href={"/"}>
           <div className="flex items-center gap-3 mb-10 cursor-pointer">
-            <div className="size-10 rounded-xl bg-gradient-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
+            <div className="size-10 rounded-xl bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
               <Sparkles className="text-primary-foreground h-6 w-6 fill-primary-foreground" />
             </div>
             <div className="flex flex-col">
@@ -154,3 +154,5 @@ export default function Sidebar() {
     </aside>
   );
 }
+
+export default Sidebar;
