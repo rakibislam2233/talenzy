@@ -1,27 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ArrowRight, Clock, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, Mail } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-const verifyOtpSchema = z.object({
-  code: z.string().length(6, "Code must be 6 digits"),
-});
-
-type VerifyOtpFormValues = z.infer<typeof verifyOtpSchema>;
+import VerifyOtpCodeField from "./VerifyOtpCodeField";
+import VerifyOtpResendInfo from "./VerifyOtpResendInfo";
+import { VerifyOtpFormValues, verifyOtpSchema } from "./verify-otp-schema";
 
 export default function VerifyOtp() {
   const [resendTimer, setResendTimer] = useState(59);
@@ -61,58 +49,12 @@ export default function VerifyOtp() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="code"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-foreground">
-                    Verification Code
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="000000"
-                      maxLength={6}
-                      className="text-center tracking-[1rem] text-lg font-bold"
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/\D/g, "");
-                        field.onChange(value);
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <VerifyOtpCodeField control={form.control} />
 
-            <div className="space-y-3">
-              <p className="text-muted-foreground text-sm text-center">
-                Didn&apos;t receive the code?
-              </p>
-              <div className="flex items-center justify-center gap-4">
-                <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                  <Clock className="h-4 w-4" />
-                  <span>
-                    Resend in{" "}
-                    <span className="font-semibold text-foreground">
-                      00:{String(resendTimer).padStart(2, "0")}
-                    </span>
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  className="text-primary text-sm hover:underline cursor-pointer"
-                  onClick={() => {
-                    // Handle resend logic
-                    setResendTimer(59);
-                  }}
-                >
-                  Resend Code
-                </button>
-              </div>
-            </div>
+            <VerifyOtpResendInfo
+              resendTimer={resendTimer}
+              onResend={() => setResendTimer(59)}
+            />
 
             <Button type="submit" className="w-full cursor-pointer">
               Verify Account
