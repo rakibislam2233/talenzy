@@ -15,7 +15,7 @@ export default function MessageComposer({
   onChange,
 }: MessageComposerProps) {
   return (
-    <footer className="border-t border-border/60 bg-background/90 px-4 py-4 sm:px-6 sm:py-5">
+    <footer className="border-t border-border/60 bg-background/90 px-3 py-3 sm:px-6 sm:py-5">
       <div className="mx-auto flex items-end gap-3 sm:gap-4">
         <button
           className="hidden h-12 w-12 items-center justify-center rounded-2xl border border-border bg-background text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
@@ -25,7 +25,7 @@ export default function MessageComposer({
         </button>
 
         <div className="relative flex-1">
-          <div className="rounded-[22px] border border-border bg-background px-4 py-3 shadow-sm">
+          <div className="rounded-[22px] border border-border bg-background px-3 sm:px-4 py-2.5 sm:py-3 shadow-sm">
             <div className="flex items-center gap-3">
               <button
                 className="rounded-lg p-1.5 text-muted-foreground transition-colors hover:text-foreground"
@@ -38,7 +38,7 @@ export default function MessageComposer({
                 onChange={(e) => onChange(e.target.value)}
                 type="text"
                 placeholder={`Message ${contactName}...`}
-                className="h-10 flex-1 border-0 bg-transparent px-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+                className="h-9 sm:h-10 flex-1 border-0 bg-transparent px-0 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               />
               <div className="flex items-center gap-2 text-muted-foreground">
                 <button
@@ -58,7 +58,7 @@ export default function MessageComposer({
           </div>
         </div>
 
-        <Button className="h-12 w-12 rounded-2xl bg-primary p-0 text-primary-foreground hover:bg-primary-hover">
+        <Button className="h-11 w-11 sm:h-12 sm:w-12 rounded-2xl bg-primary p-0 text-primary-foreground hover:bg-primary-hover">
           <Send className="h-5 w-5" />
         </Button>
       </div>

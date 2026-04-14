@@ -3,48 +3,31 @@ import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { useAuth } from "@/context/AuthContext";
 import {
-    Bell,
-    Bookmark,
-    Briefcase,
-    Compass,
-    Home,
-    Info,
-    Menu,
-    MessageCircle,
-    Mic,
-    Music,
-    Palette,
-    PlusSquare,
-    Search,
-    Settings,
-    Sparkles,
-    User,
-    Users,
-    Wallet,
-    X,
+  Bell,
+  Bookmark,
+  Briefcase,
+  Compass,
+  Home,
+  Info,
+  Menu,
+  MessageCircle,
+  PlusSquare,
+  Search,
+  Settings,
+  User,
+  Users,
+  Wallet,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const CATEGORIES = [
-  { id: "all", label: "All", icon: null },
-  { id: "music", label: "Music", icon: Music },
-  { id: "comedy", label: "Comedy", icon: Sparkles },
-  { id: "design", label: "Design", icon: Palette },
-  { id: "dance", label: "Dance", icon: User },
-  { id: "magic", label: "Magic", icon: Sparkles },
-  { id: "acting", label: "Acting", icon: Mic },
-];
-
 export default function Header() {
-  const [activeCategory, setActiveCategory] = useState("all");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const { isAuthenticated } = useAuth();
-
-  const isHome = pathname === "/";
 
   const publicNavItems = [
     { href: "/", icon: Home, label: "Home" },
@@ -68,8 +51,8 @@ export default function Header() {
   const currentNavItems = isAuthenticated ? authNavItems : publicNavItems;
 
   return (
-    <header className="bg-background sticky top-0 w-full  border-b border-border z-10">
-      <div className="w-full px-4 py-3 flex flex-col gap-4">
+    <header className="bg-background sticky top-0 w-full border-b border-border z-50">
+      <div className="w-full px-4 py-3">
         {/* Main Header Row */}
         <div className="flex items-center justify-between gap-6 ">
           {/* Center: Search Bar */}
@@ -139,26 +122,6 @@ export default function Header() {
             )}
           </div>
         </div>
-
-        {/* Categories Chips (Only on Home Page - Hidden if Mobile Menu is Open) */}
-        {isHome && !isMobileMenuOpen && (
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`shrink-0 px-5 py-1.5 cursor-pointer rounded-full text-sm transition-all  flex items-center gap-2 border ${
-                  activeCategory === cat.id
-                    ? "bg-background text-foreground border-primary "
-                    : "bg-surface border-border text-text-secondary  font-medium"
-                }`}
-              >
-                {cat.icon && <cat.icon className="h-3.5 w-3.5" />}
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        )}
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (

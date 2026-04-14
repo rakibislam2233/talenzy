@@ -43,8 +43,8 @@ export default function ConversationHeader({ contact, onBack }: ConversationHead
           )}
         </div>
 
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
+        <div className="min-w-0 max-w-[55vw] sm:max-w-none">
+          <div className="flex items-center gap-2 min-w-0">
             <h2 className="truncate text-base font-semibold text-foreground sm:text-lg">
               {contact.name}
             </h2>
@@ -60,7 +60,7 @@ export default function ConversationHeader({ contact, onBack }: ConversationHead
         </div>
       </div>
 
-      <div className="flex items-center gap-1 text-muted-foreground sm:gap-2">
+      <div className="flex items-center gap-1 text-muted-foreground sm:gap-2 shrink-0">
         <button
           className="rounded-xl p-2 transition-colors hover:bg-accent hover:text-foreground"
           aria-label="Phone call"

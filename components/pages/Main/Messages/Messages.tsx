@@ -29,7 +29,7 @@ export default function Messages() {
     : [];
 
   return (
-    <div className="h-full bg-background p-4 sm:p-5">
+    <div className="h-full bg-background p-3 sm:p-4 md:p-5">
       <div className="flex h-[calc(100dvh-7.5rem)] w-full overflow-hidden border border-border bg-card/30 shadow-sm rounded-lg">
         <ContactList
           contacts={visibleContacts}

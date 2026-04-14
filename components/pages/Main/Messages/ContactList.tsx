@@ -24,7 +24,7 @@ export default function ContactList({
 }: ContactListProps) {
   return (
     <aside
-      className={`flex w-full flex-col border-r border-border/60 bg-background/90 backdrop-blur-xl md:w-90 ${
+      className={`flex w-full flex-col border-r border-border/60 bg-background/90 backdrop-blur-xl md:w-[22rem] lg:w-[24rem] ${
         selectedContactId ? "hidden md:flex" : "flex"
       }`}
     >

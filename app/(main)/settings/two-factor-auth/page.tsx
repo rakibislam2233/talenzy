@@ -114,7 +114,7 @@ export default function TwoFactorAuthPage() {
                   <ShieldAlert className="h-5 w-5 text-destructive" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-foreground text-destructive">Turn off two-factor authentication</h3>
+                  <h3 className="font-medium text-destructive">Turn off two-factor authentication</h3>
                   <p className="text-sm text-destructive">Your account will be less secure</p>
                 </div>
               </div>
