@@ -2,12 +2,9 @@ import { Button } from "@/components/ui/button";
 import {
     Bell,
     ChevronRight,
-    FileClock,
     Lock,
     Shield,
-    SlidersHorizontal,
     User,
-    UserCheck,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -22,11 +19,11 @@ const sections = [
 				icon: User,
 			},
 			{
-				label: "App settings",
-				description: "Control appearance, language and app preferences.",
-				href: "/settings/app-settings",
-				icon: SlidersHorizontal,
-			},
+				label: "Profile",
+				description: "Open your public profile page.",
+				href: "/alextalent",
+				icon: User,
+			}
 		],
 	},
 	{
@@ -45,10 +42,10 @@ const sections = [
 				icon: Lock,
 			},
 			{
-				label: "Family pairing",
-				description: "Configure supervision and family safety controls.",
-				href: "/settings/family-pairing",
-				icon: UserCheck,
+				label: "Change password",
+				description: "Update your account password and security credentials.",
+				href: "/settings/change-password",
+				icon: Lock,
 			},
 		],
 	},
@@ -65,13 +62,7 @@ const sections = [
 				label: "Content preferences",
 				description: "Adjust feed, recommendations and media interests.",
 				href: "/settings/content-preferences",
-				icon: SlidersHorizontal,
-			},
-			{
-				label: "Data and history",
-				description: "Download data and review account activity logs.",
-				href: "/settings/data-and-history",
-				icon: FileClock,
+				icon: Bell,
 			},
 		],
 	},

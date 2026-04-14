@@ -1,5 +1,6 @@
 "use client";
 
+import BrandLogo from "@/components/BrandLogo";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { MoreHorizontal, TrendingUp, UserPlus } from "lucide-react";
@@ -15,9 +16,8 @@ export default function RightSidebar() {
       {!isAuthenticated && (
         <div className="bg-card rounded-2xl p-5 border border-border shadow-glow relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/30 transition-colors"></div>
-          <h3 className="text-foreground font-bold text-lg mb-2 relative">
-            Join Talenzy
-          </h3>
+          <BrandLogo size={30} className="mb-2 relative" />
+          <h3 className="text-foreground font-bold text-lg mb-2 relative">Join now</h3>
           <p className="text-muted-foreground text-xs mb-4 relative leading-relaxed">
             Unlock your full potential. Connect with top talents and get hired
             for your skills.
@@ -130,23 +130,17 @@ export default function RightSidebar() {
 
       {/* Footer Links */}
       <div className="flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-muted-foreground font-medium px-2">
-        <Link href="#" className="hover:text-foreground transition-colors">
+        <Link href="/about" className="hover:text-foreground transition-colors">
           About
         </Link>
-        <Link href="#" className="hover:text-foreground transition-colors">
+        <Link href="/help" className="hover:text-foreground transition-colors">
           Help
         </Link>
-        <Link href="#" className="hover:text-foreground transition-colors">
-          Privacy
+        <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
+          Privacy Policy
         </Link>
-        <Link href="#" className="hover:text-foreground transition-colors">
+        <Link href="/terms" className="hover:text-foreground transition-colors">
           Terms
-        </Link>
-        <Link href="#" className="hover:text-foreground transition-colors">
-          Locations
-        </Link>
-        <Link href="#" className="hover:text-foreground transition-colors">
-          Language
         </Link>
       </div>
       <p className="text-[11px] text-muted-foreground px-2 mt-2">

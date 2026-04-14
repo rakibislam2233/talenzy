@@ -1,3 +1,4 @@
+import BrandLogo from "@/components/BrandLogo";
 import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { useAuth } from "@/context/AuthContext";
@@ -74,11 +75,7 @@ export default function Header() {
           {/* Center: Search Bar */}
           <div className="w-full flex items-center gap-6 ">
             <Link href={"/"} className="block md:hidden">
-              <div className="flex items-center gap-3 cursor-pointer">
-                <div className="size-10 rounded-xl bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
-                  <Sparkles className="text-foreground h-6 w-6 fill-white" />
-                </div>
-              </div>
+              <BrandLogo size={40} withText={false} className="cursor-pointer" />
             </Link>
             <div className={`w-full relative flex-1 max-w-md`}>
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

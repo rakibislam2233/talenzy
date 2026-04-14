@@ -9,6 +9,7 @@ const beVietnamPro = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.talenzy.com"),
   title: {
     default: "Talenzy - Connect with Creative Professionals",
     template: "%s | Talenzy"
@@ -53,9 +54,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/talenzy-logo.png",
+    shortcut: "/talenzy-logo.png",
+    apple: "/talenzy-logo.png",
   },
   manifest: `/site.webmanifest`,
 };

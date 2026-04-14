@@ -547,7 +547,9 @@ export default function ProfileView({
           <div className="flex w-full flex-wrap items-center justify-center gap-2 text-foreground md:w-auto md:justify-end md:gap-3">
             {isOwnProfile ? (
               <>
-                <Button className="h-10 flex-1 cursor-pointer md:flex-none">Edit Profile</Button>
+                <Button asChild className="h-10 flex-1 cursor-pointer md:flex-none">
+                  <Link href="/settings/edit-profile">Edit Profile</Link>
+                </Button>
                 <Button variant="outline" className="h-10 flex-1 cursor-pointer md:flex-none">
                   <Share className="mr-2 h-4 w-4" />
                   Share

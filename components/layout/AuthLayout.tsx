@@ -4,6 +4,7 @@ import image2 from "@/assets/auth/image2.jpg";
 import image3 from "@/assets/auth/image3.jpg";
 import image4 from "@/assets/auth/image4.jpg";
 import image5 from "@/assets/auth/image5.jpg";
+import BrandLogo from "@/components/BrandLogo";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { ReactNode, useEffect, useState } from "react";
@@ -189,7 +190,10 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
           </div>
         </div>
         <div className="flex w-full items-center justify-center px-5 py-10 md:min-w-110 md:basis-[42%] md:bg-card/45 md:px-8 lg:basis-[38%]">
-          <div className="w-full max-w-lg">{children}</div>
+          <div className="w-full max-w-lg">
+            <BrandLogo size={42} showTagline className="mb-8" />
+            {children}
+          </div>
         </div>
       </div>
     </section>

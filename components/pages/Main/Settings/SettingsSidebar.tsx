@@ -1,75 +1,54 @@
+'use client'
 import {
-  User,
-  Lock,
   Bell,
+  Lock,
   Shield,
-  Users,
-  UserX,
-  MapPin,
-  MessageSquare,
-  HelpCircle,
-  Mail,
-  AlertCircle,
-  LogOut,
+  User,
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { CURRENT_USER_SLUG } from "../Profile/mock-data";
 
 const SettingsSidebar = () => {
+  const pathname = usePathname();
+
   const menuItems = [
     {
-      category: "How you use Instagram",
+      category: "Account",
       items: [
-        { id: "edit-profile", icon: User, label: "Edit profile" },
-        { id: "notifications", icon: Bell, label: "Notifications" },
+        { id: "profile", href: `/${CURRENT_USER_SLUG}`, icon: User, label: "Profile" },
+        { id: "edit-profile", href: "/settings/edit-profile", icon: User, label: "Edit profile" },
       ],
     },
     {
-      category: "For professionals",
+      category: "Privacy & Security",
       items: [
-        { id: "professional", icon: Shield, label: "Professional account" },
-        {
-          id: "business-tools",
-          icon: Users,
-          label: "Business tools and controls",
-        },
+        { id: "privacy", href: "/settings/privacy-and-safety", icon: Shield, label: "Privacy and safety" },
+        { id: "change-password", href: "/settings/change-password", icon: Lock, label: "Change password" },
+        { id: "two-factor", href: "/settings/two-factor-auth", icon: Lock, label: "Two-factor auth" },
       ],
     },
     {
-      category: "Who can see your content",
-      items: [
-        { id: "privacy", icon: Lock, label: "Account privacy" },
-        { id: "close-friends", icon: Users, label: "Close Friends" },
-        { id: "blocked", icon: UserX, label: "Blocked" },
-        { id: "story-location", icon: MapPin, label: "Story and location" },
-      ],
-    },
-    {
-      category: "How others can interact with you",
+      category: "Content & Activity",
       items: [
         {
-          id: "messages",
-          icon: MessageSquare,
-          label: "Messages and story replies",
+          id: "notifications",
+          href: "/settings/notification-settings",
+          icon: Bell,
+          label: "Notification settings",
         },
-      ],
-    },
-    {
-      category: "Support & About",
-      items: [
-        { id: "help", icon: HelpCircle, label: "Help center" },
-        { id: "contact", icon: Mail, label: "Contact us" },
-        { id: "report", icon: AlertCircle, label: "Report a problem" },
+        { id: "content", href: "/settings/content-preferences", icon: Bell, label: "Content preferences" },
       ],
     },
   ];
 
   return (
-    <div className="w-72 border-r bg-background border-border fixed">
+    <div className="fixed w-72 border-r border-border bg-background">
       <div className="p-6 bg-background">
         <h1 className="text-2xl font-bold text-foreground">Settings</h1>
       </div>
 
       <div className="px-3 pb-6">
-        {/* Menu Items */}
         <div className="space-y-6">
           {menuItems.map((section, idx) => (
             <div key={idx}>
@@ -79,33 +58,26 @@ const SettingsSidebar = () => {
               <div className="space-y-1">
                 {section.items.map((item) => {
                   const Icon = item.icon;
+                  const active = pathname === item.href || pathname?.startsWith(`${item.href}/`);
+
                   return (
-                    <button
+                    <Link
                       key={item.id}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-left transition-all `}
+                      href={item.href}
+                      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-all ${
+                        active ? "bg-accent text-foreground" : "text-muted-foreground"
+                      }`}
                     >
-                      <Icon className={`w-5 h-5 text-muted-foreground`} />
-                      <span
-                        className={`text-sm font-medium text-muted-foreground`}
-                      >
+                      <Icon className={`h-5 w-5 ${active ? "text-foreground" : "text-muted-foreground"}`} />
+                      <span className={`text-sm font-medium ${active ? "text-foreground" : "text-muted-foreground"}`}>
                         {item.label}
                       </span>
-                    </button>
+                    </Link>
                   );
                 })}
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Logout Button */}
-        <div className="mt-6 px-3">
-          <button className="flex items-center gap-3 px-3 py-2.5 rounded-lg w-full text-left hover:bg-destructive/10 transition-all group">
-            <LogOut className="w-5 h-5 text-destructive" />
-            <span className="text-sm font-medium text-destructive">
-              Log out
-            </span>
-          </button>
         </div>
       </div>
     </div>

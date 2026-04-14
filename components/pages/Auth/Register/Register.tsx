@@ -223,7 +223,7 @@ export default function Register() {
                     </Link>{" "}
                     and{" "}
                     <Link
-                      href="/privacy"
+                      href="/privacy-policy"
                       className="text-foreground hover:underline underline-offset-4"
                     >
                       Privacy Policy

@@ -1,4 +1,5 @@
 "use client";
+import BrandLogo from "@/components/BrandLogo";
 import CreatePostModal from "@/components/modals/CreatePostModal";
 import { CURRENT_USER_SLUG } from "@/components/pages/Main/Profile/mock-data";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
@@ -11,7 +12,6 @@ import {
     MessageCircle,
     PlusCircle,
     Settings,
-    Sparkles,
     User,
     Users,
     Wallet,
@@ -55,19 +55,7 @@ const Sidebar =() => {
       <div className="p-6 flex flex-col h-full">
         {/* Logo */}
         <Link href={"/"}>
-          <div className="flex items-center gap-3 mb-10 cursor-pointer">
-            <div className="size-10 rounded-xl bg-linear-to-br from-primary to-purple-400 flex items-center justify-center shadow-glow">
-              <Sparkles className="text-primary-foreground h-6 w-6 fill-primary-foreground" />
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-xl font-bold tracking-tight text-foreground">
-                Talenzy
-              </h1>
-              <p className="text-muted-foreground text-xs font-medium">
-                Unleash Your Potential
-              </p>
-            </div>
-          </div>
+          <BrandLogo className="mb-10 cursor-pointer" showTagline />
         </Link>
 
         {/* Navigation */}

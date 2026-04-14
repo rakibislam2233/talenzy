@@ -3,12 +3,12 @@
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -227,7 +227,7 @@ export default function VerifyPage() {
                   )}
                 />
                 <div>
-                  <FormLabel className="text-white mb-2">Relevant Links</FormLabel>
+                  <label className="text-white mb-2 block">Relevant Links</label>
                   <div className="space-y-3">
                     <FormField
                       control={form.control}
@@ -293,7 +293,7 @@ export default function VerifyPage() {
                           Terms of Service
                         </a>{" "}
                         and{" "}
-                        <a href="/privacy" className="text-[#9419e6] hover:underline">
+                        <a href="/privacy-policy" className="text-[#9419e6] hover:underline">
                           Privacy Policy
                         </a>
                         .
